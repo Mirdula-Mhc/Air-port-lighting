@@ -1,36 +1,68 @@
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
+using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
 /// Drives the full scenario sequence: shows signal, waits for answer,
 /// validates, plays consequence, handles Next/Previous navigation.
-/// Hook UI buttons (OptionA, OptionB, Next, Previous) to the public methods below.
+/// All UI references are dragged directly into the Inspector slots below -
+/// no event binding needed.
 /// </summary>
 public class ScenarioManager : MonoBehaviour
 {
     [Header("Scenario Sequence")]
+    [Tooltip("Drag your ScenarioData assets here in the order they should play")]
     [SerializeField] private List<ScenarioData> scenarios;
 
     [Header("Scene References")]
+    [Tooltip("The GameObject with LightGunController on it")]
     [SerializeField] private LightGunController lightGun;
-    [SerializeField] private Animator consequenceAnimator; // aircraft/scene animator
+    [Tooltip("Optional - the Animator that plays consequence animations (aircraft movement etc)")]
+    [SerializeField] private Animator consequenceAnimator;
+    [Tooltip("Optional - an AudioSource to play instructor voice lines")]
     [SerializeField] private AudioSource voiceSource;
 
-    [Header("UI Events (hook in Inspector)")]
-    public UnityEvent<string> OnOptionATextSet;
-    public UnityEvent<string> OnOptionBTextSet;
-    public UnityEvent OnAnswerCorrect;          // e.g. play green checkmark, enable Next
-    public UnityEvent OnAnswerWrong;            // e.g. flash red icon
-    public UnityEvent<string> OnInstructorLine; // subtitle/captions text
-    public UnityEvent<bool> OnNextButtonInteractable;
-    public UnityEvent<bool> OnPrevButtonInteractable;
-    public UnityEvent<bool, bool> OnOptionButtonsInteractable; // (optionA, optionB)
+    [Header("UI - Option Buttons")]
+    [Tooltip("The first choice button (e.g. left option)")]
+    [SerializeField] private Button optionAButton;
+    [Tooltip("Text inside Option A button")]
+    [SerializeField] private TextMeshProUGUI optionAText;
+    [Tooltip("The second choice button (e.g. right option)")]
+    [SerializeField] private Button optionBButton;
+    [Tooltip("Text inside Option B button")]
+    [SerializeField] private TextMeshProUGUI optionBText;
+
+    [Header("UI - Navigation Buttons")]
+    [SerializeField] private Button nextButton;
+    [SerializeField] private Button previousButton;
+
+    [Header("UI - Feedback")]
+    [Tooltip("Subtitle/caption text showing instructor lines")]
+    [SerializeField] private TextMeshProUGUI instructorText;
+    [Tooltip("Optional - GameObject shown briefly when answer is wrong (e.g. a red X icon)")]
+    [SerializeField] private GameObject wrongIcon;
+    [Tooltip("Optional - GameObject shown briefly when answer is correct (e.g. a green check icon)")]
+    [SerializeField] private GameObject correctIcon;
+    [Tooltip("How long the wrong/correct icon stays visible, in seconds")]
+    [SerializeField] private float feedbackIconDuration = 1.2f;
 
     private int currentIndex = 0;
     private bool[] answeredCorrectly;
     private bool waitingForAnswer = false;
+
+    private void Awake()
+    {
+        // Wire button clicks once, here, so nothing needs to be set up in the Inspector's OnClick() lists
+        if (optionAButton != null) optionAButton.onClick.AddListener(SelectOptionA);
+        if (optionBButton != null) optionBButton.onClick.AddListener(SelectOptionB);
+        if (nextButton != null) nextButton.onClick.AddListener(GoNext);
+        if (previousButton != null) previousButton.onClick.AddListener(GoPrevious);
+
+        if (wrongIcon != null) wrongIcon.SetActive(false);
+        if (correctIcon != null) correctIcon.SetActive(false);
+    }
 
     private void Start()
     {
@@ -46,41 +78,37 @@ public class ScenarioManager : MonoBehaviour
         ScenarioData s = scenarios[index];
 
         // Display the light signal
-        lightGun.SetSignal(s.lightColor, s.lightPattern);
+        if (lightGun != null)
+            lightGun.SetSignal(s.lightColor, s.lightPattern);
 
-        // Set prompt text
-        OnOptionATextSet?.Invoke(s.optionA);
-        OnOptionBTextSet?.Invoke(s.optionB);
+        // Set prompt text directly
+        if (optionAText != null) optionAText.text = s.optionA;
+        if (optionBText != null) optionBText.text = s.optionB;
 
         // Intro VO/caption if present
-        if (!string.IsNullOrEmpty(s.instructorIntroLine))
-            OnInstructorLine?.Invoke(s.instructorIntroLine);
+        if (!string.IsNullOrEmpty(s.instructorIntroLine) && instructorText != null)
+            instructorText.text = s.instructorIntroLine;
 
         if (voiceSource != null && s.introVO != null)
             voiceSource.PlayOneShot(s.introVO);
 
         bool alreadyCorrect = answeredCorrectly[index];
 
-        // Buttons stay interactable even on review so user can re-tap,
-        // but if already correct, Next is immediately available
-        OnOptionButtonsInteractable?.Invoke(true, true);
-        OnNextButtonInteractable?.Invoke(alreadyCorrect);
-        OnPrevButtonInteractable?.Invoke(index > 0);
+        SetOptionButtonsInteractable(true);
+        if (nextButton != null) nextButton.interactable = alreadyCorrect;
+        if (previousButton != null) previousButton.interactable = index > 0;
 
         waitingForAnswer = !alreadyCorrect;
     }
 
-    /// <summary>Call from Option A button OnClick</summary>
     public void SelectOptionA() => HandleSelection(0);
-
-    /// <summary>Call from Option B button OnClick</summary>
     public void SelectOptionB() => HandleSelection(1);
 
     private void HandleSelection(int selectedIndex)
     {
         if (!waitingForAnswer && answeredCorrectly[currentIndex])
         {
-            // Already correct, just reviewing - ignore re-selection or allow silently
+            // Already correct, just reviewing - ignore re-selection
             return;
         }
 
@@ -94,15 +122,30 @@ public class ScenarioManager : MonoBehaviour
         }
         else
         {
-            OnAnswerWrong?.Invoke();
-            // Buttons remain interactable - user must pick again
+            StartCoroutine(ShowWrongFeedback());
         }
+    }
+
+    private IEnumerator ShowWrongFeedback()
+    {
+        if (wrongIcon != null)
+        {
+            wrongIcon.SetActive(true);
+            yield return new WaitForSeconds(feedbackIconDuration);
+            wrongIcon.SetActive(false);
+        }
+        // Buttons remain interactable the whole time - user must pick again
     }
 
     private IEnumerator HandleCorrectAnswer(ScenarioData s)
     {
-        OnAnswerCorrect?.Invoke();
-        OnInstructorLine?.Invoke(s.instructorCorrectLine);
+        if (correctIcon != null)
+        {
+            correctIcon.SetActive(true);
+        }
+
+        if (instructorText != null)
+            instructorText.text = s.instructorCorrectLine;
 
         if (voiceSource != null && s.correctVO != null)
             voiceSource.PlayOneShot(s.correctVO);
@@ -110,16 +153,21 @@ public class ScenarioManager : MonoBehaviour
         if (!string.IsNullOrEmpty(s.consequenceAnimationTrigger) && consequenceAnimator != null)
         {
             consequenceAnimator.SetTrigger(s.consequenceAnimationTrigger);
-            // Optional: wait for animation length here if you want Next gated on animation finishing.
-            // yield return new WaitForSeconds(animationDuration);
         }
 
-        yield return null;
+        if (correctIcon != null)
+        {
+            yield return new WaitForSeconds(feedbackIconDuration);
+            correctIcon.SetActive(false);
+        }
+        else
+        {
+            yield return null;
+        }
 
-        OnNextButtonInteractable?.Invoke(true);
+        if (nextButton != null) nextButton.interactable = true;
     }
 
-    /// <summary>Call from Next button OnClick</summary>
     public void GoNext()
     {
         if (!answeredCorrectly[currentIndex]) return; // safety guard
@@ -129,11 +177,16 @@ public class ScenarioManager : MonoBehaviour
             OnSequenceComplete();
     }
 
-    /// <summary>Call from Previous button OnClick</summary>
     public void GoPrevious()
     {
         if (currentIndex > 0)
             ShowScenario(currentIndex - 1);
+    }
+
+    private void SetOptionButtonsInteractable(bool value)
+    {
+        if (optionAButton != null) optionAButton.interactable = value;
+        if (optionBButton != null) optionBButton.interactable = value;
     }
 
     private void OnSequenceComplete()
