@@ -1,33 +1,73 @@
 using UnityEngine;
 
-public enum LightColor { Red, Green, White }
-public enum LightPattern { Steady, Flashing }
-public enum SceneContext { Ground, Flight, Advanced }
+public enum LightColor
+{
+    Red,
+    Green,
+    White
+}
+
+public enum LightPattern
+{
+    Steady,
+    Flashing
+}
+
+public enum SceneContext
+{
+    Ground,
+    Flight,
+    Advanced
+}
+
+public enum SignalVisualType
+{
+    None,
+    LightGun,
+    AlternatingRedGreen,
+    Flare
+}
 
 [CreateAssetMenu(fileName = "Scenario_", menuName = "ATC/Scenario Data")]
 public class ScenarioData : ScriptableObject
 {
     [Header("Identification")]
-    public string scenarioId;          // e.g. "Ground_A_SteadyRed"
+    public string scenarioId;
     public SceneContext context;
 
-    [Header("Light Signal")]
+    [Header("Page Type")]
+    public bool requiresAnswer = true;
+
+    [Header("Signal")]
+    public SignalVisualType signalVisualType = SignalVisualType.LightGun;
     public LightColor lightColor;
     public LightPattern lightPattern;
 
-    [Header("Prompt Options")]
-    [TextArea] public string optionA;
-    [TextArea] public string optionB;
-    public int correctOptionIndex;     // 0 = A, 1 = B
+    [Header("Question")]
+    [TextArea(2, 5)]
+    public string questionText;
+
+    [TextArea(2, 5)]
+    public string optionA;
+
+    [TextArea(2, 5)]
+    public string optionB;
+
+    public int correctOptionIndex;
+
+    [Header("Instructor")]
+    [TextArea(2, 5)]
+    public string instructorIntroLine;
 
     [Header("Feedback")]
-    [TextArea] public string instructorCorrectLine;
-    [TextArea] public string instructorIntroLine; // optional, played when scenario starts
+    [TextArea(2, 5)]
+    public string instructorCorrectLine;
 
-    [Header("Consequence Animation (optional)")]
-    public string consequenceAnimationTrigger; // Animator trigger name, leave blank if none
+    [TextArea(2, 5)]
+    public string instructorWrongLine;
 
-    [Header("Audio (optional)")]
+    [Header("Audio (Optional)")]
     public AudioClip introVO;
     public AudioClip correctVO;
+    public AudioClip wrongVO;
 }

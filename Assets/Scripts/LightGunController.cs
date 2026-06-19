@@ -89,6 +89,12 @@ public class LightGunController : MonoBehaviour
             StopCoroutine(flashRoutine);
             flashRoutine = null;
         }
+
+        if (alternatingRoutine != null)
+        {
+            StopCoroutine(alternatingRoutine);
+            alternatingRoutine = null;
+        }
     }
 
     private void SetSphereVisible(bool visible, Color c)
@@ -115,4 +121,32 @@ public class LightGunController : MonoBehaviour
             default: return Color.magenta;
         }
     }
+
+    private Coroutine alternatingRoutine;
+
+    public void PlayAlternatingSignal()
+    {
+        StopFlashing();
+
+        if (alternatingRoutine != null)
+        {
+            StopCoroutine(alternatingRoutine);
+        }
+
+        alternatingRoutine = StartCoroutine(AlternatingRoutine());
+    }
+
+    private IEnumerator AlternatingRoutine()
+    {
+        while (true)
+        {
+            SetSphereVisible(true, redColor);
+            yield return new WaitForSeconds(flashOnTime);
+
+            SetSphereVisible(true, greenColor);
+            yield return new WaitForSeconds(flashOnTime);
+        }
+    }
+
+
 }

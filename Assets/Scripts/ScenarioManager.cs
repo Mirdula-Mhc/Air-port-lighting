@@ -1,197 +1,215 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
 using System.Collections.Generic;
 
-/// <summary>
-/// Drives the full scenario sequence: shows signal, waits for answer,
-/// validates, plays consequence, handles Next/Previous navigation.
-/// All UI references are dragged directly into the Inspector slots below -
-/// no event binding needed.
-/// </summary>
 public class ScenarioManager : MonoBehaviour
 {
-    [Header("Scenario Sequence")]
-    [Tooltip("Drag your ScenarioData assets here in the order they should play")]
+    [Header("Scenario Data")]
     [SerializeField] private List<ScenarioData> scenarios;
 
-    [Header("Scene References")]
-    [Tooltip("The GameObject with LightGunController on it")]
+    [Header("Signal Controllers")]
     [SerializeField] private LightGunController lightGun;
-    [Tooltip("Optional - the Animator that plays consequence animations (aircraft movement etc)")]
-    [SerializeField] private Animator consequenceAnimator;
-    [Tooltip("Optional - an AudioSource to play instructor voice lines")]
-    [SerializeField] private AudioSource voiceSource;
+    [SerializeField] private FlareController flareController;
 
-    [Header("UI - Option Buttons")]
-    [Tooltip("The first choice button (e.g. left option)")]
+    [Header("Instruction UI")]
+    [SerializeField] private GameObject instructionPanel;
+    [SerializeField] private TextMeshProUGUI instructionText;
+
+    [Header("Question UI")]
+    [SerializeField] private GameObject questionPanel;
+    [SerializeField] private TextMeshProUGUI questionText;
+
     [SerializeField] private Button optionAButton;
-    [Tooltip("Text inside Option A button")]
     [SerializeField] private TextMeshProUGUI optionAText;
-    [Tooltip("The second choice button (e.g. right option)")]
+
     [SerializeField] private Button optionBButton;
-    [Tooltip("Text inside Option B button")]
     [SerializeField] private TextMeshProUGUI optionBText;
 
-    [Header("UI - Navigation Buttons")]
+    [Header("Feedback UI")]
+    [SerializeField] private GameObject feedbackPanel;
+    [SerializeField] private TextMeshProUGUI feedbackTitleText;
+    [SerializeField] private TextMeshProUGUI feedbackDescriptionText;
+
+    [Header("Navigation")]
     [SerializeField] private Button nextButton;
     [SerializeField] private Button previousButton;
 
-    [Header("UI - Feedback")]
-    [Tooltip("Subtitle/caption text showing instructor lines")]
-    [SerializeField] private TextMeshProUGUI instructorText;
-    [Tooltip("Optional - GameObject shown briefly when answer is wrong (e.g. a red X icon)")]
-    [SerializeField] private GameObject wrongIcon;
-    [Tooltip("Optional - GameObject shown briefly when answer is correct (e.g. a green check icon)")]
-    [SerializeField] private GameObject correctIcon;
-    [Tooltip("How long the wrong/correct icon stays visible, in seconds")]
-    [SerializeField] private float feedbackIconDuration = 1.2f;
-
-    private int currentIndex = 0;
-    private bool[] answeredCorrectly;
-    private bool waitingForAnswer = false;
+    private int currentIndex;
+    private bool[] completedSteps;
 
     private void Awake()
     {
-        // Wire button clicks once, here, so nothing needs to be set up in the Inspector's OnClick() lists
-        if (optionAButton != null) optionAButton.onClick.AddListener(SelectOptionA);
-        if (optionBButton != null) optionBButton.onClick.AddListener(SelectOptionB);
-        if (nextButton != null) nextButton.onClick.AddListener(GoNext);
-        if (previousButton != null) previousButton.onClick.AddListener(GoPrevious);
+        if (optionAButton != null)
+            optionAButton.onClick.AddListener(() => SelectAnswer(0));
 
-        if (wrongIcon != null) wrongIcon.SetActive(false);
-        if (correctIcon != null) correctIcon.SetActive(false);
+        if (optionBButton != null)
+            optionBButton.onClick.AddListener(() => SelectAnswer(1));
+
+        if (nextButton != null)
+            nextButton.onClick.AddListener(GoNext);
+
+        if (previousButton != null)
+            previousButton.onClick.AddListener(GoPrevious);
     }
 
     private void Start()
     {
-        answeredCorrectly = new bool[scenarios.Count];
-        ShowScenario(currentIndex);
+        completedSteps = new bool[scenarios.Count];
+
+        if (feedbackPanel != null)
+            feedbackPanel.SetActive(false);
+
+        ShowScenario(0);
     }
 
     private void ShowScenario(int index)
     {
-        if (index < 0 || index >= scenarios.Count) return;
+        if (index < 0 || index >= scenarios.Count)
+            return;
 
         currentIndex = index;
-        ScenarioData s = scenarios[index];
 
-        // Display the light signal
-        if (lightGun != null)
-            lightGun.SetSignal(s.lightColor, s.lightPattern);
+        ScenarioData scenario = scenarios[index];
 
-        // Set prompt text directly
-        if (optionAText != null) optionAText.text = s.optionA;
-        if (optionBText != null) optionBText.text = s.optionB;
+        if (feedbackPanel != null)
+            feedbackPanel.SetActive(false);
 
-        // Intro VO/caption if present
-        if (!string.IsNullOrEmpty(s.instructorIntroLine) && instructorText != null)
-            instructorText.text = s.instructorIntroLine;
+        previousButton.interactable = currentIndex > 0;
 
-        if (voiceSource != null && s.introVO != null)
-            voiceSource.PlayOneShot(s.introVO);
+        HandleSignal(scenario);
 
-        bool alreadyCorrect = answeredCorrectly[index];
-
-        SetOptionButtonsInteractable(true);
-        if (nextButton != null) nextButton.interactable = alreadyCorrect;
-        if (previousButton != null) previousButton.interactable = index > 0;
-
-        waitingForAnswer = !alreadyCorrect;
-    }
-
-    public void SelectOptionA() => HandleSelection(0);
-    public void SelectOptionB() => HandleSelection(1);
-
-    private void HandleSelection(int selectedIndex)
-    {
-        if (!waitingForAnswer && answeredCorrectly[currentIndex])
+        if (!scenario.requiresAnswer)
         {
-            // Already correct, just reviewing - ignore re-selection
+            if (instructionPanel != null)
+                instructionPanel.SetActive(true);
+
+            if (questionPanel != null)
+                questionPanel.SetActive(false);
+
+            if (instructionText != null)
+                instructionText.text = scenario.instructorIntroLine;
+
+            completedSteps[index] = true;
+
+            if (nextButton != null)
+                nextButton.interactable = true;
+
             return;
         }
 
-        ScenarioData s = scenarios[currentIndex];
+        if (instructionPanel != null)
+            instructionPanel.SetActive(false);
 
-        if (selectedIndex == s.correctOptionIndex)
+        if (questionPanel != null)
+            questionPanel.SetActive(true);
+
+        if (questionText != null)
+            questionText.text = scenario.questionText;
+
+        if (optionAText != null)
+            optionAText.text = scenario.optionA;
+
+        if (optionBText != null)
+            optionBText.text = scenario.optionB;
+
+        if (nextButton != null)
+            nextButton.interactable = completedSteps[index];
+    }
+
+    private void HandleSignal(ScenarioData scenario)
+    {
+        if (lightGun != null)
+            lightGun.ClearSignal();
+
+        switch (scenario.signalVisualType)
         {
-            answeredCorrectly[currentIndex] = true;
-            waitingForAnswer = false;
-            StartCoroutine(HandleCorrectAnswer(s));
+            case SignalVisualType.None:
+                break;
+
+            case SignalVisualType.LightGun:
+
+                if (lightGun != null)
+                {
+                    lightGun.SetSignal(
+                        scenario.lightColor,
+                        scenario.lightPattern);
+                }
+
+                break;
+
+            case SignalVisualType.AlternatingRedGreen:
+
+                if (lightGun != null)
+                {
+                    lightGun.PlayAlternatingSignal();
+                }
+
+                break;
+
+            case SignalVisualType.Flare:
+
+                if (flareController != null)
+                {
+                    flareController.PlayFlare();
+                }
+
+                break;
+        }
+    }
+
+    private void SelectAnswer(int selectedAnswer)
+    {
+        ScenarioData scenario = scenarios[currentIndex];
+
+        bool correct = selectedAnswer == scenario.correctOptionIndex;
+
+        if (feedbackPanel != null)
+            feedbackPanel.SetActive(true);
+
+        if (correct)
+        {
+            if (feedbackTitleText != null)
+                feedbackTitleText.text = "Correct";
+
+            if (feedbackDescriptionText != null)
+                feedbackDescriptionText.text = scenario.instructorCorrectLine;
+
+            completedSteps[currentIndex] = true;
+
+            if (nextButton != null)
+                nextButton.interactable = true;
         }
         else
         {
-            StartCoroutine(ShowWrongFeedback());
+            if (feedbackTitleText != null)
+                feedbackTitleText.text = "Incorrect";
+
+            if (feedbackDescriptionText != null)
+                feedbackDescriptionText.text = scenario.instructorWrongLine;
         }
     }
 
-    private IEnumerator ShowWrongFeedback()
+    private void GoNext()
     {
-        if (wrongIcon != null)
-        {
-            wrongIcon.SetActive(true);
-            yield return new WaitForSeconds(feedbackIconDuration);
-            wrongIcon.SetActive(false);
-        }
-        // Buttons remain interactable the whole time - user must pick again
-    }
+        if (!completedSteps[currentIndex])
+            return;
 
-    private IEnumerator HandleCorrectAnswer(ScenarioData s)
-    {
-        if (correctIcon != null)
-        {
-            correctIcon.SetActive(true);
-        }
-
-        if (instructorText != null)
-            instructorText.text = s.instructorCorrectLine;
-
-        if (voiceSource != null && s.correctVO != null)
-            voiceSource.PlayOneShot(s.correctVO);
-
-        if (!string.IsNullOrEmpty(s.consequenceAnimationTrigger) && consequenceAnimator != null)
-        {
-            consequenceAnimator.SetTrigger(s.consequenceAnimationTrigger);
-        }
-
-        if (correctIcon != null)
-        {
-            yield return new WaitForSeconds(feedbackIconDuration);
-            correctIcon.SetActive(false);
-        }
-        else
-        {
-            yield return null;
-        }
-
-        if (nextButton != null) nextButton.interactable = true;
-    }
-
-    public void GoNext()
-    {
-        if (!answeredCorrectly[currentIndex]) return; // safety guard
         if (currentIndex < scenarios.Count - 1)
+        {
             ShowScenario(currentIndex + 1);
+        }
         else
-            OnSequenceComplete();
+        {
+            Debug.Log("ATC Training Complete");
+        }
     }
 
-    public void GoPrevious()
+    private void GoPrevious()
     {
         if (currentIndex > 0)
+        {
             ShowScenario(currentIndex - 1);
-    }
-
-    private void SetOptionButtonsInteractable(bool value)
-    {
-        if (optionAButton != null) optionAButton.interactable = value;
-        if (optionBButton != null) optionBButton.interactable = value;
-    }
-
-    private void OnSequenceComplete()
-    {
-        // Hook up your scene-transition logic here (e.g. Scene 2 -> Scene 3)
-        Debug.Log("Scenario sequence complete: " + (scenarios.Count > 0 ? scenarios[0].context.ToString() : ""));
+        }
     }
 }
