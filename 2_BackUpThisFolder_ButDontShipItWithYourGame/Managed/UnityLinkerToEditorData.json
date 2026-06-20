@@ -262,14 +262,6 @@
             "icon": null
           },
           {
-            "name": "LineRenderer",
-            "scenes": [
-              "Assets/Scenes/Default.unity"
-            ],
-            "dependencyType": 0,
-            "icon": null
-          },
-          {
             "name": "LowerResBlitTexture",
             "scenes": [],
             "dependencyType": 0,
