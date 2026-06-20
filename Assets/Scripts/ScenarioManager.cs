@@ -26,10 +26,27 @@ public class ScenarioManager : MonoBehaviour
     [SerializeField] private Button optionBButton;
     [SerializeField] private TextMeshProUGUI optionBText;
 
-    [Header("Feedback UI")]
-    [SerializeField] private GameObject feedbackPanel;
+    [Header("Feedback UI (short auto title, e.g. Correct/Incorrect)")]
     [SerializeField] private TextMeshProUGUI feedbackTitleText;
+
+    [Header("Per-Option Result Icons (empty Image next to each option)")]
+    [SerializeField] private Image optionAResultIcon;
+    [SerializeField] private Image optionBResultIcon;
+    [SerializeField] private Sprite correctIconSprite;
+    [SerializeField] private Sprite wrongIconSprite;
+
+    [Header("Feedback Audio")]
+    [SerializeField] private AudioSource feedbackAudioSource;
+    [SerializeField] private AudioClip correctChime;
+    [SerializeField] private AudioClip wrongChime;
+
+    [Header("Explain Button (appears after answering)")]
+    [SerializeField] private Button explainButton;
+
+    [Header("Explanation Panel (a.k.a. Feedback Panel - same thing)")]
+    [SerializeField] private GameObject feedbackPanel;
     [SerializeField] private TextMeshProUGUI feedbackDescriptionText;
+    [SerializeField] private Button continueButton;
 
     [Header("Navigation")]
     [SerializeField] private Button nextButton;
@@ -37,6 +54,7 @@ public class ScenarioManager : MonoBehaviour
 
     private int currentIndex;
     private bool[] completedSteps;
+    private bool lastAnswerCorrect;
 
     private void Awake()
     {
@@ -45,6 +63,12 @@ public class ScenarioManager : MonoBehaviour
 
         if (optionBButton != null)
             optionBButton.onClick.AddListener(() => SelectAnswer(1));
+
+        if (explainButton != null)
+            explainButton.onClick.AddListener(OpenExplanation);
+
+        if (continueButton != null)
+            continueButton.onClick.AddListener(CloseExplanation);
 
         if (nextButton != null)
             nextButton.onClick.AddListener(GoNext);
@@ -72,13 +96,29 @@ public class ScenarioManager : MonoBehaviour
 
         ScenarioData scenario = scenarios[index];
 
+        // Always start a fresh scenario with the explanation panel closed
+        // and the explain button hidden until a new answer is given.
         if (feedbackPanel != null)
             feedbackPanel.SetActive(false);
 
-        previousButton.interactable = currentIndex > 0;
+        if (explainButton != null)
+            explainButton.gameObject.SetActive(false);
+
+        if (feedbackTitleText != null)
+            feedbackTitleText.text = string.Empty;
+
+        if (optionAResultIcon != null)
+            optionAResultIcon.gameObject.SetActive(false);
+
+        if (optionBResultIcon != null)
+            optionBResultIcon.gameObject.SetActive(false);
+
+        if (previousButton != null)
+            previousButton.interactable = currentIndex > 0;
 
         HandleSignal(scenario);
 
+        // INTRO PAGE
         if (!scenario.requiresAnswer)
         {
             if (instructionPanel != null)
@@ -98,6 +138,7 @@ public class ScenarioManager : MonoBehaviour
             return;
         }
 
+        // QUESTION PAGE
         if (instructionPanel != null)
             instructionPanel.SetActive(false);
 
@@ -113,8 +154,24 @@ public class ScenarioManager : MonoBehaviour
         if (optionBText != null)
             optionBText.text = scenario.optionB;
 
+        bool alreadyCompleted = completedSteps[index];
+
+        if (optionAButton != null)
+            optionAButton.interactable = !alreadyCompleted;
+
+        if (optionBButton != null)
+            optionBButton.interactable = !alreadyCompleted;
+
         if (nextButton != null)
-            nextButton.interactable = completedSteps[index];
+            nextButton.interactable = alreadyCompleted;
+
+        // If the user already answered correctly before (e.g. came back via
+        // Previous then Next), let them reopen the explain button too.
+        if (alreadyCompleted && explainButton != null)
+        {
+            lastAnswerCorrect = true;
+            explainButton.gameObject.SetActive(true);
+        }
     }
 
     private void HandleSignal(ScenarioData scenario)
@@ -162,32 +219,89 @@ public class ScenarioManager : MonoBehaviour
     {
         ScenarioData scenario = scenarios[currentIndex];
 
-        bool correct = selectedAnswer == scenario.correctOptionIndex;
+        bool correct =
+            selectedAnswer == scenario.correctOptionIndex;
 
-        if (feedbackPanel != null)
-            feedbackPanel.SetActive(true);
+        lastAnswerCorrect = correct;
+
+        // Short, automatic feedback only - no explanation text yet.
+        if (feedbackTitleText != null)
+            feedbackTitleText.text = correct ? "Correct" : "Incorrect";
+
+        if (explainButton != null)
+            explainButton.gameObject.SetActive(true);
+
+        // Clear the other option's icon first, so only the just-clicked
+        // option ever shows a result icon at a time.
+        Image otherIcon = (selectedAnswer == 0) ? optionBResultIcon : optionAResultIcon;
+        if (otherIcon != null)
+            otherIcon.gameObject.SetActive(false);
+
+        // Show the correct/wrong icon next to the option that was clicked.
+        Image clickedIcon = (selectedAnswer == 0) ? optionAResultIcon : optionBResultIcon;
+        if (clickedIcon != null)
+        {
+            clickedIcon.sprite = correct ? correctIconSprite : wrongIconSprite;
+            clickedIcon.gameObject.SetActive(true);
+        }
+
+        if (feedbackAudioSource != null)
+        {
+            AudioClip clip = correct ? correctChime : wrongChime;
+            if (clip != null)
+                feedbackAudioSource.PlayOneShot(clip);
+        }
 
         if (correct)
         {
-            if (feedbackTitleText != null)
-                feedbackTitleText.text = "Correct";
-
-            if (feedbackDescriptionText != null)
-                feedbackDescriptionText.text = scenario.instructorCorrectLine;
-
             completedSteps[currentIndex] = true;
+
+            // LOCK ANSWERS FOREVER
+            if (optionAButton != null)
+                optionAButton.interactable = false;
+
+            if (optionBButton != null)
+                optionBButton.interactable = false;
 
             if (nextButton != null)
                 nextButton.interactable = true;
         }
         else
         {
-            if (feedbackTitleText != null)
-                feedbackTitleText.text = "Incorrect";
-
-            if (feedbackDescriptionText != null)
-                feedbackDescriptionText.text = scenario.instructorWrongLine;
+            // Buzz only on a wrong selection, per Mirdula's call.
+            Handheld.Vibrate();
         }
+        // Wrong answers: no lockout, user can simply try again.
+        // explainButton stays available if they want the full explanation first.
+    }
+
+    private void OpenExplanation()
+    {
+        ScenarioData scenario = scenarios[currentIndex];
+
+        if (feedbackDescriptionText != null)
+        {
+            feedbackDescriptionText.text = lastAnswerCorrect
+                ? scenario.instructorCorrectLine
+                : scenario.instructorWrongLine;
+        }
+
+        if (feedbackPanel != null)
+            feedbackPanel.SetActive(true);
+
+        // Defensive: hide question panel underneath in case the
+        // explanation panel material isn't fully opaque.
+        if (questionPanel != null)
+            questionPanel.SetActive(false);
+    }
+
+    private void CloseExplanation()
+    {
+        if (feedbackPanel != null)
+            feedbackPanel.SetActive(false);
+
+        if (questionPanel != null)
+            questionPanel.SetActive(true);
     }
 
     private void GoNext()
