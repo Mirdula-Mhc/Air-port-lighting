@@ -563,16 +563,19 @@ public class ScenarioManager : MonoBehaviour
         if (voAudioSource != null && vo != null)
             voAudioSource.PlayOneShot(vo);
 
-        // Sync the typewriter speed to the VO clip's actual length so the
-        // text finishes typing roughly when the audio finishes, instead of
-        // using the fixed typewriterCharDelay (which was outpacing audio).
-        float charDelay = typewriterCharDelay;
-        if (vo != null && !string.IsNullOrEmpty(line))
-            charDelay = vo.length / line.Length;
+        // Type at a fixed, readable speed - don't stretch character delay
+        // to match VO length, since short lines with long/padded clips
+        // made typing painfully slow. Instead, whatever time is left over
+        // after typing finishes gets absorbed into the wait below, so the
+        // popup still stays open until the audio (and the hold time) ends.
+        float typeStartTime = Time.time;
+        yield return StartCoroutine(TypewriterReveal(feedbackDescriptionText, line, typewriterCharDelay));
+        float typingDuration = Time.time - typeStartTime;
 
-        yield return StartCoroutine(TypewriterReveal(feedbackDescriptionText, line, charDelay));
+        float remainingVOTime = (vo != null) ? Mathf.Max(0f, vo.length - typingDuration) : 0f;
+        float waitTime = Mathf.Max(popupHoldTime, remainingVOTime);
 
-        yield return new WaitForSeconds(popupHoldTime);
+        yield return new WaitForSeconds(waitTime);
 
         if (feedbackPanel != null)
             feedbackPanel.SetActive(false);
