@@ -32,15 +32,15 @@ public class ScenarioManager : MonoBehaviour
     [Tooltip("The aircraft/scene Animator that all scenario animation triggers fire on. Lives here (not on ScenarioData) because it's a scene reference, not an asset reference.")]
     [SerializeField] private Animator animatorReference;
 
-    [Header("Scene Context Position Snap")]
-    [Tooltip("The aircraft Transform that gets repositioned when crossing into a new SceneContext (Ground/Flight/Advanced).")]
-    [SerializeField] private Transform aircraftTransform;
-    [Tooltip("Where the aircraft snaps to when the first Ground scenario loads.")]
-    [SerializeField] private Transform groundPositionPoint;
-    [Tooltip("Where the aircraft snaps to when the first Flight scenario loads.")]
-    [SerializeField] private Transform flightPositionPoint;
-    [Tooltip("Where the aircraft snaps to when the first Advanced scenario loads.")]
-    [SerializeField] private Transform advancedPositionPoint;
+    [Header("Scene Context Transition (Animator-driven)")]
+    // Direct Transform.position changes get overwritten every frame by the
+    // Animator's own position curves, so the aircraft move into a new
+    // context must be done as an animation trigger instead - same
+    // mechanism as the consequence animations.
+    [Tooltip("Trigger fired once when the first Flight-context scenario loads. Leave empty if not needed.")]
+    [SerializeField] private string enterFlightTrigger;
+    [Tooltip("Trigger fired once when the first Advanced-context scenario loads. Leave empty if not needed.")]
+    [SerializeField] private string enterAdvancedTrigger;
 
     private SceneContext? lastContext;
 
@@ -290,35 +290,37 @@ public class ScenarioManager : MonoBehaviour
 
     private void SnapAircraftIfContextChanged(SceneContext newContext)
     {
-        // Only snap when actually crossing into a new context - not on
+        // Only fire when actually crossing into a new context - not on
         // every scenario within the same context (e.g. Ground A -> Ground B).
         if (lastContext.HasValue && lastContext.Value == newContext)
             return;
 
         lastContext = newContext;
 
-        if (aircraftTransform == null)
+        if (animatorReference == null)
         {
-            Debug.LogWarning("[ScenarioManager] aircraftTransform is not assigned on ScenarioManager - the aircraft cannot be repositioned. Drag the aircraft GameObject into the 'Aircraft Transform' field.");
+            Debug.LogWarning("[ScenarioManager] animatorReference is not assigned - cannot fire the scene transition trigger.");
             return;
         }
 
-        Transform targetPoint = newContext switch
+        string trigger = newContext switch
         {
-            SceneContext.Ground => groundPositionPoint,
-            SceneContext.Flight => flightPositionPoint,
-            SceneContext.Advanced => advancedPositionPoint,
-            _ => null
+            SceneContext.Flight => enterFlightTrigger,
+            SceneContext.Advanced => enterAdvancedTrigger,
+            _ => null // Ground is the starting context - nothing to transition into.
         };
 
-        if (targetPoint == null)
+        if (string.IsNullOrEmpty(trigger))
         {
-            Debug.LogWarning($"[ScenarioManager] No position point assigned for SceneContext.{newContext} - aircraft was not moved.");
+            // Fine for Ground (no trigger needed), but worth flagging for
+            // Flight/Advanced if someone forgot to assign one.
+            if (newContext != SceneContext.Ground)
+                Debug.LogWarning($"[ScenarioManager] No transition trigger assigned for entering {newContext} - aircraft position will not change.");
             return;
         }
 
-        aircraftTransform.SetPositionAndRotation(targetPoint.position, targetPoint.rotation);
-        Debug.Log($"[ScenarioManager] Aircraft snapped to {newContext} position point.");
+        Debug.Log($"[ScenarioManager] Firing scene transition trigger '{trigger}' for entering {newContext}.");
+        animatorReference.SetTrigger(trigger);
     }
 
     private System.Collections.IEnumerator GateNextUntilIntroVOEnds(ScenarioData scenario)
@@ -546,6 +548,10 @@ public class ScenarioManager : MonoBehaviour
         if (feedbackPanel != null)
             feedbackPanel.SetActive(true);
 
+        // No manual Continue button in Mode A - the popup closes itself.
+        if (continueButton != null)
+            continueButton.gameObject.SetActive(false);
+
         if (questionPanel != null)
             questionPanel.SetActive(false);
 
@@ -557,7 +563,14 @@ public class ScenarioManager : MonoBehaviour
         if (voAudioSource != null && vo != null)
             voAudioSource.PlayOneShot(vo);
 
-        yield return StartCoroutine(TypewriterReveal(feedbackDescriptionText, line, typewriterCharDelay));
+        // Sync the typewriter speed to the VO clip's actual length so the
+        // text finishes typing roughly when the audio finishes, instead of
+        // using the fixed typewriterCharDelay (which was outpacing audio).
+        float charDelay = typewriterCharDelay;
+        if (vo != null && !string.IsNullOrEmpty(line))
+            charDelay = vo.length / line.Length;
+
+        yield return StartCoroutine(TypewriterReveal(feedbackDescriptionText, line, charDelay));
 
         yield return new WaitForSeconds(popupHoldTime);
 
@@ -692,6 +705,11 @@ public class ScenarioManager : MonoBehaviour
 
         if (feedbackPanel != null)
             feedbackPanel.SetActive(true);
+
+        // Mode B uses the manual Continue button - make sure it's visible
+        // (Mode A hides it).
+        if (continueButton != null)
+            continueButton.gameObject.SetActive(true);
 
         // Defensive: hide question panel underneath in case the
         // explanation panel material isn't fully opaque.
