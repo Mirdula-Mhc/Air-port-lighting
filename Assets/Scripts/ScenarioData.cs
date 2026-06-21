@@ -28,6 +28,12 @@ public enum SignalVisualType
     Flare
 }
 
+public enum NonInteractivePageType
+{
+    InfoPanel,
+    SceneIntro
+}
+
 [CreateAssetMenu(fileName = "Scenario_", menuName = "ATC/Scenario Data")]
 public class ScenarioData : ScriptableObject
 {
@@ -37,6 +43,8 @@ public class ScenarioData : ScriptableObject
 
     [Header("Page Type")]
     public bool requiresAnswer = true;
+    [Tooltip("Only used when Requires Answer is OFF. InfoPanel = small existing panel. SceneIntro = big per-context panel (Ground/Flight/Advanced).")]
+    public NonInteractivePageType pageType = NonInteractivePageType.InfoPanel;
 
     [Header("Signal")]
     public SignalVisualType signalVisualType = SignalVisualType.LightGun;

@@ -32,9 +32,31 @@ public class ScenarioManager : MonoBehaviour
     [Tooltip("The aircraft/scene Animator that all scenario animation triggers fire on. Lives here (not on ScenarioData) because it's a scene reference, not an asset reference.")]
     [SerializeField] private Animator animatorReference;
 
+    [Header("Scene Context Position Snap")]
+    [Tooltip("The aircraft Transform that gets repositioned when crossing into a new SceneContext (Ground/Flight/Advanced).")]
+    [SerializeField] private Transform aircraftTransform;
+    [Tooltip("Where the aircraft snaps to when the first Ground scenario loads.")]
+    [SerializeField] private Transform groundPositionPoint;
+    [Tooltip("Where the aircraft snaps to when the first Flight scenario loads.")]
+    [SerializeField] private Transform flightPositionPoint;
+    [Tooltip("Where the aircraft snaps to when the first Advanced scenario loads.")]
+    [SerializeField] private Transform advancedPositionPoint;
+
+    private SceneContext? lastContext;
+
     [Header("Instruction UI")]
     [SerializeField] private GameObject instructionPanel;
     [SerializeField] private TextMeshProUGUI instructionText;
+
+    [Header("Scene Intro Panels (VO-only, no question, Next locked until VO ends)")]
+    [Tooltip("Shown based on the scenario's existing Context dropdown (Ground/Flight/Advanced) - no new field needed.")]
+    [SerializeField] private GameObject groundIntroPanel;
+    [SerializeField] private TextMeshProUGUI groundIntroText;
+    [SerializeField] private GameObject flightIntroPanel;
+    [SerializeField] private TextMeshProUGUI flightIntroText;
+    [SerializeField] private GameObject advancedIntroPanel;
+    [SerializeField] private TextMeshProUGUI advancedIntroText;
+    [SerializeField] private AudioSource sceneIntroAudioSource;
 
     [Header("Question UI")]
     [SerializeField] private GameObject questionPanel;
@@ -66,6 +88,13 @@ public class ScenarioManager : MonoBehaviour
     [Header("Post-Answer Timing")]
     [Tooltip("Seconds to let the result icon sit before hiding the UI and playing the animation. (Mode B only)")]
     [SerializeField] private float resultIconHoldTime = 2.5f;
+
+    [Header("Wrong Answer Vignette")]
+    [Tooltip("Full-screen red Image (CanvasGroup or Image with alpha 0 by default) that flashes in/out on a wrong answer.")]
+    [SerializeField] private CanvasGroup wrongVignette;
+    [SerializeField] private float vignetteFadeInTime = 0.15f;
+    [SerializeField] private float vignetteHoldTime = 0.2f;
+    [SerializeField] private float vignetteFadeOutTime = 0.4f;
 
     [Header("Auto Popup / Typewriter Timing (Mode A only)")]
     [Tooltip("Seconds between each typed character.")]
@@ -149,24 +178,71 @@ public class ScenarioManager : MonoBehaviour
         if (previousButton != null)
             previousButton.interactable = currentIndex > 0;
 
+        SnapAircraftIfContextChanged(scenario.context);
+
         HandleSignal(scenario);
 
-        // INTRO PAGE
+        // NON-INTERACTIVE PAGE (no question)
         if (!scenario.requiresAnswer)
         {
-            if (instructionPanel != null)
-                instructionPanel.SetActive(true);
-
-            if (questionPanel != null)
-                questionPanel.SetActive(false);
-
-            if (instructionText != null)
-                instructionText.text = scenario.instructorIntroLine;
+            // Hide everything from both non-interactive sub-types first.
+            if (instructionPanel != null) instructionPanel.SetActive(false);
+            if (groundIntroPanel != null) groundIntroPanel.SetActive(false);
+            if (flightIntroPanel != null) flightIntroPanel.SetActive(false);
+            if (advancedIntroPanel != null) advancedIntroPanel.SetActive(false);
+            if (questionPanel != null) questionPanel.SetActive(false);
 
             completedSteps[index] = true;
 
+            if (scenario.pageType == NonInteractivePageType.InfoPanel)
+            {
+                // Small existing info panel - same as before, Next unlocks immediately.
+                if (instructionPanel != null)
+                    instructionPanel.SetActive(true);
+
+                if (instructionText != null)
+                    instructionText.text = scenario.instructorIntroLine;
+
+                if (nextButton != null)
+                    nextButton.interactable = true;
+
+                return;
+            }
+
+            // SceneIntro - big per-context panel, Next gated until VO ends.
+            GameObject activePanel = scenario.context switch
+            {
+                SceneContext.Ground => groundIntroPanel,
+                SceneContext.Flight => flightIntroPanel,
+                SceneContext.Advanced => advancedIntroPanel,
+                _ => null
+            };
+
+            TextMeshProUGUI activeText = scenario.context switch
+            {
+                SceneContext.Ground => groundIntroText,
+                SceneContext.Flight => flightIntroText,
+                SceneContext.Advanced => advancedIntroText,
+                _ => null
+            };
+
+            if (activePanel != null)
+            {
+                activePanel.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning($"[ScenarioManager] No scene intro panel assigned for SceneContext.{scenario.context} - nothing will show on screen.");
+            }
+
+            if (activeText != null)
+                activeText.text = scenario.instructorIntroLine;
+
+            // Next stays disabled until the VO finishes playing.
             if (nextButton != null)
-                nextButton.interactable = true;
+                nextButton.interactable = false;
+
+            StartCoroutine(GateNextUntilIntroVOEnds(scenario));
 
             return;
         }
@@ -174,6 +250,10 @@ public class ScenarioManager : MonoBehaviour
         // QUESTION PAGE
         if (instructionPanel != null)
             instructionPanel.SetActive(false);
+
+        if (groundIntroPanel != null) groundIntroPanel.SetActive(false);
+        if (flightIntroPanel != null) flightIntroPanel.SetActive(false);
+        if (advancedIntroPanel != null) advancedIntroPanel.SetActive(false);
 
         if (questionPanel != null)
             questionPanel.SetActive(true);
@@ -206,6 +286,59 @@ public class ScenarioManager : MonoBehaviour
             lastAnswerCorrect = true;
             explainButton.gameObject.SetActive(true);
         }
+    }
+
+    private void SnapAircraftIfContextChanged(SceneContext newContext)
+    {
+        // Only snap when actually crossing into a new context - not on
+        // every scenario within the same context (e.g. Ground A -> Ground B).
+        if (lastContext.HasValue && lastContext.Value == newContext)
+            return;
+
+        lastContext = newContext;
+
+        if (aircraftTransform == null)
+        {
+            Debug.LogWarning("[ScenarioManager] aircraftTransform is not assigned on ScenarioManager - the aircraft cannot be repositioned. Drag the aircraft GameObject into the 'Aircraft Transform' field.");
+            return;
+        }
+
+        Transform targetPoint = newContext switch
+        {
+            SceneContext.Ground => groundPositionPoint,
+            SceneContext.Flight => flightPositionPoint,
+            SceneContext.Advanced => advancedPositionPoint,
+            _ => null
+        };
+
+        if (targetPoint == null)
+        {
+            Debug.LogWarning($"[ScenarioManager] No position point assigned for SceneContext.{newContext} - aircraft was not moved.");
+            return;
+        }
+
+        aircraftTransform.SetPositionAndRotation(targetPoint.position, targetPoint.rotation);
+        Debug.Log($"[ScenarioManager] Aircraft snapped to {newContext} position point.");
+    }
+
+    private System.Collections.IEnumerator GateNextUntilIntroVOEnds(ScenarioData scenario)
+    {
+        if (sceneIntroAudioSource != null && scenario.introVO != null)
+        {
+            sceneIntroAudioSource.PlayOneShot(scenario.introVO);
+            Debug.Log($"[ScenarioManager] Scene intro VO playing ({scenario.introVO.length:0.00}s) - Next locked until it ends.");
+            yield return new WaitForSeconds(scenario.introVO.length);
+        }
+        else
+        {
+            // No VO assigned - don't lock Next forever, just fall back to
+            // a short minimum read time so the page isn't instantly skippable.
+            Debug.LogWarning("[ScenarioManager] No intro VO assigned for this scene-intro page - using a 2s fallback before unlocking Next.");
+            yield return new WaitForSeconds(2f);
+        }
+
+        if (nextButton != null)
+            nextButton.interactable = true;
     }
 
     private void HandleSignal(ScenarioData scenario)
@@ -305,6 +438,8 @@ public class ScenarioManager : MonoBehaviour
             // Buzz only on a wrong selection, per Mirdula's call.
             Handheld.Vibrate();
 
+            StartCoroutine(FlashWrongVignette());
+
             if (feedbackMode == FeedbackMode.AutoPopupTypewriter)
             {
                 StartCoroutine(WrongSequence_AutoPopup(scenario));
@@ -326,6 +461,34 @@ public class ScenarioManager : MonoBehaviour
                 // Otherwise: no lockout, user can simply try again immediately.
             }
         }
+    }
+
+    private System.Collections.IEnumerator FlashWrongVignette()
+    {
+        if (wrongVignette == null)
+            yield break;
+
+        // Fade in
+        float t = 0f;
+        while (t < vignetteFadeInTime)
+        {
+            t += Time.deltaTime;
+            wrongVignette.alpha = Mathf.Lerp(0f, 1f, t / vignetteFadeInTime);
+            yield return null;
+        }
+        wrongVignette.alpha = 1f;
+
+        yield return new WaitForSeconds(vignetteHoldTime);
+
+        // Fade out
+        t = 0f;
+        while (t < vignetteFadeOutTime)
+        {
+            t += Time.deltaTime;
+            wrongVignette.alpha = Mathf.Lerp(1f, 0f, t / vignetteFadeOutTime);
+            yield return null;
+        }
+        wrongVignette.alpha = 0f;
     }
 
     // ===================== MODE A: Auto Popup / Typewriter =====================
