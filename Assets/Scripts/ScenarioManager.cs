@@ -477,6 +477,14 @@ public class ScenarioManager : MonoBehaviour
         if (nextButton != null)
             nextButton.interactable = false;
 
+        // Force-close the explanation panel if it's open, and lock the
+        // Explain button so the user can't pop it open mid-animation.
+        if (feedbackPanel != null)
+            feedbackPanel.SetActive(false);
+
+        if (explainButton != null)
+            explainButton.interactable = false;
+
         // 3) Fire the animation trigger (if assigned) and VO together.
         yield return StartCoroutine(TriggerAnimationAndWait(scenario, correct, playVO: true));
 
@@ -486,6 +494,9 @@ public class ScenarioManager : MonoBehaviour
 
         if (previousButton != null)
             previousButton.interactable = currentIndex > 0;
+
+        if (explainButton != null)
+            explainButton.interactable = true;
 
         if (correct)
         {
