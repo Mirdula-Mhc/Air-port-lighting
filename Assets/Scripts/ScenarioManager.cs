@@ -5,12 +5,32 @@ using System.Collections.Generic;
 
 public class ScenarioManager : MonoBehaviour
 {
+    public enum FeedbackMode
+    {
+        // Mode B (old): short icon only, explanation is manual/optional via
+        // the Explain button, animation is mandatory and runs right away.
+        ManualExplainButton,
+
+        // Mode A (new): explanation popup opens automatically with VO +
+        // typewriter text, holds, auto-closes - THEN the mandatory
+        // animation plays. No Explain button involved.
+        AutoPopupTypewriter
+    }
+
+    [Header("Feedback Mode Toggle")]
+    [Tooltip("Switch between the manual Explain-button flow (B) and the automatic popup/typewriter flow (A) without touching any wiring.")]
+    [SerializeField] private FeedbackMode feedbackMode = FeedbackMode.ManualExplainButton;
+
     [Header("Scenario Data")]
     [SerializeField] private List<ScenarioData> scenarios;
 
     [Header("Signal Controllers")]
     [SerializeField] private LightGunController lightGun;
     [SerializeField] private FlareController flareController;
+
+    [Header("Consequence Animation")]
+    [Tooltip("The aircraft/scene Animator that all scenario animation triggers fire on. Lives here (not on ScenarioData) because it's a scene reference, not an asset reference.")]
+    [SerializeField] private Animator animatorReference;
 
     [Header("Instruction UI")]
     [SerializeField] private GameObject instructionPanel;
@@ -39,6 +59,19 @@ public class ScenarioManager : MonoBehaviour
     [SerializeField] private AudioSource feedbackAudioSource;
     [SerializeField] private AudioClip correctChime;
     [SerializeField] private AudioClip wrongChime;
+
+    [Header("Voice Over Audio (plays parallel to animation)")]
+    [SerializeField] private AudioSource voAudioSource;
+
+    [Header("Post-Answer Timing")]
+    [Tooltip("Seconds to let the result icon sit before hiding the UI and playing the animation. (Mode B only)")]
+    [SerializeField] private float resultIconHoldTime = 2.5f;
+
+    [Header("Auto Popup / Typewriter Timing (Mode A only)")]
+    [Tooltip("Seconds between each typed character.")]
+    [SerializeField] private float typewriterCharDelay = 0.03f;
+    [Tooltip("Seconds to hold the fully-typed explanation on screen before it auto-closes.")]
+    [SerializeField] private float popupHoldTime = 2f;
 
     [Header("Explain Button (appears after answering)")]
     [SerializeField] private Button explainButton;
@@ -167,7 +200,8 @@ public class ScenarioManager : MonoBehaviour
 
         // If the user already answered correctly before (e.g. came back via
         // Previous then Next), let them reopen the explain button too.
-        if (alreadyCompleted && explainButton != null)
+        // Only applies in Mode B - Mode A has no manual explain button.
+        if (alreadyCompleted && feedbackMode == FeedbackMode.ManualExplainButton && explainButton != null)
         {
             lastAnswerCorrect = true;
             explainButton.gameObject.SetActive(true);
@@ -228,7 +262,8 @@ public class ScenarioManager : MonoBehaviour
         if (feedbackTitleText != null)
             feedbackTitleText.text = correct ? "Correct" : "Incorrect";
 
-        if (explainButton != null)
+        // Explain button only exists in Mode B - Mode A pops up automatically.
+        if (feedbackMode == FeedbackMode.ManualExplainButton && explainButton != null)
             explainButton.gameObject.SetActive(true);
 
         // Clear the other option's icon first, so only the just-clicked
@@ -254,25 +289,220 @@ public class ScenarioManager : MonoBehaviour
 
         if (correct)
         {
-            completedSteps[currentIndex] = true;
-
-            // LOCK ANSWERS FOREVER
             if (optionAButton != null)
                 optionAButton.interactable = false;
 
             if (optionBButton != null)
                 optionBButton.interactable = false;
 
-            if (nextButton != null)
-                nextButton.interactable = true;
+            if (feedbackMode == FeedbackMode.AutoPopupTypewriter)
+                StartCoroutine(CorrectSequence_AutoPopup(scenario));
+            else
+                StartCoroutine(PlayResultSequence(scenario, correct: true));
         }
         else
         {
             // Buzz only on a wrong selection, per Mirdula's call.
             Handheld.Vibrate();
+
+            if (feedbackMode == FeedbackMode.AutoPopupTypewriter)
+            {
+                StartCoroutine(WrongSequence_AutoPopup(scenario));
+            }
+            else
+            {
+                // Mode B: wrong-answer animation is optional. Only run the
+                // full lock/hide/restore sequence if this scenario has one.
+                if (!string.IsNullOrEmpty(scenario.wrongAnimTrigger))
+                {
+                    if (optionAButton != null)
+                        optionAButton.interactable = false;
+
+                    if (optionBButton != null)
+                        optionBButton.interactable = false;
+
+                    StartCoroutine(PlayResultSequence(scenario, correct: false));
+                }
+                // Otherwise: no lockout, user can simply try again immediately.
+            }
         }
-        // Wrong answers: no lockout, user can simply try again.
-        // explainButton stays available if they want the full explanation first.
+    }
+
+    // ===================== MODE A: Auto Popup / Typewriter =====================
+
+    private System.Collections.IEnumerator CorrectSequence_AutoPopup(ScenarioData scenario)
+    {
+        // 1) Explanation popup with parallel VO + typewriter text, auto-closes.
+        yield return StartCoroutine(AutoExplainSequence(scenario, correct: true));
+
+        // 2) Mandatory animation. Next stays disabled until this completes.
+        if (questionPanel != null)
+            questionPanel.SetActive(false);
+
+        if (previousButton != null)
+            previousButton.interactable = false;
+
+        if (nextButton != null)
+            nextButton.interactable = false;
+
+        // VO already played during the explanation popup above, so skip it here.
+        yield return StartCoroutine(TriggerAnimationAndWait(scenario, correct: true, playVO: false));
+
+        if (questionPanel != null)
+            questionPanel.SetActive(true);
+
+        if (previousButton != null)
+            previousButton.interactable = currentIndex > 0;
+
+        completedSteps[currentIndex] = true;
+
+        if (nextButton != null)
+            nextButton.interactable = true;
+    }
+
+    private System.Collections.IEnumerator WrongSequence_AutoPopup(ScenarioData scenario)
+    {
+        if (optionAButton != null)
+            optionAButton.interactable = false;
+
+        if (optionBButton != null)
+            optionBButton.interactable = false;
+
+        yield return StartCoroutine(AutoExplainSequence(scenario, correct: false));
+
+        // Wrong answer: no mandatory animation, just let them retry.
+        if (optionAButton != null)
+            optionAButton.interactable = true;
+
+        if (optionBButton != null)
+            optionBButton.interactable = true;
+    }
+
+    private System.Collections.IEnumerator AutoExplainSequence(ScenarioData scenario, bool correct)
+    {
+        if (feedbackPanel != null)
+            feedbackPanel.SetActive(true);
+
+        if (questionPanel != null)
+            questionPanel.SetActive(false);
+
+        string line = correct ? scenario.instructorCorrectLine : scenario.instructorWrongLine;
+        AudioClip vo = correct ? scenario.correctVO : scenario.wrongVO;
+
+        // VO and typewriter start together, so the text reveals while the
+        // line is being spoken.
+        if (voAudioSource != null && vo != null)
+            voAudioSource.PlayOneShot(vo);
+
+        yield return StartCoroutine(TypewriterReveal(feedbackDescriptionText, line, typewriterCharDelay));
+
+        yield return new WaitForSeconds(popupHoldTime);
+
+        if (feedbackPanel != null)
+            feedbackPanel.SetActive(false);
+
+        if (questionPanel != null)
+            questionPanel.SetActive(true);
+    }
+
+    private System.Collections.IEnumerator TypewriterReveal(TextMeshProUGUI target, string fullText, float delay)
+    {
+        if (target == null)
+            yield break;
+
+        target.text = string.Empty;
+
+        if (string.IsNullOrEmpty(fullText))
+            yield break;
+
+        foreach (char c in fullText)
+        {
+            target.text += c;
+            yield return new WaitForSeconds(delay);
+        }
+    }
+
+    // Shared by both modes: actually fires the Animator trigger (if any)
+    // and waits the configured duration. Used directly by Mode B's
+    // PlayResultSequence, and by Mode A's CorrectSequence_AutoPopup.
+    private System.Collections.IEnumerator TriggerAnimationAndWait(ScenarioData scenario, bool correct, bool playVO)
+    {
+        string trigger = correct ? scenario.correctAnimTrigger : scenario.wrongAnimTrigger;
+        AnimationClip clip = correct ? scenario.correctAnimClip : scenario.wrongAnimClip;
+        AudioClip vo = correct ? scenario.correctVO : scenario.wrongVO;
+
+        bool hasAnimation = animatorReference != null && !string.IsNullOrEmpty(trigger);
+
+        // Auto-deduct duration from the assigned clip. Falls back to a
+        // small default only if no clip was assigned, so we never wait 0s.
+        float duration = (clip != null) ? clip.length : 2f;
+
+        if (hasAnimation)
+        {
+            Debug.Log($"[ScenarioManager] Animation STARTED: trigger='{trigger}' duration={duration:0.00}s on {animatorReference.name}");
+            animatorReference.SetTrigger(trigger);
+
+            if (clip == null)
+                Debug.LogWarning($"[ScenarioManager] No AnimationClip assigned for trigger '{trigger}' - falling back to a {duration}s default wait. Assign the clip on the ScenarioData asset to auto-deduct the real duration.");
+        }
+        else
+        {
+            Debug.Log("[ScenarioManager] No animation assigned for this result - skipping trigger.");
+        }
+
+        if (playVO && voAudioSource != null && vo != null)
+            voAudioSource.PlayOneShot(vo);
+
+        yield return new WaitForSeconds(duration);
+
+        if (hasAnimation)
+            Debug.Log($"[ScenarioManager] Animation FINISHED: trigger='{trigger}'");
+    }
+
+    // ===================== MODE B: Manual Explain Button =====================
+
+    private System.Collections.IEnumerator PlayResultSequence(ScenarioData scenario, bool correct)
+    {
+        // 1) Let the result icon sit on screen for a moment first.
+        yield return new WaitForSeconds(resultIconHoldTime);
+
+        // 2) Hide the question UI and lock both nav buttons so the user
+        // can't skip ahead or back out mid-animation.
+        if (questionPanel != null)
+            questionPanel.SetActive(false);
+
+        if (previousButton != null)
+            previousButton.interactable = false;
+
+        if (nextButton != null)
+            nextButton.interactable = false;
+
+        // 3) Fire the animation trigger (if assigned) and VO together.
+        yield return StartCoroutine(TriggerAnimationAndWait(scenario, correct, playVO: true));
+
+        // 4) Restore UI and re-enable navigation.
+        if (questionPanel != null)
+            questionPanel.SetActive(true);
+
+        if (previousButton != null)
+            previousButton.interactable = currentIndex > 0;
+
+        if (correct)
+        {
+            completedSteps[currentIndex] = true;
+
+            if (nextButton != null)
+                nextButton.interactable = true;
+        }
+        else
+        {
+            // Wrong answer animation finished - let them try again.
+            if (optionAButton != null)
+                optionAButton.interactable = true;
+
+            if (optionBButton != null)
+                optionBButton.interactable = true;
+        }
     }
 
     private void OpenExplanation()
