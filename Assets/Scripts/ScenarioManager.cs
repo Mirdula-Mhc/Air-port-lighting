@@ -375,6 +375,21 @@ public class ScenarioManager : MonoBehaviour
         }
         // If already heard (revisit), skip audio and unlock Next immediately.
 
+        // If this intro page has an animation assigned (correctAnimTrigger +
+        // correctAnimClip), fire it after the VO finishes. Next stays locked
+        // until the animation completes. On revisit, animation is also skipped
+        // since audioPlayed doubles as the "already seen this intro" flag.
+        if (!alreadyHeard && !string.IsNullOrEmpty(scenario.correctAnimTrigger))
+        {
+            if (previousButton != null)
+                previousButton.interactable = false;
+
+            yield return StartCoroutine(TriggerAnimationAndWait(scenario, correct: true, playVO: false));
+
+            if (previousButton != null)
+                previousButton.interactable = currentIndex > 0;
+        }
+
         if (nextButton != null)
             nextButton.interactable = true;
     }
@@ -741,10 +756,10 @@ public class ScenarioManager : MonoBehaviour
             completionPanel.SetActive(true);
 
         if (completionTitleText != null)
-            completionTitleText.text = "Objective Smashed !!\r\nYou're Making Progress";
+            completionTitleText.text = "Mission Complete";
 
         if (completionSlayedText != null)
-            completionSlayedText.text = "Keep Grinding ";
+            completionSlayedText.text = $"Slayed {slayedCount}";
 
         // Hide question panel underneath - completion panel takes its place.
         if (questionPanel != null)

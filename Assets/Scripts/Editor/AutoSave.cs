@@ -7,7 +7,7 @@ using UnityEngine;
 public class AutoSave
 {
     private static double lastSaveTime;
-    private const double saveInterval = 300; // 5 minutes in seconds
+    private const double saveInterval = 600; // 10 minutes in seconds
 
     static AutoSave()
     {
