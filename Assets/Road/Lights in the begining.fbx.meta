@@ -3,7 +3,27 @@ guid: 938e7a6604f65ee41a784c5b81bb38c6
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Side_light_001
+    second: {fileID: 2100000, guid: 1fdd183ddabc33a4fbfe1b9b56ea1748, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Side_light_emission
+    second: {fileID: 2100000, guid: e473bb0b3037a5e4fa4607120c403b23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Side_light_emission_Green
+    second: {fileID: 2100000, guid: b2438bb4487799a4d91cfa73a59b3167, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Side_light_emission_Red
+    second: {fileID: 2100000, guid: f379b5b0d9513fc4cbe990e3d05fc785, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

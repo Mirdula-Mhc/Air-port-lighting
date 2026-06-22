@@ -116,7 +116,17 @@ public class ScenarioManager : MonoBehaviour
 
     private int currentIndex;
     private bool[] completedSteps;
+    private bool[] audioPlayed;
     private bool lastAnswerCorrect;
+
+    [Header("Completion Panel (shown after correct animation, first visit only)")]
+    [SerializeField] private GameObject completionPanel;
+    [Tooltip("Shows 'Mission Complete' - static title text.")]
+    [SerializeField] private TextMeshProUGUI completionTitleText;
+    [Tooltip("Shows 'Slayed X' - sits on the button that acts as Next.")]
+    [SerializeField] private TextMeshProUGUI completionSlayedText;
+    [Tooltip("The button inside the completion panel that acts as Next. Wired automatically in Awake.")]
+    [SerializeField] private Button completionNextButton;
 
     private void Awake()
     {
@@ -132,6 +142,9 @@ public class ScenarioManager : MonoBehaviour
         if (continueButton != null)
             continueButton.onClick.AddListener(CloseExplanation);
 
+        if (completionNextButton != null)
+            completionNextButton.onClick.AddListener(GoNext);
+
         if (nextButton != null)
             nextButton.onClick.AddListener(GoNext);
 
@@ -142,9 +155,13 @@ public class ScenarioManager : MonoBehaviour
     private void Start()
     {
         completedSteps = new bool[scenarios.Count];
+        audioPlayed = new bool[scenarios.Count];
 
         if (feedbackPanel != null)
             feedbackPanel.SetActive(false);
+
+        if (completionPanel != null)
+            completionPanel.SetActive(false);
 
         ShowScenario(0);
     }
@@ -162,6 +179,13 @@ public class ScenarioManager : MonoBehaviour
         // and the explain button hidden until a new answer is given.
         if (feedbackPanel != null)
             feedbackPanel.SetActive(false);
+
+        if (completionPanel != null)
+            completionPanel.SetActive(false);
+
+        // Restore Next button visibility (ShowCompletionPanel hides it).
+        if (nextButton != null)
+            nextButton.gameObject.SetActive(true);
 
         if (explainButton != null)
             explainButton.gameObject.SetActive(false);
@@ -325,19 +349,31 @@ public class ScenarioManager : MonoBehaviour
 
     private System.Collections.IEnumerator GateNextUntilIntroVOEnds(ScenarioData scenario)
     {
-        if (sceneIntroAudioSource != null && scenario.introVO != null)
+        bool alreadyHeard = audioPlayed[currentIndex];
+
+        if (!alreadyHeard && sceneIntroAudioSource != null && scenario.introVO != null)
         {
+            audioPlayed[currentIndex] = true;
+
+            // Disable Previous while VO is playing so the user
+            // can't navigate away mid-audio.
+            if (previousButton != null)
+                previousButton.interactable = false;
+
             sceneIntroAudioSource.PlayOneShot(scenario.introVO);
-            Debug.Log($"[ScenarioManager] Scene intro VO playing ({scenario.introVO.length:0.00}s) - Next locked until it ends.");
+            Debug.Log($"[ScenarioManager] Scene intro VO playing ({scenario.introVO.length:0.00}s) - Next and Previous locked until it ends.");
             yield return new WaitForSeconds(scenario.introVO.length);
+
+            if (previousButton != null)
+                previousButton.interactable = currentIndex > 0;
         }
-        else
+        else if (!alreadyHeard)
         {
-            // No VO assigned - don't lock Next forever, just fall back to
-            // a short minimum read time so the page isn't instantly skippable.
+            // No VO assigned - short fallback wait so page isn't instantly skippable.
             Debug.LogWarning("[ScenarioManager] No intro VO assigned for this scene-intro page - using a 2s fallback before unlocking Next.");
             yield return new WaitForSeconds(2f);
         }
+        // If already heard (revisit), skip audio and unlock Next immediately.
 
         if (nextButton != null)
             nextButton.interactable = true;
@@ -513,16 +549,12 @@ public class ScenarioManager : MonoBehaviour
         // VO already played during the explanation popup above, so skip it here.
         yield return StartCoroutine(TriggerAnimationAndWait(scenario, correct: true, playVO: false));
 
-        if (questionPanel != null)
-            questionPanel.SetActive(true);
-
         if (previousButton != null)
             previousButton.interactable = currentIndex > 0;
 
         completedSteps[currentIndex] = true;
 
-        if (nextButton != null)
-            nextButton.interactable = true;
+        ShowCompletionPanel();
     }
 
     private System.Collections.IEnumerator WrongSequence_AutoPopup(ScenarioData scenario)
@@ -681,8 +713,10 @@ public class ScenarioManager : MonoBehaviour
         {
             completedSteps[currentIndex] = true;
 
-            if (nextButton != null)
-                nextButton.interactable = true;
+            if (explainButton != null)
+                explainButton.interactable = true;
+
+            ShowCompletionPanel();
         }
         else
         {
@@ -693,6 +727,32 @@ public class ScenarioManager : MonoBehaviour
             if (optionBButton != null)
                 optionBButton.interactable = true;
         }
+    }
+
+    private void ShowCompletionPanel()
+    {
+        // Count how many requiresAnswer scenarios are completed so far.
+        int slayedCount = 0;
+        for (int i = 0; i < scenarios.Count; i++)
+            if (scenarios[i].requiresAnswer && completedSteps[i])
+                slayedCount++;
+
+        if (completionPanel != null)
+            completionPanel.SetActive(true);
+
+        if (completionTitleText != null)
+            completionTitleText.text = "Objective Smashed !!\r\nYou're Making Progress";
+
+        if (completionSlayedText != null)
+            completionSlayedText.text = "Keep Grinding ";
+
+        // Hide question panel underneath - completion panel takes its place.
+        if (questionPanel != null)
+            questionPanel.SetActive(false);
+
+        // Hide the regular Next button - completionNextButton acts as Next instead.
+        if (nextButton != null)
+            nextButton.gameObject.SetActive(false);
     }
 
     private void OpenExplanation()
@@ -733,6 +793,14 @@ public class ScenarioManager : MonoBehaviour
     {
         if (!completedSteps[currentIndex])
             return;
+
+        // Hide completion panel if it's showing (e.g. Slayed button wired
+        // here too, but ShowScenario also hides it at top - belt and braces).
+        if (completionPanel != null)
+            completionPanel.SetActive(false);
+
+        if (nextButton != null)
+            nextButton.gameObject.SetActive(true);
 
         if (currentIndex < scenarios.Count - 1)
         {
