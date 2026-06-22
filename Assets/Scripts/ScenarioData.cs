@@ -30,8 +30,9 @@ public enum SignalVisualType
 
 public enum NonInteractivePageType
 {
-    InfoPanel,
-    SceneIntro
+    None,       // No panel shown - just VO + optional animation, Next unlocks after both.
+    InfoPanel,  // Small existing info panel.
+    SceneIntro  // Big per-context panel (Ground/Flight/Advanced).
 }
 
 [CreateAssetMenu(fileName = "Scenario_", menuName = "ATC/Scenario Data")]

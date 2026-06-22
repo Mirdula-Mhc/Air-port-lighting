@@ -218,6 +218,17 @@ public class ScenarioManager : MonoBehaviour
 
             completedSteps[index] = true;
 
+            if (scenario.pageType == NonInteractivePageType.None)
+            {
+                // No panel at all - just VO + optional animation, then Next unlocks.
+                // Everything is already hidden above.
+                if (nextButton != null)
+                    nextButton.interactable = false;
+
+                StartCoroutine(GateNextUntilIntroVOEnds(scenario));
+                return;
+            }
+
             if (scenario.pageType == NonInteractivePageType.InfoPanel)
             {
                 // Small existing info panel - same as before, Next unlocks immediately.
@@ -605,6 +616,11 @@ public class ScenarioManager : MonoBehaviour
         string line = correct ? scenario.instructorCorrectLine : scenario.instructorWrongLine;
         AudioClip vo = correct ? scenario.correctVO : scenario.wrongVO;
 
+        // Lock Previous while VO is playing so the user can't navigate
+        // away mid-audio.
+        if (previousButton != null)
+            previousButton.interactable = false;
+
         // VO and typewriter start together, so the text reveals while the
         // line is being spoken.
         if (voAudioSource != null && vo != null)
@@ -623,6 +639,10 @@ public class ScenarioManager : MonoBehaviour
         float waitTime = Mathf.Max(popupHoldTime, remainingVOTime);
 
         yield return new WaitForSeconds(waitTime);
+
+        // Restore Previous after VO + hold time completes.
+        if (previousButton != null)
+            previousButton.interactable = currentIndex > 0;
 
         if (feedbackPanel != null)
             feedbackPanel.SetActive(false);
