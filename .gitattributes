@@ -10,3 +10,4 @@
 *.mp3 filter=lfs diff=lfs merge=lfs -text
 *.exr filter=lfs diff=lfs merge=lfs -text
 *exr filter=lfs diff=lfs merge=lfs -text
+*data.br filter=lfs diff=lfs merge=lfs -text
