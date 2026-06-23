@@ -3043,6 +3043,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Selectable_set_interactable_m8DD581C1AD9
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_SnapAircraftIfContextChanged_m662D72F9535FAFB83A54299247A3726407C6DF53 (ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* __this, int32_t ___0_newContext, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_HandleSignal_mBC8BFE900A17AD272D876E6872CB9751D2208AC7 (ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* __this, ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* ___0_scenario, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* ScenarioManager_GateNextUntilIntroVOEnds_m62A27F749E4DAEE62D289183CF3579F727F0F40A (ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* __this, ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* ___0_scenario, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AudioSource_PlayOneShot_m098BCAE084AABB128BB19ED805D2D985E7B75112 (AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* __this, AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* ___0_clip, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* String_Format_mA8DBB4C2516B9723C5A41E6CB1E2FAF4BBE96DD8 (String_t* ___0_format, RuntimeObject* ___1_arg0, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Debug_LogWarning_m33EF1B897E0C7C6FF538989610BFAFFEF4628CA9 (RuntimeObject* ___0_message, const RuntimeMethod* method) ;
 inline bool Nullable_1_get_HasValue_m66773B4E59C9F120BA5D11F74C5F6A4AB174B6FE_inline (Nullable_1_t3B0DF2263A8030B5ACDC4C8D186B2168B790D7AD* __this, const RuntimeMethod* method)
@@ -3066,7 +3067,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void LightGunController_ClearSignal_m77F62E8F
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void LightGunController_PlayAlternatingSignal_m754747C4279C00C5CC4290EF5318C56ED6050936 (LightGunController_t680B4BA75BD4F4F71E8A19174F71D05FB5CBC290* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void FlareController_PlayFlare_m498822B08298E0FC888A3188458C70C0C8D05783 (FlareController_t19DFA8C95BBE590AE5C50AC9DD381EE578857239* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE (Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* __this, Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* ___0_value, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AudioSource_PlayOneShot_m098BCAE084AABB128BB19ED805D2D985E7B75112 (AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* __this, AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* ___0_clip, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* ScenarioManager_CorrectSequence_AutoPopup_m58D0ED589D6D4FE141C295E7C5416888E4189293 (ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* __this, ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* ___0_scenario, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* ScenarioManager_PlayResultSequence_m154041CEF4C4A823B1E47B650569D46129C4B130 (ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* __this, ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* ___0_scenario, bool ___1_correct, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Handheld_Vibrate_m820B68A9A3A1C5C0173B99A94C2054778BC3A2F9 (const RuntimeMethod* method) ;
@@ -4275,7 +4275,7 @@ IL_0013:
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_7;
 		L_7 = List_1_get_Item_m3084AFF53ED01E36BF53BCF3E37284D2311FF7AB(L_5, L_6, List_1_get_Item_m3084AFF53ED01E36BF53BCF3E37284D2311FF7AB_RuntimeMethod_var);
 		V_0 = L_7;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:180>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:178>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_8 = __this->___feedbackPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_9;
@@ -4286,7 +4286,7 @@ IL_0013:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:181>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:179>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_10 = __this->___feedbackPanel;
 		NullCheck(L_10);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_10, (bool)0, NULL);
@@ -4294,7 +4294,7 @@ IL_0013:
 
 IL_0041:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:183>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:181>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_11 = __this->___completionPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_12;
@@ -4305,7 +4305,7 @@ IL_0041:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:184>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:182>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_13 = __this->___completionPanel;
 		NullCheck(L_13);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_13, (bool)0, NULL);
@@ -4313,7 +4313,7 @@ IL_0041:
 
 IL_005b:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:187>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:184>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_14 = __this->___nextButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_15;
@@ -4324,7 +4324,7 @@ IL_005b:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:188>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:185>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_16 = __this->___nextButton;
 		NullCheck(L_16);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_17;
@@ -4335,7 +4335,7 @@ IL_005b:
 
 IL_007a:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:190>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:187>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_18 = __this->___explainButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_19;
@@ -4346,7 +4346,7 @@ IL_007a:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:191>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:188>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_20 = __this->___explainButton;
 		NullCheck(L_20);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_21;
@@ -4357,7 +4357,7 @@ IL_007a:
 
 IL_0099:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:193>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:190>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_22 = __this->___feedbackTitleText;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_23;
@@ -4368,7 +4368,7 @@ IL_0099:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:194>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:191>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_24 = __this->___feedbackTitleText;
 		String_t* L_25 = ((String_t_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_defaults.string_class))->___Empty;
 		NullCheck(L_24);
@@ -4377,7 +4377,7 @@ IL_0099:
 
 IL_00b7:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:196>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:193>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_26 = __this->___optionAResultIcon;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_27;
@@ -4388,7 +4388,7 @@ IL_00b7:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:197>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:194>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_28 = __this->___optionAResultIcon;
 		NullCheck(L_28);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_29;
@@ -4399,7 +4399,7 @@ IL_00b7:
 
 IL_00d6:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:199>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:196>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_30 = __this->___optionBResultIcon;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_31;
@@ -4410,7 +4410,7 @@ IL_00d6:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:200>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:197>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_32 = __this->___optionBResultIcon;
 		NullCheck(L_32);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_33;
@@ -4421,7 +4421,7 @@ IL_00d6:
 
 IL_00f5:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:202>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:199>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_34 = __this->___previousButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_35;
@@ -4432,7 +4432,7 @@ IL_00f5:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:203>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:200>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_36 = __this->___previousButton;
 		int32_t L_37 = __this->___currentIndex;
 		NullCheck(L_36);
@@ -4441,25 +4441,25 @@ IL_00f5:
 
 IL_0117:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:205>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:202>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_38 = V_0;
 		NullCheck(L_38);
 		int32_t L_39 = L_38->___context;
 		ScenarioManager_SnapAircraftIfContextChanged_m662D72F9535FAFB83A54299247A3726407C6DF53(__this, L_39, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:207>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:204>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_40 = V_0;
 		ScenarioManager_HandleSignal_mBC8BFE900A17AD272D876E6872CB9751D2208AC7(__this, L_40, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:210>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:207>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_41 = V_0;
 		NullCheck(L_41);
 		bool L_42 = L_41->___requiresAnswer;
 		if (L_42)
 		{
-			goto IL_033a;
+			goto IL_0387;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:213>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:209>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_43 = __this->___instructionPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_44;
@@ -4470,7 +4470,7 @@ IL_0117:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:213>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:209>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_45 = __this->___instructionPanel;
 		NullCheck(L_45);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_45, (bool)0, NULL);
@@ -4478,7 +4478,7 @@ IL_0117:
 
 IL_014f:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:214>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:210>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_46 = __this->___groundIntroPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_47;
@@ -4489,7 +4489,7 @@ IL_014f:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:214>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:210>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_48 = __this->___groundIntroPanel;
 		NullCheck(L_48);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_48, (bool)0, NULL);
@@ -4497,7 +4497,7 @@ IL_014f:
 
 IL_0169:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:215>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:211>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_49 = __this->___flightIntroPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_50;
@@ -4508,7 +4508,7 @@ IL_0169:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:215>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:211>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_51 = __this->___flightIntroPanel;
 		NullCheck(L_51);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_51, (bool)0, NULL);
@@ -4516,7 +4516,7 @@ IL_0169:
 
 IL_0183:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:216>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:212>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_52 = __this->___advancedIntroPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_53;
@@ -4527,7 +4527,7 @@ IL_0183:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:216>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:212>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_54 = __this->___advancedIntroPanel;
 		NullCheck(L_54);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_54, (bool)0, NULL);
@@ -4535,7 +4535,7 @@ IL_0183:
 
 IL_019d:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:217>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:213>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_55 = __this->___questionPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_56;
@@ -4546,7 +4546,7 @@ IL_019d:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:217>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:213>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_57 = __this->___questionPanel;
 		NullCheck(L_57);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_57, (bool)0, NULL);
@@ -4554,12 +4554,12 @@ IL_019d:
 
 IL_01b7:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:219>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:215>
 		BooleanU5BU5D_tD317D27C31DB892BE79FAE3AEBC0B3FFB73DE9B4* L_58 = __this->___completedSteps;
 		int32_t L_59 = ___0_index;
 		NullCheck(L_58);
 		(L_58)->SetAt(static_cast<il2cpp_array_size_t>(L_59), (bool)1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:221>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:217>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_60 = V_0;
 		NullCheck(L_60);
 		int32_t L_61 = L_60->___pageType;
@@ -4569,7 +4569,7 @@ IL_01b7:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:225>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:219>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_62 = __this->___nextButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_63;
@@ -4580,7 +4580,7 @@ IL_01b7:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:226>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:220>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_64 = __this->___nextButton;
 		NullCheck(L_64);
 		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_64, (bool)0, NULL);
@@ -4588,59 +4588,59 @@ IL_01b7:
 
 IL_01e2:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:228>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:222>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_65 = V_0;
 		RuntimeObject* L_66;
 		L_66 = ScenarioManager_GateNextUntilIntroVOEnds_m62A27F749E4DAEE62D289183CF3579F727F0F40A(__this, L_65, NULL);
 		Coroutine_t85EA685566A254C23F3FD77AB5BDFFFF8799596B* L_67;
 		L_67 = MonoBehaviour_StartCoroutine_m4CAFF732AA28CD3BDC5363B44A863575530EC812(__this, L_66, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:229>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:223>
 		return;
 	}
 
 IL_01f1:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:232>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:226>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_68 = V_0;
 		NullCheck(L_68);
 		int32_t L_69 = L_68->___pageType;
 		if ((!(((uint32_t)L_69) == ((uint32_t)1))))
 		{
-			goto IL_024e;
+			goto IL_029b;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:235>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:228>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_70 = __this->___instructionPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_71;
 		L_71 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_70, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
 		if (!L_71)
 		{
-			goto IL_0214;
+			goto IL_0217;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:236>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:229>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_72 = __this->___instructionPanel;
 		NullCheck(L_72);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_72, (bool)1, NULL);
 	}
 
-IL_0214:
+IL_0217:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:238>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:231>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_73 = __this->___instructionText;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_74;
 		L_74 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_73, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
 		if (!L_74)
 		{
-			goto IL_0233;
+			goto IL_0236;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:239>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:232>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_75 = __this->___instructionText;
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_76 = V_0;
 		NullCheck(L_76);
@@ -4649,519 +4649,569 @@ IL_0214:
 		VirtualActionInvoker1< String_t* >::Invoke(66, L_75, L_77);
 	}
 
-IL_0233:
+IL_0236:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:241>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:234>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_78 = __this->___nextButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_79;
 		L_79 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_78, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
 		if (!L_79)
 		{
-			goto IL_024d;
+			goto IL_0250;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:242>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:235>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_80 = __this->___nextButton;
 		NullCheck(L_80);
 		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_80, (bool)1, NULL);
 	}
 
-IL_024d:
+IL_0250:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:244>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:239>
+		BooleanU5BU5D_tD317D27C31DB892BE79FAE3AEBC0B3FFB73DE9B4* L_81 = __this->___audioPlayed;
+		int32_t L_82 = __this->___currentIndex;
+		NullCheck(L_81);
+		int32_t L_83 = L_82;
+		uint8_t L_84 = (uint8_t)(L_81)->GetAt(static_cast<il2cpp_array_size_t>(L_83));
+		if (L_84)
+		{
+			goto IL_029a;
+		}
+	}
+	{
+		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_85 = __this->___sceneIntroAudioSource;
+		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		bool L_86;
+		L_86 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_85, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_86)
+		{
+			goto IL_029a;
+		}
+	}
+	{
+		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_87 = V_0;
+		NullCheck(L_87);
+		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_88 = L_87->___introVO;
+		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		bool L_89;
+		L_89 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_88, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_89)
+		{
+			goto IL_029a;
+		}
+	}
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:241>
+		BooleanU5BU5D_tD317D27C31DB892BE79FAE3AEBC0B3FFB73DE9B4* L_90 = __this->___audioPlayed;
+		int32_t L_91 = __this->___currentIndex;
+		NullCheck(L_90);
+		(L_90)->SetAt(static_cast<il2cpp_array_size_t>(L_91), (bool)1);
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:242>
+		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_92 = __this->___sceneIntroAudioSource;
+		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_93 = V_0;
+		NullCheck(L_93);
+		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_94 = L_93->___introVO;
+		NullCheck(L_92);
+		AudioSource_PlayOneShot_m098BCAE084AABB128BB19ED805D2D985E7B75112(L_92, L_94, NULL);
+	}
+
+IL_029a:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:245>
 		return;
 	}
 
-IL_024e:
+IL_029b:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:248>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:249>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:250>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:251>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:252>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:253>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:254>
-		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_81 = V_0;
-		NullCheck(L_81);
-		int32_t L_82 = L_81->___context;
-		V_5 = L_82;
-		int32_t L_83 = V_5;
-		switch (L_83)
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:255>
+		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_95 = V_0;
+		NullCheck(L_95);
+		int32_t L_96 = L_95->___context;
+		V_5 = L_96;
+		int32_t L_97 = V_5;
+		switch (L_97)
 		{
 			case 0:
 			{
-				goto IL_026b;
+				goto IL_02b8;
 			}
 			case 1:
 			{
-				goto IL_0275;
+				goto IL_02c2;
 			}
 			case 2:
 			{
-				goto IL_027f;
+				goto IL_02cc;
 			}
 		}
 	}
 	{
-		goto IL_0289;
+		goto IL_02d6;
 	}
 
-IL_026b:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:250>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_84 = __this->___groundIntroPanel;
-		V_4 = L_84;
-		goto IL_028c;
-	}
-
-IL_0275:
+IL_02b8:
 	{
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:251>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_85 = __this->___flightIntroPanel;
-		V_4 = L_85;
-		goto IL_028c;
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_98 = __this->___groundIntroPanel;
+		V_4 = L_98;
+		goto IL_02d9;
 	}
 
-IL_027f:
+IL_02c2:
 	{
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:252>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_86 = __this->___advancedIntroPanel;
-		V_4 = L_86;
-		goto IL_028c;
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_99 = __this->___flightIntroPanel;
+		V_4 = L_99;
+		goto IL_02d9;
 	}
 
-IL_0289:
+IL_02cc:
 	{
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:253>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_100 = __this->___advancedIntroPanel;
+		V_4 = L_100;
+		goto IL_02d9;
+	}
+
+IL_02d6:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:254>
 		V_4 = (GameObject_t76FEDD663AB33C991A9C9A23129337651094216F*)NULL;
 	}
 
-IL_028c:
+IL_02d9:
 	{
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_87 = V_4;
-		V_2 = L_87;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:256>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_101 = V_4;
+		V_2 = L_101;
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:257>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:258>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:259>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:260>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:261>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:262>
-		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_88 = V_0;
-		NullCheck(L_88);
-		int32_t L_89 = L_88->___context;
-		V_5 = L_89;
-		int32_t L_90 = V_5;
-		switch (L_90)
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:263>
+		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_102 = V_0;
+		NullCheck(L_102);
+		int32_t L_103 = L_102->___context;
+		V_5 = L_103;
+		int32_t L_104 = V_5;
+		switch (L_104)
 		{
 			case 0:
 			{
-				goto IL_02ac;
+				goto IL_02f9;
 			}
 			case 1:
 			{
-				goto IL_02b6;
+				goto IL_0303;
 			}
 			case 2:
 			{
-				goto IL_02c0;
+				goto IL_030d;
 			}
 		}
 	}
 	{
-		goto IL_02ca;
+		goto IL_0317;
 	}
 
-IL_02ac:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:258>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_91 = __this->___groundIntroText;
-		V_6 = L_91;
-		goto IL_02cd;
-	}
-
-IL_02b6:
+IL_02f9:
 	{
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:259>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_92 = __this->___flightIntroText;
-		V_6 = L_92;
-		goto IL_02cd;
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_105 = __this->___groundIntroText;
+		V_6 = L_105;
+		goto IL_031a;
 	}
 
-IL_02c0:
+IL_0303:
 	{
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:260>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_93 = __this->___advancedIntroText;
-		V_6 = L_93;
-		goto IL_02cd;
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_106 = __this->___flightIntroText;
+		V_6 = L_106;
+		goto IL_031a;
 	}
 
-IL_02ca:
+IL_030d:
 	{
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:261>
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_107 = __this->___advancedIntroText;
+		V_6 = L_107;
+		goto IL_031a;
+	}
+
+IL_0317:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:262>
 		V_6 = (TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957*)NULL;
 	}
 
-IL_02cd:
+IL_031a:
 	{
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_94 = V_6;
-		V_3 = L_94;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:264>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_95 = V_2;
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_108 = V_6;
+		V_3 = L_108;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:265>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_109 = V_2;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_96;
-		L_96 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_95, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_96)
+		bool L_110;
+		L_110 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_109, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_110)
 		{
-			goto IL_02e2;
+			goto IL_032f;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:266>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_97 = V_2;
-		NullCheck(L_97);
-		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_97, (bool)1, NULL);
-		goto IL_02fc;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:267>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_111 = V_2;
+		NullCheck(L_111);
+		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_111, (bool)1, NULL);
+		goto IL_0349;
 	}
 
-IL_02e2:
+IL_032f:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:270>
-		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_98 = V_0;
-		NullCheck(L_98);
-		int32_t L_99 = L_98->___context;
-		int32_t L_100 = L_99;
-		RuntimeObject* L_101 = Box(SceneContext_t0F63208EE7CAAD2E0CB9A30C1739F997C0BAB09E_il2cpp_TypeInfo_var, &L_100);
-		String_t* L_102;
-		L_102 = String_Format_mA8DBB4C2516B9723C5A41E6CB1E2FAF4BBE96DD8(_stringLiteralD92E92F9D00FCD3B0B71F32CB16DD7F7D0AD164E, L_101, NULL);
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:271>
+		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_112 = V_0;
+		NullCheck(L_112);
+		int32_t L_113 = L_112->___context;
+		int32_t L_114 = L_113;
+		RuntimeObject* L_115 = Box(SceneContext_t0F63208EE7CAAD2E0CB9A30C1739F997C0BAB09E_il2cpp_TypeInfo_var, &L_114);
+		String_t* L_116;
+		L_116 = String_Format_mA8DBB4C2516B9723C5A41E6CB1E2FAF4BBE96DD8(_stringLiteralD92E92F9D00FCD3B0B71F32CB16DD7F7D0AD164E, L_115, NULL);
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
-		Debug_LogWarning_m33EF1B897E0C7C6FF538989610BFAFFEF4628CA9(L_102, NULL);
+		Debug_LogWarning_m33EF1B897E0C7C6FF538989610BFAFFEF4628CA9(L_116, NULL);
 	}
 
-IL_02fc:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:273>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_103 = V_3;
-		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_104;
-		L_104 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_103, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_104)
-		{
-			goto IL_0311;
-		}
-	}
+IL_0349:
 	{
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:274>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_105 = V_3;
-		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_106 = V_0;
-		NullCheck(L_106);
-		String_t* L_107 = L_106->___instructorIntroLine;
-		NullCheck(L_105);
-		VirtualActionInvoker1< String_t* >::Invoke(66, L_105, L_107);
-	}
-
-IL_0311:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:277>
-		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_108 = __this->___nextButton;
-		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_109;
-		L_109 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_108, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_109)
-		{
-			goto IL_032b;
-		}
-	}
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:278>
-		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_110 = __this->___nextButton;
-		NullCheck(L_110);
-		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_110, (bool)0, NULL);
-	}
-
-IL_032b:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:280>
-		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_111 = V_0;
-		RuntimeObject* L_112;
-		L_112 = ScenarioManager_GateNextUntilIntroVOEnds_m62A27F749E4DAEE62D289183CF3579F727F0F40A(__this, L_111, NULL);
-		Coroutine_t85EA685566A254C23F3FD77AB5BDFFFF8799596B* L_113;
-		L_113 = MonoBehaviour_StartCoroutine_m4CAFF732AA28CD3BDC5363B44A863575530EC812(__this, L_112, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:282>
-		return;
-	}
-
-IL_033a:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:286>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_114 = __this->___instructionPanel;
-		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_115;
-		L_115 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_114, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_115)
-		{
-			goto IL_0354;
-		}
-	}
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:287>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_116 = __this->___instructionPanel;
-		NullCheck(L_116);
-		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_116, (bool)0, NULL);
-	}
-
-IL_0354:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:289>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_117 = __this->___groundIntroPanel;
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_117 = V_3;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_118;
 		L_118 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_117, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
 		if (!L_118)
 		{
-			goto IL_036e;
+			goto IL_035e;
+		}
+	}
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:275>
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_119 = V_3;
+		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_120 = V_0;
+		NullCheck(L_120);
+		String_t* L_121 = L_120->___instructorIntroLine;
+		NullCheck(L_119);
+		VirtualActionInvoker1< String_t* >::Invoke(66, L_119, L_121);
+	}
+
+IL_035e:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:277>
+		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_122 = __this->___nextButton;
+		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		bool L_123;
+		L_123 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_122, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_123)
+		{
+			goto IL_0378;
+		}
+	}
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:278>
+		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_124 = __this->___nextButton;
+		NullCheck(L_124);
+		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_124, (bool)0, NULL);
+	}
+
+IL_0378:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:280>
+		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_125 = V_0;
+		RuntimeObject* L_126;
+		L_126 = ScenarioManager_GateNextUntilIntroVOEnds_m62A27F749E4DAEE62D289183CF3579F727F0F40A(__this, L_125, NULL);
+		Coroutine_t85EA685566A254C23F3FD77AB5BDFFFF8799596B* L_127;
+		L_127 = MonoBehaviour_StartCoroutine_m4CAFF732AA28CD3BDC5363B44A863575530EC812(__this, L_126, NULL);
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:282>
+		return;
+	}
+
+IL_0387:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:286>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_128 = __this->___instructionPanel;
+		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		bool L_129;
+		L_129 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_128, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_129)
+		{
+			goto IL_03a1;
+		}
+	}
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:287>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_130 = __this->___instructionPanel;
+		NullCheck(L_130);
+		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_130, (bool)0, NULL);
+	}
+
+IL_03a1:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:289>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_131 = __this->___groundIntroPanel;
+		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		bool L_132;
+		L_132 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_131, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_132)
+		{
+			goto IL_03bb;
 		}
 	}
 	{
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:289>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_119 = __this->___groundIntroPanel;
-		NullCheck(L_119);
-		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_119, (bool)0, NULL);
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_133 = __this->___groundIntroPanel;
+		NullCheck(L_133);
+		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_133, (bool)0, NULL);
 	}
 
-IL_036e:
+IL_03bb:
 	{
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:290>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_120 = __this->___flightIntroPanel;
-		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_121;
-		L_121 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_120, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_121)
-		{
-			goto IL_0388;
-		}
-	}
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:290>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_122 = __this->___flightIntroPanel;
-		NullCheck(L_122);
-		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_122, (bool)0, NULL);
-	}
-
-IL_0388:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:291>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_123 = __this->___advancedIntroPanel;
-		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_124;
-		L_124 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_123, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_124)
-		{
-			goto IL_03a2;
-		}
-	}
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:291>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_125 = __this->___advancedIntroPanel;
-		NullCheck(L_125);
-		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_125, (bool)0, NULL);
-	}
-
-IL_03a2:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:293>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_126 = __this->___questionPanel;
-		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_127;
-		L_127 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_126, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_127)
-		{
-			goto IL_03bc;
-		}
-	}
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:294>
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_128 = __this->___questionPanel;
-		NullCheck(L_128);
-		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_128, (bool)1, NULL);
-	}
-
-IL_03bc:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:296>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_129 = __this->___questionText;
-		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_130;
-		L_130 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_129, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_130)
-		{
-			goto IL_03db;
-		}
-	}
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:297>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_131 = __this->___questionText;
-		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_132 = V_0;
-		NullCheck(L_132);
-		String_t* L_133 = L_132->___questionText;
-		NullCheck(L_131);
-		VirtualActionInvoker1< String_t* >::Invoke(66, L_131, L_133);
-	}
-
-IL_03db:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:299>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_134 = __this->___optionAText;
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_134 = __this->___flightIntroPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_135;
 		L_135 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_134, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
 		if (!L_135)
 		{
-			goto IL_03fa;
+			goto IL_03d5;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:300>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_136 = __this->___optionAText;
-		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_137 = V_0;
-		NullCheck(L_137);
-		String_t* L_138 = L_137->___optionA;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:290>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_136 = __this->___flightIntroPanel;
 		NullCheck(L_136);
-		VirtualActionInvoker1< String_t* >::Invoke(66, L_136, L_138);
+		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_136, (bool)0, NULL);
 	}
 
-IL_03fa:
+IL_03d5:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:302>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_139 = __this->___optionBText;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:291>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_137 = __this->___advancedIntroPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_140;
-		L_140 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_139, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_140)
+		bool L_138;
+		L_138 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_137, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_138)
 		{
-			goto IL_0419;
+			goto IL_03ef;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:303>
-		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_141 = __this->___optionBText;
-		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_142 = V_0;
-		NullCheck(L_142);
-		String_t* L_143 = L_142->___optionB;
-		NullCheck(L_141);
-		VirtualActionInvoker1< String_t* >::Invoke(66, L_141, L_143);
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:291>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_139 = __this->___advancedIntroPanel;
+		NullCheck(L_139);
+		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_139, (bool)0, NULL);
 	}
 
-IL_0419:
+IL_03ef:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:305>
-		BooleanU5BU5D_tD317D27C31DB892BE79FAE3AEBC0B3FFB73DE9B4* L_144 = __this->___completedSteps;
-		int32_t L_145 = ___0_index;
-		NullCheck(L_144);
-		int32_t L_146 = L_145;
-		uint8_t L_147 = (uint8_t)(L_144)->GetAt(static_cast<il2cpp_array_size_t>(L_146));
-		V_1 = (bool)L_147;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:307>
-		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_148 = __this->___optionAButton;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:293>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_140 = __this->___questionPanel;
+		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		bool L_141;
+		L_141 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_140, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_141)
+		{
+			goto IL_0409;
+		}
+	}
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:294>
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_142 = __this->___questionPanel;
+		NullCheck(L_142);
+		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_142, (bool)1, NULL);
+	}
+
+IL_0409:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:296>
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_143 = __this->___questionText;
+		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		bool L_144;
+		L_144 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_143, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_144)
+		{
+			goto IL_0428;
+		}
+	}
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:297>
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_145 = __this->___questionText;
+		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_146 = V_0;
+		NullCheck(L_146);
+		String_t* L_147 = L_146->___questionText;
+		NullCheck(L_145);
+		VirtualActionInvoker1< String_t* >::Invoke(66, L_145, L_147);
+	}
+
+IL_0428:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:299>
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_148 = __this->___optionAText;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_149;
 		L_149 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_148, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
 		if (!L_149)
 		{
-			goto IL_043f;
+			goto IL_0447;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:308>
-		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_150 = __this->___optionAButton;
-		bool L_151 = V_1;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:300>
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_150 = __this->___optionAText;
+		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_151 = V_0;
+		NullCheck(L_151);
+		String_t* L_152 = L_151->___optionA;
 		NullCheck(L_150);
-		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_150, (bool)((((int32_t)L_151) == ((int32_t)0))? 1 : 0), NULL);
+		VirtualActionInvoker1< String_t* >::Invoke(66, L_150, L_152);
 	}
 
-IL_043f:
+IL_0447:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:310>
-		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_152 = __this->___optionBButton;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:302>
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_153 = __this->___optionBText;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_153;
-		L_153 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_152, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_153)
+		bool L_154;
+		L_154 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_153, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_154)
 		{
-			goto IL_045c;
+			goto IL_0466;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:311>
-		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_154 = __this->___optionBButton;
-		bool L_155 = V_1;
-		NullCheck(L_154);
-		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_154, (bool)((((int32_t)L_155) == ((int32_t)0))? 1 : 0), NULL);
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:303>
+		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_155 = __this->___optionBText;
+		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_156 = V_0;
+		NullCheck(L_156);
+		String_t* L_157 = L_156->___optionB;
+		NullCheck(L_155);
+		VirtualActionInvoker1< String_t* >::Invoke(66, L_155, L_157);
 	}
 
-IL_045c:
+IL_0466:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:313>
-		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_156 = __this->___nextButton;
-		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_157;
-		L_157 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_156, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_157)
-		{
-			goto IL_0476;
-		}
-	}
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:314>
-		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_158 = __this->___nextButton;
-		bool L_159 = V_1;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:305>
+		BooleanU5BU5D_tD317D27C31DB892BE79FAE3AEBC0B3FFB73DE9B4* L_158 = __this->___completedSteps;
+		int32_t L_159 = ___0_index;
 		NullCheck(L_158);
-		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_158, L_159, NULL);
-	}
-
-IL_0476:
-	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:319>
-		bool L_160 = V_1;
-		if (!L_160)
-		{
-			goto IL_04a7;
-		}
-	}
-	{
-		int32_t L_161 = __this->___feedbackMode;
-		if (L_161)
-		{
-			goto IL_04a7;
-		}
-	}
-	{
-		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_162 = __this->___explainButton;
+		int32_t L_160 = L_159;
+		uint8_t L_161 = (uint8_t)(L_158)->GetAt(static_cast<il2cpp_array_size_t>(L_160));
+		V_1 = (bool)L_161;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:307>
+		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_162 = __this->___optionAButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_163;
 		L_163 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_162, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
 		if (!L_163)
 		{
-			goto IL_04a7;
+			goto IL_048c;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:321>
-		__this->___lastAnswerCorrect = (bool)1;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:322>
-		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_164 = __this->___explainButton;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:308>
+		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_164 = __this->___optionAButton;
+		bool L_165 = V_1;
 		NullCheck(L_164);
-		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_165;
-		L_165 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_164, NULL);
-		NullCheck(L_165);
-		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_165, (bool)1, NULL);
+		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_164, (bool)((((int32_t)L_165) == ((int32_t)0))? 1 : 0), NULL);
 	}
 
-IL_04a7:
+IL_048c:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:324>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:310>
+		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_166 = __this->___optionBButton;
+		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		bool L_167;
+		L_167 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_166, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_167)
+		{
+			goto IL_04a9;
+		}
+	}
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:311>
+		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_168 = __this->___optionBButton;
+		bool L_169 = V_1;
+		NullCheck(L_168);
+		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_168, (bool)((((int32_t)L_169) == ((int32_t)0))? 1 : 0), NULL);
+	}
+
+IL_04a9:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:313>
+		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_170 = __this->___nextButton;
+		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		bool L_171;
+		L_171 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_170, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_171)
+		{
+			goto IL_04c3;
+		}
+	}
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:314>
+		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_172 = __this->___nextButton;
+		bool L_173 = V_1;
+		NullCheck(L_172);
+		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_172, L_173, NULL);
+	}
+
+IL_04c3:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:316>
+		bool L_174 = V_1;
+		if (!L_174)
+		{
+			goto IL_04f4;
+		}
+	}
+	{
+		int32_t L_175 = __this->___feedbackMode;
+		if (L_175)
+		{
+			goto IL_04f4;
+		}
+	}
+	{
+		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_176 = __this->___explainButton;
+		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+		bool L_177;
+		L_177 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_176, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_177)
+		{
+			goto IL_04f4;
+		}
+	}
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:318>
+		__this->___lastAnswerCorrect = (bool)1;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:319>
+		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_178 = __this->___explainButton;
+		NullCheck(L_178);
+		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_179;
+		L_179 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_178, NULL);
+		NullCheck(L_179);
+		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_179, (bool)1, NULL);
+	}
+
+IL_04f4:
+	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:321>
 		return;
 	}
 }
@@ -5185,7 +5235,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_SnapAircraftIfContextCha
 	String_t* V_0 = NULL;
 	String_t* V_1 = NULL;
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:330>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:327>
 		Nullable_1_t3B0DF2263A8030B5ACDC4C8D186B2168B790D7AD* L_0 = (Nullable_1_t3B0DF2263A8030B5ACDC4C8D186B2168B790D7AD*)(&__this->___lastContext);
 		bool L_1;
 		L_1 = Nullable_1_get_HasValue_m66773B4E59C9F120BA5D11F74C5F6A4AB174B6FE_inline(L_0, Nullable_1_get_HasValue_m66773B4E59C9F120BA5D11F74C5F6A4AB174B6FE_RuntimeMethod_var);
@@ -5205,19 +5255,19 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_SnapAircraftIfContextCha
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:331>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:328>
 		return;
 	}
 
 IL_001c:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:333>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:330>
 		int32_t L_5 = ___0_newContext;
 		Nullable_1_t3B0DF2263A8030B5ACDC4C8D186B2168B790D7AD L_6;
 		memset((&L_6), 0, sizeof(L_6));
 		Nullable_1__ctor_m4F952C2EBBDEDAF4B85EC0FEFB2575EDCA545C54((&L_6), L_5, Nullable_1__ctor_m4F952C2EBBDEDAF4B85EC0FEFB2575EDCA545C54_RuntimeMethod_var);
 		__this->___lastContext = L_6;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:335>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:332>
 		Animator_t8A52E42AE54F76681838FE9E632683EF3952E883* L_7 = __this->___animatorReference;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_8;
@@ -5228,21 +5278,21 @@ IL_001c:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:337>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:334>
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
 		Debug_LogWarning_m33EF1B897E0C7C6FF538989610BFAFFEF4628CA9(_stringLiteral53E403E34DECC4F15D4292C1EEDCFE54095001BD, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:338>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:335>
 		return;
 	}
 
 IL_0041:
 	{
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:338>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:339>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:340>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:341>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:342>
 		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:343>
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:344>
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:345>
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:346>
 		int32_t L_9 = ___0_newContext;
 		if ((((int32_t)L_9) == ((int32_t)1)))
 		{
@@ -5262,7 +5312,7 @@ IL_0041:
 
 IL_004b:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:343>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:340>
 		String_t* L_11 = __this->___enterFlightTrigger;
 		V_1 = L_11;
 		goto IL_005f;
@@ -5270,7 +5320,7 @@ IL_004b:
 
 IL_0054:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:344>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:341>
 		String_t* L_12 = __this->___enterAdvancedTrigger;
 		V_1 = L_12;
 		goto IL_005f;
@@ -5278,7 +5328,7 @@ IL_0054:
 
 IL_005d:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:345>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:342>
 		V_1 = (String_t*)NULL;
 	}
 
@@ -5286,7 +5336,7 @@ IL_005f:
 	{
 		String_t* L_13 = V_1;
 		V_0 = L_13;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:348>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:345>
 		String_t* L_14 = V_0;
 		bool L_15;
 		L_15 = String_IsNullOrEmpty_mEA9E3FB005AC28FE02E69FCF95A7B8456192B478(L_14, NULL);
@@ -5296,7 +5346,7 @@ IL_005f:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:352>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:349>
 		int32_t L_16 = ___0_newContext;
 		if (!L_16)
 		{
@@ -5304,7 +5354,7 @@ IL_005f:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:353>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:350>
 		int32_t L_17 = ___0_newContext;
 		int32_t L_18 = L_17;
 		RuntimeObject* L_19 = Box(SceneContext_t0F63208EE7CAAD2E0CB9A30C1739F997C0BAB09E_il2cpp_TypeInfo_var, &L_18);
@@ -5316,13 +5366,13 @@ IL_005f:
 
 IL_0081:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:354>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:351>
 		return;
 	}
 
 IL_0082:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:357>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:354>
 		String_t* L_21 = V_0;
 		int32_t L_22 = ___0_newContext;
 		int32_t L_23 = L_22;
@@ -5331,12 +5381,12 @@ IL_0082:
 		L_25 = String_Format_mFB7DA489BD99F4670881FF50EC017BFB0A5C0987(_stringLiteralB0B826F4363ED060543A27BACE12792BBFF14134, L_21, L_24, NULL);
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
 		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(L_25, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:358>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:355>
 		Animator_t8A52E42AE54F76681838FE9E632683EF3952E883* L_26 = __this->___animatorReference;
 		String_t* L_27 = V_0;
 		NullCheck(L_26);
 		Animator_SetTrigger_mC9CD54D627C8843EF6E159E167449D216EF6EB30(L_26, L_27, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:359>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:356>
 		return;
 	}
 }
@@ -5375,7 +5425,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_HandleSignal_mBC8BFE900A
 	}
 	int32_t V_0 = 0;
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:410>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:407>
 		LightGunController_t680B4BA75BD4F4F71E8A19174F71D05FB5CBC290* L_0 = __this->___lightGun;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_1;
@@ -5386,7 +5436,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_HandleSignal_mBC8BFE900A
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:411>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:408>
 		LightGunController_t680B4BA75BD4F4F71E8A19174F71D05FB5CBC290* L_2 = __this->___lightGun;
 		NullCheck(L_2);
 		LightGunController_ClearSignal_m77F62E8F1A23DBCF83DCF2D14A87E24488B4A013(L_2, NULL);
@@ -5394,7 +5444,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_HandleSignal_mBC8BFE900A
 
 IL_0019:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:413>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:410>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_3 = ___0_scenario;
 		NullCheck(L_3);
 		int32_t L_4 = L_3->___signalVisualType;
@@ -5426,7 +5476,7 @@ IL_0019:
 
 IL_0037:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:420>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:417>
 		LightGunController_t680B4BA75BD4F4F71E8A19174F71D05FB5CBC290* L_6 = __this->___lightGun;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_7;
@@ -5437,9 +5487,9 @@ IL_0037:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:422>
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:423>
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:424>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:419>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:420>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:421>
 		LightGunController_t680B4BA75BD4F4F71E8A19174F71D05FB5CBC290* L_8 = __this->___lightGun;
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_9 = ___0_scenario;
 		NullCheck(L_9);
@@ -5449,13 +5499,13 @@ IL_0037:
 		int32_t L_12 = L_11->___lightPattern;
 		NullCheck(L_8);
 		LightGunController_SetSignal_m5E9F67A86BC4BFF932BC0C9A9E03B88809CA077E(L_8, L_10, L_12, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:427>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:424>
 		return;
 	}
 
 IL_005d:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:431>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:428>
 		LightGunController_t680B4BA75BD4F4F71E8A19174F71D05FB5CBC290* L_13 = __this->___lightGun;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_14;
@@ -5466,17 +5516,17 @@ IL_005d:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:433>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:430>
 		LightGunController_t680B4BA75BD4F4F71E8A19174F71D05FB5CBC290* L_15 = __this->___lightGun;
 		NullCheck(L_15);
 		LightGunController_PlayAlternatingSignal_m754747C4279C00C5CC4290EF5318C56ED6050936(L_15, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:436>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:433>
 		return;
 	}
 
 IL_0077:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:440>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:437>
 		FlareController_t19DFA8C95BBE590AE5C50AC9DD381EE578857239* L_16 = __this->___flareController;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_17;
@@ -5487,7 +5537,7 @@ IL_0077:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:442>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:439>
 		FlareController_t19DFA8C95BBE590AE5C50AC9DD381EE578857239* L_18 = __this->___flareController;
 		NullCheck(L_18);
 		FlareController_PlayFlare_m498822B08298E0FC888A3188458C70C0C8D05783(L_18, NULL);
@@ -5495,7 +5545,7 @@ IL_0077:
 
 IL_0090:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:447>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:444>
 		return;
 	}
 }
@@ -5528,24 +5578,24 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_SelectAnswer_m3F402542F6
 	Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* G_B20_1 = NULL;
 	AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* G_B25_0 = NULL;
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:451>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:448>
 		List_1_tC5B83DA4C6F3B1C2FE00621F63115C47E4765494* L_0 = __this->___scenarios;
 		int32_t L_1 = __this->___currentIndex;
 		NullCheck(L_0);
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_2;
 		L_2 = List_1_get_Item_m3084AFF53ED01E36BF53BCF3E37284D2311FF7AB(L_0, L_1, List_1_get_Item_m3084AFF53ED01E36BF53BCF3E37284D2311FF7AB_RuntimeMethod_var);
 		V_0 = L_2;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:453>
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:454>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:450>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:451>
 		int32_t L_3 = ___0_selectedAnswer;
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_4 = V_0;
 		NullCheck(L_4);
 		int32_t L_5 = L_4->___correctOptionIndex;
 		V_1 = (bool)((((int32_t)L_3) == ((int32_t)L_5))? 1 : 0);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:456>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:453>
 		bool L_6 = V_1;
 		__this->___lastAnswerCorrect = L_6;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:459>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:456>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_7 = __this->___feedbackTitleText;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_8;
@@ -5556,7 +5606,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_SelectAnswer_m3F402542F6
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:460>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:457>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_9 = __this->___feedbackTitleText;
 		bool L_10 = V_1;
 		if (L_10)
@@ -5586,7 +5636,7 @@ IL_0046:
 
 IL_004b:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:463>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:460>
 		int32_t L_11 = __this->___feedbackMode;
 		if (L_11)
 		{
@@ -5604,7 +5654,7 @@ IL_004b:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:464>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:461>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_14 = __this->___explainButton;
 		NullCheck(L_14);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_15;
@@ -5615,7 +5665,7 @@ IL_004b:
 
 IL_0072:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:468>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:465>
 		int32_t L_16 = ___0_selectedAnswer;
 		if (!L_16)
 		{
@@ -5637,7 +5687,7 @@ IL_007d:
 IL_0083:
 	{
 		V_2 = G_B11_0;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:469>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:466>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_19 = V_2;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_20;
@@ -5648,7 +5698,7 @@ IL_0083:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:470>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:467>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_21 = V_2;
 		NullCheck(L_21);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_22;
@@ -5659,7 +5709,7 @@ IL_0083:
 
 IL_0099:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:473>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:470>
 		int32_t L_23 = ___0_selectedAnswer;
 		if (!L_23)
 		{
@@ -5681,7 +5731,7 @@ IL_00a4:
 IL_00aa:
 	{
 		V_3 = G_B16_0;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:474>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:471>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_26 = V_3;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_27;
@@ -5692,7 +5742,7 @@ IL_00aa:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:476>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:473>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_28 = V_3;
 		bool L_29 = V_1;
 		if (L_29)
@@ -5720,7 +5770,7 @@ IL_00c6:
 	{
 		NullCheck(G_B20_1);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(G_B20_1, G_B20_0, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:477>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:474>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_32 = V_3;
 		NullCheck(L_32);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_33;
@@ -5731,7 +5781,7 @@ IL_00c6:
 
 IL_00d7:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:480>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:477>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_34 = __this->___feedbackAudioSource;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_35;
@@ -5742,7 +5792,7 @@ IL_00d7:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:482>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:479>
 		bool L_36 = V_1;
 		if (L_36)
 		{
@@ -5764,7 +5814,7 @@ IL_00f0:
 IL_00f6:
 	{
 		V_4 = G_B25_0;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:483>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:480>
 		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_39 = V_4;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_40;
@@ -5775,7 +5825,7 @@ IL_00f6:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:484>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:481>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_41 = __this->___feedbackAudioSource;
 		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_42 = V_4;
 		NullCheck(L_41);
@@ -5784,7 +5834,7 @@ IL_00f6:
 
 IL_010f:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:487>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:484>
 		bool L_43 = V_1;
 		if (!L_43)
 		{
@@ -5792,7 +5842,7 @@ IL_010f:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:489>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:486>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_44 = __this->___optionAButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_45;
@@ -5803,7 +5853,7 @@ IL_010f:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:490>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:487>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_46 = __this->___optionAButton;
 		NullCheck(L_46);
 		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_46, (bool)0, NULL);
@@ -5811,7 +5861,7 @@ IL_010f:
 
 IL_012c:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:492>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:489>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_47 = __this->___optionBButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_48;
@@ -5822,7 +5872,7 @@ IL_012c:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:493>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:490>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_49 = __this->___optionBButton;
 		NullCheck(L_49);
 		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_49, (bool)0, NULL);
@@ -5830,7 +5880,7 @@ IL_012c:
 
 IL_0146:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:495>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:492>
 		int32_t L_50 = __this->___feedbackMode;
 		if ((!(((uint32_t)L_50) == ((uint32_t)1))))
 		{
@@ -5838,7 +5888,7 @@ IL_0146:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:496>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:493>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_51 = V_0;
 		RuntimeObject* L_52;
 		L_52 = ScenarioManager_CorrectSequence_AutoPopup_m58D0ED589D6D4FE141C295E7C5416888E4189293(__this, L_51, NULL);
@@ -5849,7 +5899,7 @@ IL_0146:
 
 IL_015e:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:498>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:495>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_54 = V_0;
 		RuntimeObject* L_55;
 		L_55 = ScenarioManager_PlayResultSequence_m154041CEF4C4A823B1E47B650569D46129C4B130(__this, L_54, (bool)1, NULL);
@@ -5860,14 +5910,14 @@ IL_015e:
 
 IL_016e:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:503>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:500>
 		Handheld_Vibrate_m820B68A9A3A1C5C0173B99A94C2054778BC3A2F9(NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:505>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:502>
 		RuntimeObject* L_57;
 		L_57 = ScenarioManager_FlashWrongVignette_mCAB2A06BFD671D1C299B7283A4D1E5234C623502(__this, NULL);
 		Coroutine_t85EA685566A254C23F3FD77AB5BDFFFF8799596B* L_58;
 		L_58 = MonoBehaviour_StartCoroutine_m4CAFF732AA28CD3BDC5363B44A863575530EC812(__this, L_57, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:507>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:504>
 		int32_t L_59 = __this->___feedbackMode;
 		if ((!(((uint32_t)L_59) == ((uint32_t)1))))
 		{
@@ -5875,7 +5925,7 @@ IL_016e:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:509>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:506>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_60 = V_0;
 		RuntimeObject* L_61;
 		L_61 = ScenarioManager_WrongSequence_AutoPopup_m383531AC4ABE6F639345FA1DC8A4F4828028D04F(__this, L_60, NULL);
@@ -5886,7 +5936,7 @@ IL_016e:
 
 IL_0198:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:515>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:512>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_63 = V_0;
 		NullCheck(L_63);
 		String_t* L_64 = L_63->___wrongAnimTrigger;
@@ -5898,7 +5948,7 @@ IL_0198:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:517>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:514>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_66 = __this->___optionAButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_67;
@@ -5909,7 +5959,7 @@ IL_0198:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:518>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:515>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_68 = __this->___optionAButton;
 		NullCheck(L_68);
 		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_68, (bool)0, NULL);
@@ -5917,7 +5967,7 @@ IL_0198:
 
 IL_01bf:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:520>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:517>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_69 = __this->___optionBButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_70;
@@ -5928,7 +5978,7 @@ IL_01bf:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:521>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:518>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_71 = __this->___optionBButton;
 		NullCheck(L_71);
 		Selectable_set_interactable_m8DD581C1AD99B2EFA8B3EE9AF69EDDF26688B492(L_71, (bool)0, NULL);
@@ -5936,7 +5986,7 @@ IL_01bf:
 
 IL_01d9:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:523>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:520>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_72 = V_0;
 		RuntimeObject* L_73;
 		L_73 = ScenarioManager_PlayResultSequence_m154041CEF4C4A823B1E47B650569D46129C4B130(__this, L_72, (bool)0, NULL);
@@ -5946,7 +5996,7 @@ IL_01d9:
 
 IL_01e8:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:528>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:525>
 		return;
 	}
 }
@@ -6150,16 +6200,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_ShowCompletionPanel_mE1E
 	int32_t V_0 = 0;
 	int32_t V_1 = 0;
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:770>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:765>
 		V_0 = 0;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:771>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:766>
 		V_1 = 0;
 		goto IL_002b;
 	}
 
 IL_0006:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:772>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:767>
 		List_1_tC5B83DA4C6F3B1C2FE00621F63115C47E4765494* L_0 = __this->___scenarios;
 		int32_t L_1 = V_1;
 		NullCheck(L_0);
@@ -6184,21 +6234,21 @@ IL_0006:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:773>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:768>
 		int32_t L_8 = V_0;
 		V_0 = ((int32_t)il2cpp_codegen_add(L_8, 1));
 	}
 
 IL_0027:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:771>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:766>
 		int32_t L_9 = V_1;
 		V_1 = ((int32_t)il2cpp_codegen_add(L_9, 1));
 	}
 
 IL_002b:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:771>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:766>
 		int32_t L_10 = V_1;
 		List_1_tC5B83DA4C6F3B1C2FE00621F63115C47E4765494* L_11 = __this->___scenarios;
 		NullCheck(L_11);
@@ -6210,7 +6260,7 @@ IL_002b:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:775>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:770>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_13 = __this->___completionPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_14;
@@ -6221,7 +6271,7 @@ IL_002b:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:776>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:771>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_15 = __this->___completionPanel;
 		NullCheck(L_15);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_15, (bool)1, NULL);
@@ -6229,7 +6279,7 @@ IL_002b:
 
 IL_0053:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:778>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:773>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_16 = __this->___completionTitleText;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_17;
@@ -6240,7 +6290,7 @@ IL_0053:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:779>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:774>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_18 = __this->___completionTitleText;
 		NullCheck(L_18);
 		VirtualActionInvoker1< String_t* >::Invoke(66, L_18, _stringLiteral8F0418D2D5F9EE433199E2098004FED4777B6BA7);
@@ -6248,7 +6298,7 @@ IL_0053:
 
 IL_0071:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:781>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:776>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_19 = __this->___completionSlayedText;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_20;
@@ -6259,7 +6309,7 @@ IL_0071:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:782>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:777>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_21 = __this->___completionSlayedText;
 		int32_t L_22 = V_0;
 		int32_t L_23 = L_22;
@@ -6272,7 +6322,7 @@ IL_0071:
 
 IL_009a:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:785>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:780>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_26 = __this->___questionPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_27;
@@ -6283,7 +6333,7 @@ IL_009a:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:786>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:781>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_28 = __this->___questionPanel;
 		NullCheck(L_28);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_28, (bool)0, NULL);
@@ -6291,7 +6341,7 @@ IL_009a:
 
 IL_00b4:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:789>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:784>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_29 = __this->___nextButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_30;
@@ -6302,7 +6352,7 @@ IL_00b4:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:790>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:785>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_31 = __this->___nextButton;
 		NullCheck(L_31);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_32;
@@ -6313,7 +6363,7 @@ IL_00b4:
 
 IL_00d3:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:791>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:786>
 		return;
 	}
 }
@@ -6333,14 +6383,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_OpenExplanation_mFCEBBA5
 	String_t* G_B4_0 = NULL;
 	TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* G_B4_1 = NULL;
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:795>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:790>
 		List_1_tC5B83DA4C6F3B1C2FE00621F63115C47E4765494* L_0 = __this->___scenarios;
 		int32_t L_1 = __this->___currentIndex;
 		NullCheck(L_0);
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_2;
 		L_2 = List_1_get_Item_m3084AFF53ED01E36BF53BCF3E37284D2311FF7AB(L_0, L_1, List_1_get_Item_m3084AFF53ED01E36BF53BCF3E37284D2311FF7AB_RuntimeMethod_var);
 		V_0 = L_2;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:797>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:792>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_3 = __this->___feedbackDescriptionText;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_4;
@@ -6351,9 +6401,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_OpenExplanation_mFCEBBA5
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:799>
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:800>
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:801>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:794>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:795>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:796>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_5 = __this->___feedbackDescriptionText;
 		bool L_6 = __this->___lastAnswerCorrect;
 		if (L_6)
@@ -6389,7 +6439,7 @@ IL_003c:
 
 IL_0041:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:804>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:799>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_11 = __this->___feedbackPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_12;
@@ -6400,7 +6450,7 @@ IL_0041:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:805>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:800>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_13 = __this->___feedbackPanel;
 		NullCheck(L_13);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_13, (bool)1, NULL);
@@ -6408,7 +6458,7 @@ IL_0041:
 
 IL_005b:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:809>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:804>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_14 = __this->___continueButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_15;
@@ -6419,7 +6469,7 @@ IL_005b:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:810>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:805>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_16 = __this->___continueButton;
 		NullCheck(L_16);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_17;
@@ -6430,7 +6480,7 @@ IL_005b:
 
 IL_007a:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:814>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:809>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_18 = __this->___questionPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_19;
@@ -6441,7 +6491,7 @@ IL_007a:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:815>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:810>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_20 = __this->___questionPanel;
 		NullCheck(L_20);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_20, (bool)0, NULL);
@@ -6449,7 +6499,7 @@ IL_007a:
 
 IL_0094:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:816>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:811>
 		return;
 	}
 }
@@ -6463,7 +6513,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_CloseExplanation_mA80894
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:820>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:815>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_0 = __this->___feedbackPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_1;
@@ -6474,7 +6524,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_CloseExplanation_mA80894
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:821>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:816>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_2 = __this->___feedbackPanel;
 		NullCheck(L_2);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_2, (bool)0, NULL);
@@ -6482,7 +6532,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_CloseExplanation_mA80894
 
 IL_001a:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:823>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:818>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_3 = __this->___questionPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_4;
@@ -6493,7 +6543,7 @@ IL_001a:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:824>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:819>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_5 = __this->___questionPanel;
 		NullCheck(L_5);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_5, (bool)1, NULL);
@@ -6501,7 +6551,7 @@ IL_001a:
 
 IL_0034:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:825>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:820>
 		return;
 	}
 }
@@ -6518,7 +6568,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_GoNext_m31B30ECEEE8071D6
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:829>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:824>
 		BooleanU5BU5D_tD317D27C31DB892BE79FAE3AEBC0B3FFB73DE9B4* L_0 = __this->___completedSteps;
 		int32_t L_1 = __this->___currentIndex;
 		NullCheck(L_0);
@@ -6530,13 +6580,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_GoNext_m31B30ECEEE8071D6
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:830>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:825>
 		return;
 	}
 
 IL_0010:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:834>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:829>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_4 = __this->___completionPanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_5;
@@ -6547,7 +6597,7 @@ IL_0010:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:835>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:830>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_6 = __this->___completionPanel;
 		NullCheck(L_6);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_6, (bool)0, NULL);
@@ -6555,7 +6605,7 @@ IL_0010:
 
 IL_002a:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:837>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:832>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_7 = __this->___nextButton;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_8;
@@ -6566,7 +6616,7 @@ IL_002a:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:838>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:833>
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_9 = __this->___nextButton;
 		NullCheck(L_9);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_10;
@@ -6577,7 +6627,7 @@ IL_002a:
 
 IL_0049:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:840>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:835>
 		int32_t L_11 = __this->___currentIndex;
 		List_1_tC5B83DA4C6F3B1C2FE00621F63115C47E4765494* L_12 = __this->___scenarios;
 		NullCheck(L_12);
@@ -6589,7 +6639,7 @@ IL_0049:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:842>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:837>
 		int32_t L_14 = __this->___currentIndex;
 		ScenarioManager_ShowScenario_mA21003754A0D966403EE8271B94A3A1101CA50F5(__this, ((int32_t)il2cpp_codegen_add(L_14, 1)), NULL);
 		return;
@@ -6597,10 +6647,10 @@ IL_0049:
 
 IL_006d:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:846>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:841>
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
 		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(_stringLiteral10DDA72021E08419591366D87B431D93D73FBF7D, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:848>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:843>
 		return;
 	}
 }
@@ -6608,7 +6658,7 @@ IL_006d:
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_GoPrevious_m7129ED63B44246762E709C56633D24FF7BC4C62E (ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:852>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:847>
 		int32_t L_0 = __this->___currentIndex;
 		if ((((int32_t)L_0) <= ((int32_t)0)))
 		{
@@ -6616,14 +6666,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScenarioManager_GoPrevious_m7129ED63B442
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:854>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:849>
 		int32_t L_1 = __this->___currentIndex;
 		ScenarioManager_ShowScenario_mA21003754A0D966403EE8271B94A3A1101CA50F5(__this, ((int32_t)il2cpp_codegen_subtract(L_1, 1)), NULL);
 	}
 
 IL_0017:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:856>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:851>
 		return;
 	}
 }
@@ -6749,7 +6799,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CAutoExplainSequenceU3Ed__64_MoveNext_
 IL_0022:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:606>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:603>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_3 = V_1;
 		NullCheck(L_3);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_4 = L_3->___feedbackPanel;
@@ -6762,7 +6812,7 @@ IL_0022:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:607>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:604>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_6 = V_1;
 		NullCheck(L_6);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_7 = L_6->___feedbackPanel;
@@ -6772,7 +6822,7 @@ IL_0022:
 
 IL_0043:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:610>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:607>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_8 = V_1;
 		NullCheck(L_8);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_9 = L_8->___continueButton;
@@ -6785,7 +6835,7 @@ IL_0043:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:611>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:608>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_11 = V_1;
 		NullCheck(L_11);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_12 = L_11->___continueButton;
@@ -6798,7 +6848,7 @@ IL_0043:
 
 IL_0062:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:613>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:610>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_14 = V_1;
 		NullCheck(L_14);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_15 = L_14->___questionPanel;
@@ -6811,7 +6861,7 @@ IL_0062:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:614>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:611>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_17 = V_1;
 		NullCheck(L_17);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_18 = L_17->___questionPanel;
@@ -6821,7 +6871,7 @@ IL_0062:
 
 IL_007c:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:616>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:613>
 		bool L_19 = __this->___correct;
 		if (L_19)
 		{
@@ -6847,7 +6897,7 @@ IL_0091:
 IL_009c:
 	{
 		V_2 = G_B11_0;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:617>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:614>
 		bool L_24 = __this->___correct;
 		if (L_24)
 		{
@@ -6879,7 +6929,7 @@ IL_00be:
 		NullCheck(G_B14_1);
 		G_B14_1->___U3CvoU3E5__2 = G_B14_0;
 		Il2CppCodeGenWriteBarrier((void**)(&G_B14_1->___U3CvoU3E5__2), (void*)G_B14_0);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:621>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:618>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_29 = V_1;
 		NullCheck(L_29);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_30 = L_29->___previousButton;
@@ -6892,7 +6942,7 @@ IL_00be:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:622>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:619>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_32 = V_1;
 		NullCheck(L_32);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_33 = L_32->___previousButton;
@@ -6902,7 +6952,7 @@ IL_00be:
 
 IL_00dd:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:626>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:623>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_34 = V_1;
 		NullCheck(L_34);
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_35 = L_34->___voAudioSource;
@@ -6925,7 +6975,7 @@ IL_00dd:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:627>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:624>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_39 = V_1;
 		NullCheck(L_39);
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_40 = L_39->___voAudioSource;
@@ -6936,11 +6986,11 @@ IL_00dd:
 
 IL_010a:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:634>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:631>
 		float L_42;
 		L_42 = Time_get_time_m3A271BB1B20041144AC5B7863B71AB1F0150374B(NULL);
 		__this->___U3CtypeStartTimeU3E5__3 = L_42;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:635>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:632>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_43 = V_1;
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_44 = V_1;
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_45 = V_1;
@@ -6965,12 +7015,12 @@ IL_010a:
 IL_013d:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:636>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:633>
 		float L_52;
 		L_52 = Time_get_time_m3A271BB1B20041144AC5B7863B71AB1F0150374B(NULL);
 		float L_53 = __this->___U3CtypeStartTimeU3E5__3;
 		V_3 = ((float)il2cpp_codegen_subtract(L_52, L_53));
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:638>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:635>
 		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_54 = __this->___U3CvoU3E5__2;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_55;
@@ -7000,7 +7050,7 @@ IL_0166:
 IL_017d:
 	{
 		V_4 = G_B23_0;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:639>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:636>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_60 = V_1;
 		NullCheck(L_60);
 		float L_61 = L_60->___popupHoldTime;
@@ -7008,7 +7058,7 @@ IL_017d:
 		float L_63;
 		L_63 = Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline(L_61, L_62, NULL);
 		V_5 = L_63;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:641>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:638>
 		float L_64 = V_5;
 		WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3* L_65 = (WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3*)il2cpp_codegen_object_new(WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3_il2cpp_TypeInfo_var);
 		WaitForSeconds__ctor_m579F95BADEDBAB4B3A7E302C6EE3995926EF2EFC(L_65, L_64, NULL);
@@ -7021,7 +7071,7 @@ IL_017d:
 IL_01a4:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:644>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:641>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_66 = V_1;
 		NullCheck(L_66);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_67 = L_66->___previousButton;
@@ -7034,7 +7084,7 @@ IL_01a4:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:645>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:642>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_69 = V_1;
 		NullCheck(L_69);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_70 = L_69->___previousButton;
@@ -7047,7 +7097,7 @@ IL_01a4:
 
 IL_01cd:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:647>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:644>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_73 = V_1;
 		NullCheck(L_73);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_74 = L_73->___feedbackPanel;
@@ -7060,7 +7110,7 @@ IL_01cd:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:648>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:645>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_76 = V_1;
 		NullCheck(L_76);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_77 = L_76->___feedbackPanel;
@@ -7070,7 +7120,7 @@ IL_01cd:
 
 IL_01e7:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:650>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:647>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_78 = V_1;
 		NullCheck(L_78);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_79 = L_78->___questionPanel;
@@ -7083,7 +7133,7 @@ IL_01e7:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:651>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:648>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_81 = V_1;
 		NullCheck(L_81);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_82 = L_81->___questionPanel;
@@ -7093,7 +7143,7 @@ IL_01e7:
 
 IL_0201:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:652>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:649>
 		return (bool)0;
 	}
 }
@@ -7187,7 +7237,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CCorrectSequence_AutoPopupU3Ed__62_Mov
 IL_0022:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:563>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:560>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_3 = V_1;
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_4 = V_1;
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_5 = __this->___scenario;
@@ -7206,7 +7256,7 @@ IL_0022:
 IL_004b:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:566>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:563>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_8 = V_1;
 		NullCheck(L_8);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_9 = L_8->___questionPanel;
@@ -7219,7 +7269,7 @@ IL_004b:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:567>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:564>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_11 = V_1;
 		NullCheck(L_11);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_12 = L_11->___questionPanel;
@@ -7229,7 +7279,7 @@ IL_004b:
 
 IL_006c:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:569>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:566>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_13 = V_1;
 		NullCheck(L_13);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_14 = L_13->___previousButton;
@@ -7242,7 +7292,7 @@ IL_006c:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:570>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:567>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_16 = V_1;
 		NullCheck(L_16);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_17 = L_16->___previousButton;
@@ -7252,7 +7302,7 @@ IL_006c:
 
 IL_0086:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:572>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:569>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_18 = V_1;
 		NullCheck(L_18);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_19 = L_18->___nextButton;
@@ -7265,7 +7315,7 @@ IL_0086:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:573>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:570>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_21 = V_1;
 		NullCheck(L_21);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_22 = L_21->___nextButton;
@@ -7275,7 +7325,7 @@ IL_0086:
 
 IL_00a0:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:576>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:573>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_23 = V_1;
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_24 = V_1;
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_25 = __this->___scenario;
@@ -7294,7 +7344,7 @@ IL_00a0:
 IL_00c3:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:578>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:575>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_28 = V_1;
 		NullCheck(L_28);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_29 = L_28->___previousButton;
@@ -7307,7 +7357,7 @@ IL_00c3:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:579>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:576>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_31 = V_1;
 		NullCheck(L_31);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_32 = L_31->___previousButton;
@@ -7320,7 +7370,7 @@ IL_00c3:
 
 IL_00ec:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:581>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:578>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_35 = V_1;
 		NullCheck(L_35);
 		BooleanU5BU5D_tD317D27C31DB892BE79FAE3AEBC0B3FFB73DE9B4* L_36 = L_35->___completedSteps;
@@ -7329,11 +7379,11 @@ IL_00ec:
 		int32_t L_38 = L_37->___currentIndex;
 		NullCheck(L_36);
 		(L_36)->SetAt(static_cast<il2cpp_array_size_t>(L_38), (bool)1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:583>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:580>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_39 = V_1;
 		NullCheck(L_39);
 		ScenarioManager_ShowCompletionPanel_mE1EFB2704E1911A8DEA44C89CD778E80B3DF2618(L_39, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:584>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:581>
 		return (bool)0;
 	}
 }
@@ -7432,7 +7482,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CFlashWrongVignetteU3Ed__61_MoveNext_m
 IL_0026:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:532>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:529>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_3 = V_1;
 		NullCheck(L_3);
 		CanvasGroup_t048C1461B14628CFAEBE6E7353093ADB04EBC094* L_4 = L_3->___wrongVignette;
@@ -7445,25 +7495,25 @@ IL_0026:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:533>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:530>
 		return (bool)0;
 	}
 
 IL_003d:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:536>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:533>
 		__this->___U3CtU3E5__2 = (0.0f);
 		goto IL_009a;
 	}
 
 IL_004a:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:539>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:536>
 		float L_6 = __this->___U3CtU3E5__2;
 		float L_7;
 		L_7 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		__this->___U3CtU3E5__2 = ((float)il2cpp_codegen_add(L_6, L_7));
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:540>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:537>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_8 = V_1;
 		NullCheck(L_8);
 		CanvasGroup_t048C1461B14628CFAEBE6E7353093ADB04EBC094* L_9 = L_8->___wrongVignette;
@@ -7475,7 +7525,7 @@ IL_004a:
 		L_13 = Mathf_Lerp_m47EF2FFB7647BD0A1FDC26DC03E28B19812139B5_inline((0.0f), (1.0f), ((float)(L_10/L_12)), NULL);
 		NullCheck(L_9);
 		CanvasGroup_set_alpha_m5C06839316D948BB4F75ED72C87FA1F1A20C333F(L_9, L_13, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:541>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:538>
 		__this->___U3CU3E2__current = NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CU3E2__current), (void*)NULL);
 		__this->___U3CU3E1__state = 1;
@@ -7489,7 +7539,7 @@ IL_0093:
 
 IL_009a:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:537>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:534>
 		float L_14 = __this->___U3CtU3E5__2;
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_15 = V_1;
 		NullCheck(L_15);
@@ -7500,13 +7550,13 @@ IL_009a:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:543>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:540>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_17 = V_1;
 		NullCheck(L_17);
 		CanvasGroup_t048C1461B14628CFAEBE6E7353093ADB04EBC094* L_18 = L_17->___wrongVignette;
 		NullCheck(L_18);
 		CanvasGroup_set_alpha_m5C06839316D948BB4F75ED72C87FA1F1A20C333F(L_18, (1.0f), NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:545>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:542>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_19 = V_1;
 		NullCheck(L_19);
 		float L_20 = L_19->___vignetteHoldTime;
@@ -7521,19 +7571,19 @@ IL_009a:
 IL_00d2:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:548>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:545>
 		__this->___U3CtU3E5__2 = (0.0f);
 		goto IL_0136;
 	}
 
 IL_00e6:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:551>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:548>
 		float L_22 = __this->___U3CtU3E5__2;
 		float L_23;
 		L_23 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		__this->___U3CtU3E5__2 = ((float)il2cpp_codegen_add(L_22, L_23));
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:552>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:549>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_24 = V_1;
 		NullCheck(L_24);
 		CanvasGroup_t048C1461B14628CFAEBE6E7353093ADB04EBC094* L_25 = L_24->___wrongVignette;
@@ -7545,7 +7595,7 @@ IL_00e6:
 		L_29 = Mathf_Lerp_m47EF2FFB7647BD0A1FDC26DC03E28B19812139B5_inline((1.0f), (0.0f), ((float)(L_26/L_28)), NULL);
 		NullCheck(L_25);
 		CanvasGroup_set_alpha_m5C06839316D948BB4F75ED72C87FA1F1A20C333F(L_25, L_29, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:553>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:550>
 		__this->___U3CU3E2__current = NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CU3E2__current), (void*)NULL);
 		__this->___U3CU3E1__state = 3;
@@ -7559,7 +7609,7 @@ IL_012f:
 
 IL_0136:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:549>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:546>
 		float L_30 = __this->___U3CtU3E5__2;
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_31 = V_1;
 		NullCheck(L_31);
@@ -7570,13 +7620,13 @@ IL_0136:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:555>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:552>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_33 = V_1;
 		NullCheck(L_33);
 		CanvasGroup_t048C1461B14628CFAEBE6E7353093ADB04EBC094* L_34 = L_33->___wrongVignette;
 		NullCheck(L_34);
 		CanvasGroup_set_alpha_m5C06839316D948BB4F75ED72C87FA1F1A20C333F(L_34, (0.0f), NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:556>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:553>
 		return (bool)0;
 	}
 }
@@ -7678,7 +7728,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CGateNextUntilIntroVOEndsU3Ed__58_Move
 IL_0026:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:363>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:360>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_3 = V_1;
 		NullCheck(L_3);
 		BooleanU5BU5D_tD317D27C31DB892BE79FAE3AEBC0B3FFB73DE9B4* L_4 = L_3->___audioPlayed;
@@ -7689,7 +7739,7 @@ IL_0026:
 		int32_t L_7 = L_6;
 		uint8_t L_8 = (uint8_t)(L_4)->GetAt(static_cast<il2cpp_array_size_t>(L_7));
 		__this->___U3CalreadyHeardU3E5__2 = (bool)L_8;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:365>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:362>
 		bool L_9 = __this->___U3CalreadyHeardU3E5__2;
 		if (L_9)
 		{
@@ -7721,7 +7771,7 @@ IL_0026:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:367>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:364>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_16 = V_1;
 		NullCheck(L_16);
 		BooleanU5BU5D_tD317D27C31DB892BE79FAE3AEBC0B3FFB73DE9B4* L_17 = L_16->___audioPlayed;
@@ -7730,7 +7780,7 @@ IL_0026:
 		int32_t L_19 = L_18->___currentIndex;
 		NullCheck(L_17);
 		(L_17)->SetAt(static_cast<il2cpp_array_size_t>(L_19), (bool)1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:371>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:368>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_20 = V_1;
 		NullCheck(L_20);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_21 = L_20->___previousButton;
@@ -7743,7 +7793,7 @@ IL_0026:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:372>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:369>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_23 = V_1;
 		NullCheck(L_23);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_24 = L_23->___previousButton;
@@ -7753,7 +7803,7 @@ IL_0026:
 
 IL_009a:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:374>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:371>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_25 = V_1;
 		NullCheck(L_25);
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_26 = L_25->___sceneIntroAudioSource;
@@ -7762,7 +7812,7 @@ IL_009a:
 		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_28 = L_27->___introVO;
 		NullCheck(L_26);
 		AudioSource_PlayOneShot_m098BCAE084AABB128BB19ED805D2D985E7B75112(L_26, L_28, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:375>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:372>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_29 = __this->___scenario;
 		NullCheck(L_29);
 		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_30 = L_29->___introVO;
@@ -7775,7 +7825,7 @@ IL_009a:
 		L_34 = String_Format_mA8DBB4C2516B9723C5A41E6CB1E2FAF4BBE96DD8(_stringLiteral3EAD3632935CA1D52C48EF2489F52EBCF681A70A, L_33, NULL);
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
 		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(L_34, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:376>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:373>
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_35 = __this->___scenario;
 		NullCheck(L_35);
 		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_36 = L_35->___introVO;
@@ -7793,7 +7843,7 @@ IL_009a:
 IL_00f8:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:378>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:375>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_39 = V_1;
 		NullCheck(L_39);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_40 = L_39->___previousButton;
@@ -7806,7 +7856,7 @@ IL_00f8:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:379>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:376>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_42 = V_1;
 		NullCheck(L_42);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_43 = L_42->___previousButton;
@@ -7820,7 +7870,7 @@ IL_00f8:
 
 IL_0123:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:381>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:378>
 		bool L_46 = __this->___U3CalreadyHeardU3E5__2;
 		if (L_46)
 		{
@@ -7828,10 +7878,10 @@ IL_0123:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:384>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:381>
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
 		Debug_LogWarning_m33EF1B897E0C7C6FF538989610BFAFFEF4628CA9(_stringLiteralBEADAB08D88A02861EB3AEC0DC808B93B4B65CCB, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:385>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:382>
 		WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3* L_47 = (WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3*)il2cpp_codegen_object_new(WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3_il2cpp_TypeInfo_var);
 		WaitForSeconds__ctor_m579F95BADEDBAB4B3A7E302C6EE3995926EF2EFC(L_47, (2.0f), NULL);
 		__this->___U3CU3E2__current = L_47;
@@ -7847,7 +7897,7 @@ IL_014e:
 
 IL_0155:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:393>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:390>
 		bool L_48 = __this->___U3CalreadyHeardU3E5__2;
 		if (L_48)
 		{
@@ -7866,7 +7916,7 @@ IL_0155:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:395>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:392>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_52 = V_1;
 		NullCheck(L_52);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_53 = L_52->___previousButton;
@@ -7879,7 +7929,7 @@ IL_0155:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:396>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:393>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_55 = V_1;
 		NullCheck(L_55);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_56 = L_55->___previousButton;
@@ -7889,7 +7939,7 @@ IL_0155:
 
 IL_0189:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:398>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:395>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_57 = V_1;
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_58 = V_1;
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_59 = __this->___scenario;
@@ -7908,7 +7958,7 @@ IL_0189:
 IL_01ac:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:400>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:397>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_62 = V_1;
 		NullCheck(L_62);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_63 = L_62->___previousButton;
@@ -7921,7 +7971,7 @@ IL_01ac:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:401>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:398>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_65 = V_1;
 		NullCheck(L_65);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_66 = L_65->___previousButton;
@@ -7934,7 +7984,7 @@ IL_01ac:
 
 IL_01d5:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:404>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:401>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_69 = V_1;
 		NullCheck(L_69);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_70 = L_69->___nextButton;
@@ -7947,7 +7997,7 @@ IL_01d5:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:405>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:402>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_72 = V_1;
 		NullCheck(L_72);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_73 = L_72->___nextButton;
@@ -7957,7 +8007,7 @@ IL_01d5:
 
 IL_01ef:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:406>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:403>
 		return (bool)0;
 	}
 }
@@ -8052,7 +8102,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CPlayResultSequenceU3Ed__67_MoveNext_m
 IL_0022:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:713>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:708>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_3 = V_1;
 		NullCheck(L_3);
 		float L_4 = L_3->___resultIconHoldTime;
@@ -8067,7 +8117,7 @@ IL_0022:
 IL_0043:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:717>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:712>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_6 = V_1;
 		NullCheck(L_6);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_7 = L_6->___questionPanel;
@@ -8080,7 +8130,7 @@ IL_0043:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:718>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:713>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_9 = V_1;
 		NullCheck(L_9);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_10 = L_9->___questionPanel;
@@ -8090,7 +8140,7 @@ IL_0043:
 
 IL_0064:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:720>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:715>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_11 = V_1;
 		NullCheck(L_11);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_12 = L_11->___previousButton;
@@ -8103,7 +8153,7 @@ IL_0064:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:721>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:716>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_14 = V_1;
 		NullCheck(L_14);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_15 = L_14->___previousButton;
@@ -8113,7 +8163,7 @@ IL_0064:
 
 IL_007e:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:723>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:718>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_16 = V_1;
 		NullCheck(L_16);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_17 = L_16->___nextButton;
@@ -8126,7 +8176,7 @@ IL_007e:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:724>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:719>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_19 = V_1;
 		NullCheck(L_19);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_20 = L_19->___nextButton;
@@ -8136,7 +8186,7 @@ IL_007e:
 
 IL_0098:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:728>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:723>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_21 = V_1;
 		NullCheck(L_21);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_22 = L_21->___feedbackPanel;
@@ -8149,7 +8199,7 @@ IL_0098:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:729>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:724>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_24 = V_1;
 		NullCheck(L_24);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_25 = L_24->___feedbackPanel;
@@ -8159,7 +8209,7 @@ IL_0098:
 
 IL_00b2:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:731>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:726>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_26 = V_1;
 		NullCheck(L_26);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_27 = L_26->___explainButton;
@@ -8172,7 +8222,7 @@ IL_00b2:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:732>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:727>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_29 = V_1;
 		NullCheck(L_29);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_30 = L_29->___explainButton;
@@ -8182,7 +8232,7 @@ IL_00b2:
 
 IL_00cc:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:735>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:730>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_31 = V_1;
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_32 = V_1;
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_33 = __this->___scenario;
@@ -8202,7 +8252,7 @@ IL_00cc:
 IL_00f4:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:738>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:733>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_37 = V_1;
 		NullCheck(L_37);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_38 = L_37->___questionPanel;
@@ -8215,7 +8265,7 @@ IL_00f4:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:739>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:734>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_40 = V_1;
 		NullCheck(L_40);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_41 = L_40->___questionPanel;
@@ -8225,7 +8275,7 @@ IL_00f4:
 
 IL_0115:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:741>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:736>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_42 = V_1;
 		NullCheck(L_42);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_43 = L_42->___previousButton;
@@ -8238,7 +8288,7 @@ IL_0115:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:742>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:737>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_45 = V_1;
 		NullCheck(L_45);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_46 = L_45->___previousButton;
@@ -8251,7 +8301,7 @@ IL_0115:
 
 IL_0137:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:744>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:739>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_49 = V_1;
 		NullCheck(L_49);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_50 = L_49->___explainButton;
@@ -8264,7 +8314,7 @@ IL_0137:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:745>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:740>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_52 = V_1;
 		NullCheck(L_52);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_53 = L_52->___explainButton;
@@ -8274,7 +8324,7 @@ IL_0137:
 
 IL_0151:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:747>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:742>
 		bool L_54 = __this->___correct;
 		if (!L_54)
 		{
@@ -8282,7 +8332,7 @@ IL_0151:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:749>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:744>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_55 = V_1;
 		NullCheck(L_55);
 		BooleanU5BU5D_tD317D27C31DB892BE79FAE3AEBC0B3FFB73DE9B4* L_56 = L_55->___completedSteps;
@@ -8291,7 +8341,7 @@ IL_0151:
 		int32_t L_58 = L_57->___currentIndex;
 		NullCheck(L_56);
 		(L_56)->SetAt(static_cast<il2cpp_array_size_t>(L_58), (bool)1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:751>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:746>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_59 = V_1;
 		NullCheck(L_59);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_60 = L_59->___explainButton;
@@ -8304,7 +8354,7 @@ IL_0151:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:752>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:747>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_62 = V_1;
 		NullCheck(L_62);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_63 = L_62->___explainButton;
@@ -8314,7 +8364,7 @@ IL_0151:
 
 IL_0181:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:754>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:749>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_64 = V_1;
 		NullCheck(L_64);
 		ScenarioManager_ShowCompletionPanel_mE1EFB2704E1911A8DEA44C89CD778E80B3DF2618(L_64, NULL);
@@ -8323,7 +8373,7 @@ IL_0181:
 
 IL_0189:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:759>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:754>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_65 = V_1;
 		NullCheck(L_65);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_66 = L_65->___optionAButton;
@@ -8336,7 +8386,7 @@ IL_0189:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:760>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:755>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_68 = V_1;
 		NullCheck(L_68);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_69 = L_68->___optionAButton;
@@ -8346,7 +8396,7 @@ IL_0189:
 
 IL_01a3:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:762>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:757>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_70 = V_1;
 		NullCheck(L_70);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_71 = L_70->___optionBButton;
@@ -8359,7 +8409,7 @@ IL_01a3:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:763>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:758>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_73 = V_1;
 		NullCheck(L_73);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_74 = L_73->___optionBButton;
@@ -8369,7 +8419,7 @@ IL_01a3:
 
 IL_01bd:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:765>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:760>
 		return (bool)0;
 	}
 }
@@ -8454,7 +8504,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CTriggerAnimationAndWaitU3Ed__66_MoveN
 	U3CTriggerAnimationAndWaitU3Ed__66_t61EA85AFF5CAD3493B35C33C188C7807D69986AC* G_B13_0 = NULL;
 	int32_t G_B15_0 = 0;
 	U3CTriggerAnimationAndWaitU3Ed__66_t61EA85AFF5CAD3493B35C33C188C7807D69986AC* G_B15_1 = NULL;
-	float G_B18_0 = 0.0f;
+	float G_B20_0 = 0.0f;
 	{
 		int32_t L_0 = __this->___U3CU3E1__state;
 		V_0 = L_0;
@@ -8470,7 +8520,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CTriggerAnimationAndWaitU3Ed__66_MoveN
 		int32_t L_3 = V_0;
 		if ((((int32_t)L_3) == ((int32_t)1)))
 		{
-			goto IL_0178;
+			goto IL_0187;
 		}
 	}
 	{
@@ -8480,7 +8530,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CTriggerAnimationAndWaitU3Ed__66_MoveN
 IL_001a:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:676>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:673>
 		bool L_4 = __this->___correct;
 		if (L_4)
 		{
@@ -8512,7 +8562,7 @@ IL_0042:
 		NullCheck(G_B6_1);
 		G_B6_1->___U3CtriggerU3E5__2 = G_B6_0;
 		Il2CppCodeGenWriteBarrier((void**)(&G_B6_1->___U3CtriggerU3E5__2), (void*)G_B6_0);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:677>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:674>
 		bool L_9 = __this->___correct;
 		if (L_9)
 		{
@@ -8538,7 +8588,7 @@ IL_005c:
 IL_0067:
 	{
 		V_2 = G_B9_0;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:678>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:675>
 		bool L_14 = __this->___correct;
 		if (L_14)
 		{
@@ -8564,7 +8614,7 @@ IL_007d:
 IL_0088:
 	{
 		V_3 = G_B12_0;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:680>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:677>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_19 = V_1;
 		NullCheck(L_19);
 		Animator_t8A52E42AE54F76681838FE9E632683EF3952E883* L_20 = L_19->___animatorReference;
@@ -8597,168 +8647,181 @@ IL_00a9:
 	{
 		NullCheck(G_B15_1);
 		G_B15_1->___U3ChasAnimationU3E5__3 = (bool)G_B15_0;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:684>
-		AnimationClip_t00BD2F131D308A4AD2C6B0BF66644FC25FECE712* L_24 = V_2;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:679>
+		bool L_24 = __this->___U3ChasAnimationU3E5__3;
+		if (L_24)
+		{
+			goto IL_00bd;
+		}
+	}
+	{
+		G_B20_0 = (0.5f);
+		goto IL_00d3;
+	}
+
+IL_00bd:
+	{
+		AnimationClip_t00BD2F131D308A4AD2C6B0BF66644FC25FECE712* L_25 = V_2;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_25;
-		L_25 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_24, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (L_25)
+		bool L_26;
+		L_26 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_25, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (L_26)
 		{
-			goto IL_00be;
+			goto IL_00cd;
 		}
 	}
 	{
-		G_B18_0 = (2.0f);
-		goto IL_00c4;
+		G_B20_0 = (2.0f);
+		goto IL_00d3;
 	}
 
-IL_00be:
+IL_00cd:
 	{
-		AnimationClip_t00BD2F131D308A4AD2C6B0BF66644FC25FECE712* L_26 = V_2;
-		NullCheck(L_26);
-		float L_27;
-		L_27 = AnimationClip_get_length_mAD91A1C134662285F26886489AC2D8E0EC79AF41(L_26, NULL);
-		G_B18_0 = L_27;
+		AnimationClip_t00BD2F131D308A4AD2C6B0BF66644FC25FECE712* L_27 = V_2;
+		NullCheck(L_27);
+		float L_28;
+		L_28 = AnimationClip_get_length_mAD91A1C134662285F26886489AC2D8E0EC79AF41(L_27, NULL);
+		G_B20_0 = L_28;
 	}
 
-IL_00c4:
+IL_00d3:
 	{
-		V_4 = G_B18_0;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:686>
-		bool L_28 = __this->___U3ChasAnimationU3E5__3;
-		if (!L_28)
+		V_4 = G_B20_0;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:681>
+		bool L_29 = __this->___U3ChasAnimationU3E5__3;
+		if (!L_29)
 		{
-			goto IL_012d;
+			goto IL_013c;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:688>
-		String_t* L_29 = __this->___U3CtriggerU3E5__2;
-		float L_30 = V_4;
-		float L_31 = L_30;
-		RuntimeObject* L_32 = Box(il2cpp_defaults.single_class, &L_31);
-		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_33 = V_1;
-		NullCheck(L_33);
-		Animator_t8A52E42AE54F76681838FE9E632683EF3952E883* L_34 = L_33->___animatorReference;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:683>
+		String_t* L_30 = __this->___U3CtriggerU3E5__2;
+		float L_31 = V_4;
+		float L_32 = L_31;
+		RuntimeObject* L_33 = Box(il2cpp_defaults.single_class, &L_32);
+		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_34 = V_1;
 		NullCheck(L_34);
-		String_t* L_35;
-		L_35 = Object_get_name_mAC2F6B897CF1303BA4249B4CB55271AFACBB6392(L_34, NULL);
+		Animator_t8A52E42AE54F76681838FE9E632683EF3952E883* L_35 = L_34->___animatorReference;
+		NullCheck(L_35);
 		String_t* L_36;
-		L_36 = String_Format_mA0534D6E2AE4D67A6BD8D45B3321323930EB930C(_stringLiteral1E12865EC44394363AE65917BBE1DA0F294E14D0, L_29, L_32, L_35, NULL);
+		L_36 = Object_get_name_mAC2F6B897CF1303BA4249B4CB55271AFACBB6392(L_35, NULL);
+		String_t* L_37;
+		L_37 = String_Format_mA0534D6E2AE4D67A6BD8D45B3321323930EB930C(_stringLiteral1E12865EC44394363AE65917BBE1DA0F294E14D0, L_30, L_33, L_36, NULL);
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
-		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(L_36, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:689>
-		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_37 = V_1;
-		NullCheck(L_37);
-		Animator_t8A52E42AE54F76681838FE9E632683EF3952E883* L_38 = L_37->___animatorReference;
-		String_t* L_39 = __this->___U3CtriggerU3E5__2;
+		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(L_37, NULL);
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:684>
+		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_38 = V_1;
 		NullCheck(L_38);
-		Animator_SetTrigger_mC9CD54D627C8843EF6E159E167449D216EF6EB30(L_38, L_39, NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:691>
-		AnimationClip_t00BD2F131D308A4AD2C6B0BF66644FC25FECE712* L_40 = V_2;
+		Animator_t8A52E42AE54F76681838FE9E632683EF3952E883* L_39 = L_38->___animatorReference;
+		String_t* L_40 = __this->___U3CtriggerU3E5__2;
+		NullCheck(L_39);
+		Animator_SetTrigger_mC9CD54D627C8843EF6E159E167449D216EF6EB30(L_39, L_40, NULL);
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:686>
+		AnimationClip_t00BD2F131D308A4AD2C6B0BF66644FC25FECE712* L_41 = V_2;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_41;
-		L_41 = Object_op_Equality_mB6120F782D83091EF56A198FCEBCF066DB4A9605(L_40, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_41)
+		bool L_42;
+		L_42 = Object_op_Equality_mB6120F782D83091EF56A198FCEBCF066DB4A9605(L_41, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_42)
 		{
-			goto IL_0137;
+			goto IL_0146;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:692>
-		String_t* L_42 = __this->___U3CtriggerU3E5__2;
-		float L_43 = V_4;
-		float L_44 = L_43;
-		RuntimeObject* L_45 = Box(il2cpp_defaults.single_class, &L_44);
-		String_t* L_46;
-		L_46 = String_Format_mFB7DA489BD99F4670881FF50EC017BFB0A5C0987(_stringLiteralE4F0143921E9F01CBE507A2AAF4C84692FDE5CCB, L_42, L_45, NULL);
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:687>
+		String_t* L_43 = __this->___U3CtriggerU3E5__2;
+		float L_44 = V_4;
+		float L_45 = L_44;
+		RuntimeObject* L_46 = Box(il2cpp_defaults.single_class, &L_45);
+		String_t* L_47;
+		L_47 = String_Format_mFB7DA489BD99F4670881FF50EC017BFB0A5C0987(_stringLiteralE4F0143921E9F01CBE507A2AAF4C84692FDE5CCB, L_43, L_46, NULL);
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
-		Debug_LogWarning_m33EF1B897E0C7C6FF538989610BFAFFEF4628CA9(L_46, NULL);
-		goto IL_0137;
+		Debug_LogWarning_m33EF1B897E0C7C6FF538989610BFAFFEF4628CA9(L_47, NULL);
+		goto IL_0146;
 	}
 
-IL_012d:
+IL_013c:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:696>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:691>
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
 		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(_stringLiteralEC6F26F772E67F491C1C17BFC327691488C9BB2D, NULL);
 	}
 
-IL_0137:
+IL_0146:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:699>
-		bool L_47 = __this->___playVO;
-		if (!L_47)
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:694>
+		bool L_48 = __this->___playVO;
+		if (!L_48)
 		{
-			goto IL_0162;
+			goto IL_0171;
 		}
 	}
 	{
-		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_48 = V_1;
-		NullCheck(L_48);
-		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_49 = L_48->___voAudioSource;
+		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_49 = V_1;
+		NullCheck(L_49);
+		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_50 = L_49->___voAudioSource;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_50;
-		L_50 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_49, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_50)
+		bool L_51;
+		L_51 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_50, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_51)
 		{
-			goto IL_0162;
+			goto IL_0171;
 		}
 	}
 	{
-		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_51 = V_3;
+		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_52 = V_3;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		bool L_52;
-		L_52 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_51, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
-		if (!L_52)
+		bool L_53;
+		L_53 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_52, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+		if (!L_53)
 		{
-			goto IL_0162;
+			goto IL_0171;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:700>
-		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_53 = V_1;
-		NullCheck(L_53);
-		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_54 = L_53->___voAudioSource;
-		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_55 = V_3;
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:695>
+		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_54 = V_1;
 		NullCheck(L_54);
-		AudioSource_PlayOneShot_m098BCAE084AABB128BB19ED805D2D985E7B75112(L_54, L_55, NULL);
+		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_55 = L_54->___voAudioSource;
+		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_56 = V_3;
+		NullCheck(L_55);
+		AudioSource_PlayOneShot_m098BCAE084AABB128BB19ED805D2D985E7B75112(L_55, L_56, NULL);
 	}
 
-IL_0162:
+IL_0171:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:702>
-		float L_56 = V_4;
-		WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3* L_57 = (WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3*)il2cpp_codegen_object_new(WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3_il2cpp_TypeInfo_var);
-		WaitForSeconds__ctor_m579F95BADEDBAB4B3A7E302C6EE3995926EF2EFC(L_57, L_56, NULL);
-		__this->___U3CU3E2__current = L_57;
-		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CU3E2__current), (void*)L_57);
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:697>
+		float L_57 = V_4;
+		WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3* L_58 = (WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3*)il2cpp_codegen_object_new(WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3_il2cpp_TypeInfo_var);
+		WaitForSeconds__ctor_m579F95BADEDBAB4B3A7E302C6EE3995926EF2EFC(L_58, L_57, NULL);
+		__this->___U3CU3E2__current = L_58;
+		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CU3E2__current), (void*)L_58);
 		__this->___U3CU3E1__state = 1;
 		return (bool)1;
 	}
 
-IL_0178:
+IL_0187:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:704>
-		bool L_58 = __this->___U3ChasAnimationU3E5__3;
-		if (!L_58)
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:699>
+		bool L_59 = __this->___U3ChasAnimationU3E5__3;
+		if (!L_59)
 		{
-			goto IL_01a1;
+			goto IL_01b0;
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:705>
-		String_t* L_59 = __this->___U3CtriggerU3E5__2;
-		String_t* L_60;
-		L_60 = String_Concat_m8855A6DE10F84DA7F4EC113CADDB59873A25573B(_stringLiteralBDFA24ED8BADAB4D434C403FFC07F3E6AD83BEA2, L_59, _stringLiteral42646B33B50B6AA15E22733C8900716F0FE19E1D, NULL);
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:700>
+		String_t* L_60 = __this->___U3CtriggerU3E5__2;
+		String_t* L_61;
+		L_61 = String_Concat_m8855A6DE10F84DA7F4EC113CADDB59873A25573B(_stringLiteralBDFA24ED8BADAB4D434C403FFC07F3E6AD83BEA2, L_60, _stringLiteral42646B33B50B6AA15E22733C8900716F0FE19E1D, NULL);
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
-		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(L_60, NULL);
+		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(L_61, NULL);
 	}
 
-IL_01a1:
+IL_01b0:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:706>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:701>
 		return (bool)0;
 	}
 }
@@ -8847,7 +8910,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CTypewriterRevealU3Ed__65_MoveNext_mA4
 IL_0013:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:656>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:653>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_3 = __this->___target;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_4;
@@ -8858,18 +8921,18 @@ IL_0013:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:657>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:654>
 		return (bool)0;
 	}
 
 IL_002a:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:659>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:656>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_5 = __this->___target;
 		String_t* L_6 = ((String_t_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_defaults.string_class))->___Empty;
 		NullCheck(L_5);
 		VirtualActionInvoker1< String_t* >::Invoke(66, L_5, L_6);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:661>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:658>
 		String_t* L_7 = __this->___fullText;
 		bool L_8;
 		L_8 = String_IsNullOrEmpty_mEA9E3FB005AC28FE02E69FCF95A7B8456192B478(L_7, NULL);
@@ -8879,13 +8942,13 @@ IL_002a:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:662>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:659>
 		return (bool)0;
 	}
 
 IL_0049:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:664>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:661>
 		String_t* L_9 = __this->___fullText;
 		__this->___U3CU3E7__wrap1 = L_9;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CU3E7__wrap1), (void*)L_9);
@@ -8895,14 +8958,14 @@ IL_0049:
 
 IL_005e:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:664>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:661>
 		String_t* L_10 = __this->___U3CU3E7__wrap1;
 		int32_t L_11 = __this->___U3CU3E7__wrap2;
 		NullCheck(L_10);
 		Il2CppChar L_12;
 		L_12 = String_get_Chars_mC49DF0CD2D3BE7BE97B3AD9C995BE3094F8E36D3(L_10, L_11, NULL);
 		V_1 = L_12;
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:666>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:663>
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_13 = __this->___target;
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_14 = L_13;
 		NullCheck(L_14);
@@ -8915,7 +8978,7 @@ IL_005e:
 		L_17 = String_Concat_m9E3155FB84015C823606188F53B47CB44C444991(L_15, L_16, NULL);
 		NullCheck(L_14);
 		VirtualActionInvoker1< String_t* >::Invoke(66, L_14, L_17);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:667>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:664>
 		float L_18 = __this->___delay;
 		WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3* L_19 = (WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3*)il2cpp_codegen_object_new(WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3_il2cpp_TypeInfo_var);
 		WaitForSeconds__ctor_m579F95BADEDBAB4B3A7E302C6EE3995926EF2EFC(L_19, L_18, NULL);
@@ -8934,7 +8997,7 @@ IL_00a7:
 
 IL_00bc:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:664>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:661>
 		int32_t L_21 = __this->___U3CU3E7__wrap2;
 		String_t* L_22 = __this->___U3CU3E7__wrap1;
 		NullCheck(L_22);
@@ -8948,7 +9011,7 @@ IL_00bc:
 	{
 		__this->___U3CU3E7__wrap1 = (String_t*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CU3E7__wrap1), (void*)(String_t*)NULL);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:669>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:666>
 		return (bool)0;
 	}
 }
@@ -9038,7 +9101,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CWrongSequence_AutoPopupU3Ed__63_MoveN
 IL_0017:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:588>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:585>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_4 = V_1;
 		NullCheck(L_4);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_5 = L_4->___optionAButton;
@@ -9051,7 +9114,7 @@ IL_0017:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:589>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:586>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_7 = V_1;
 		NullCheck(L_7);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_8 = L_7->___optionAButton;
@@ -9061,7 +9124,7 @@ IL_0017:
 
 IL_0038:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:591>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:588>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_9 = V_1;
 		NullCheck(L_9);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_10 = L_9->___optionBButton;
@@ -9074,7 +9137,7 @@ IL_0038:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:592>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:589>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_12 = V_1;
 		NullCheck(L_12);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_13 = L_12->___optionBButton;
@@ -9084,7 +9147,7 @@ IL_0038:
 
 IL_0052:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:594>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:591>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_14 = V_1;
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_15 = V_1;
 		ScenarioData_t7FD5F3458B087F1E02F1615C760C4C7A6FBF28EA* L_16 = __this->___scenario;
@@ -9103,7 +9166,7 @@ IL_0052:
 IL_0074:
 	{
 		__this->___U3CU3E1__state = (-1);
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:597>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:594>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_19 = V_1;
 		NullCheck(L_19);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_20 = L_19->___optionAButton;
@@ -9116,7 +9179,7 @@ IL_0074:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:598>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:595>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_22 = V_1;
 		NullCheck(L_22);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_23 = L_22->___optionAButton;
@@ -9126,7 +9189,7 @@ IL_0074:
 
 IL_0095:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:600>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:597>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_24 = V_1;
 		NullCheck(L_24);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_25 = L_24->___optionBButton;
@@ -9139,7 +9202,7 @@ IL_0095:
 		}
 	}
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:601>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:598>
 		ScenarioManager_tE1E5893634902947B871FA1240132B769D648D2E* L_27 = V_1;
 		NullCheck(L_27);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_28 = L_27->___optionBButton;
@@ -9149,7 +9212,7 @@ IL_0095:
 
 IL_00af:
 	{
-		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:602>
+		//<source_info:D:/Unity_MH/Air-port-lighting/Assets/Scripts/ScenarioManager.cs:599>
 		return (bool)0;
 	}
 }

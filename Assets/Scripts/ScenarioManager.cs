@@ -175,15 +175,12 @@ public class ScenarioManager : MonoBehaviour
 
         ScenarioData scenario = scenarios[index];
 
-        // Always start a fresh scenario with the explanation panel closed
-        // and the explain button hidden until a new answer is given.
         if (feedbackPanel != null)
             feedbackPanel.SetActive(false);
 
         if (completionPanel != null)
             completionPanel.SetActive(false);
 
-        // Restore Next button visibility (ShowCompletionPanel hides it).
         if (nextButton != null)
             nextButton.gameObject.SetActive(true);
 
@@ -209,7 +206,6 @@ public class ScenarioManager : MonoBehaviour
         // NON-INTERACTIVE PAGE (no question)
         if (!scenario.requiresAnswer)
         {
-            // Hide everything from both non-interactive sub-types first.
             if (instructionPanel != null) instructionPanel.SetActive(false);
             if (groundIntroPanel != null) groundIntroPanel.SetActive(false);
             if (flightIntroPanel != null) flightIntroPanel.SetActive(false);
@@ -220,8 +216,6 @@ public class ScenarioManager : MonoBehaviour
 
             if (scenario.pageType == NonInteractivePageType.None)
             {
-                // No panel at all - just VO + optional animation, then Next unlocks.
-                // Everything is already hidden above.
                 if (nextButton != null)
                     nextButton.interactable = false;
 
@@ -231,7 +225,6 @@ public class ScenarioManager : MonoBehaviour
 
             if (scenario.pageType == NonInteractivePageType.InfoPanel)
             {
-                // Small existing info panel - same as before, Next unlocks immediately.
                 if (instructionPanel != null)
                     instructionPanel.SetActive(true);
 
@@ -240,6 +233,14 @@ public class ScenarioManager : MonoBehaviour
 
                 if (nextButton != null)
                     nextButton.interactable = true;
+
+                // Play intro VO in background if assigned - Next is already
+                // unlocked, audio plays freely without gating navigation.
+                if (!audioPlayed[currentIndex] && sceneIntroAudioSource != null && scenario.introVO != null)
+                {
+                    audioPlayed[currentIndex] = true;
+                    sceneIntroAudioSource.PlayOneShot(scenario.introVO);
+                }
 
                 return;
             }
@@ -273,7 +274,6 @@ public class ScenarioManager : MonoBehaviour
             if (activeText != null)
                 activeText.text = scenario.instructorIntroLine;
 
-            // Next stays disabled until the VO finishes playing.
             if (nextButton != null)
                 nextButton.interactable = false;
 
@@ -313,9 +313,6 @@ public class ScenarioManager : MonoBehaviour
         if (nextButton != null)
             nextButton.interactable = alreadyCompleted;
 
-        // If the user already answered correctly before (e.g. came back via
-        // Previous then Next), let them reopen the explain button too.
-        // Only applies in Mode B - Mode A has no manual explain button.
         if (alreadyCompleted && feedbackMode == FeedbackMode.ManualExplainButton && explainButton != null)
         {
             lastAnswerCorrect = true;
@@ -500,7 +497,9 @@ public class ScenarioManager : MonoBehaviour
         else
         {
             // Buzz only on a wrong selection, per Mirdula's call.
-            Handheld.Vibrate();
+#if UNITY_ANDROID
+// Handheld.Vibrate();
+#endif
 
             StartCoroutine(FlashWrongVignette());
 
@@ -679,9 +678,7 @@ public class ScenarioManager : MonoBehaviour
 
         bool hasAnimation = animatorReference != null && !string.IsNullOrEmpty(trigger);
 
-        // Auto-deduct duration from the assigned clip. Falls back to a
-        // small default only if no clip was assigned, so we never wait 0s.
-        float duration = (clip != null) ? clip.length : 2f;
+        float duration = hasAnimation ? (clip != null ? clip.length : 2f) : 0.5f;
 
         if (hasAnimation)
         {
