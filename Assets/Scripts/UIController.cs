@@ -20,11 +20,13 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject advancedIntroPanel;
     [SerializeField] private TextMeshProUGUI advancedIntroText;
 
-    [Header("Question UI")]
+    [Header("Question")]
     [SerializeField] private GameObject questionPanel;
     [SerializeField] private TextMeshProUGUI questionText;
+
     [SerializeField] private Button optionAButton;
     [SerializeField] private TextMeshProUGUI optionAText;
+
     [SerializeField] private Button optionBButton;
     [SerializeField] private TextMeshProUGUI optionBText;
 
@@ -34,39 +36,40 @@ public class UIController : MonoBehaviour
     [SerializeField] private Sprite correctIconSprite;
     [SerializeField] private Sprite wrongIconSprite;
 
-    [Header("Feedback Popup")]
+    [Header("Feedback")]
     [SerializeField] private GameObject feedbackPanel;
     [SerializeField] private TextMeshProUGUI feedbackDescriptionText;
     [SerializeField] private float typewriterCharDelay = 0.03f;
     [SerializeField] private float popupHoldTime = 2f;
 
-    [Header("Voice Over")]
-    [SerializeField] private AudioSource voAudioSource;
-
-    [Header("Vignette")]
+    [Header("Wrong Vignette")]
     [SerializeField] private CanvasGroup wrongVignette;
-    [SerializeField] private float vignetteFadeInTime = 0.15f;
-    [SerializeField] private float vignetteHoldTime = 0.2f;
-    [SerializeField] private float vignetteFadeOutTime = 0.4f;
+    [SerializeField] private float vignetteFadeInTime = .15f;
+    [SerializeField] private float vignetteHoldTime = .2f;
+    [SerializeField] private float vignetteFadeOutTime = .4f;
 
     [Header("Navigation")]
     [SerializeField] private Button nextButton;
     [SerializeField] private Button previousButton;
 
-    [Header("Completion Panel")]
+    [Header("Completion")]
     [SerializeField] private GameObject completionPanel;
     [SerializeField] private TextMeshProUGUI completionTitleText;
     [SerializeField] private TextMeshProUGUI completionBodyText;
-    [SerializeField] private Button completionNextButton;
     [SerializeField] private CompletionTextData completionTextData;
+    [SerializeField] private Button completionNextButton;
+
+    private bool completionVisible;
 
     private void Awake()
     {
-        optionAButton?.onClick.AddListener(() => scenarioManager.SelectAnswer(0));
-        optionBButton?.onClick.AddListener(() => scenarioManager.SelectAnswer(1));
-        nextButton?.onClick.AddListener(scenarioManager.GoNext);
-        previousButton?.onClick.AddListener(scenarioManager.GoPrevious);
-        completionNextButton?.onClick.AddListener(scenarioManager.GoNext);
+        optionAButton.onClick.AddListener(() => scenarioManager.SelectAnswer(0));
+        optionBButton.onClick.AddListener(() => scenarioManager.SelectAnswer(1));
+
+        nextButton.onClick.AddListener(scenarioManager.GoNext);
+        previousButton.onClick.AddListener(scenarioManager.GoPrevious);
+
+        completionNextButton.onClick.AddListener(OnCompletionNextPressed);
     }
 
     private void OnEnable()
@@ -74,9 +77,12 @@ public class UIController : MonoBehaviour
         scenarioManager.OnScenarioLoaded += HandleScenarioLoaded;
         scenarioManager.OnCorrectAnswer += HandleCorrectAnswer;
         scenarioManager.OnWrongAnswer += HandleWrongAnswer;
-        scenarioManager.OnScenarioFirstCompleted += HandleScenarioFirstCompleted;
-        scenarioManager.OnAllScenariosComplete += HandleAllComplete;
+
+        scenarioManager.OnScenarioFirstCompleted += HandleScenarioCompleted;
+
         scenarioManager.OnIntroVOComplete += HandleIntroVOComplete;
+
+        scenarioManager.OnAllScenariosComplete += HandleTrainingFinished;
     }
 
     private void OnDisable()
@@ -84,277 +90,355 @@ public class UIController : MonoBehaviour
         scenarioManager.OnScenarioLoaded -= HandleScenarioLoaded;
         scenarioManager.OnCorrectAnswer -= HandleCorrectAnswer;
         scenarioManager.OnWrongAnswer -= HandleWrongAnswer;
-        scenarioManager.OnScenarioFirstCompleted -= HandleScenarioFirstCompleted;
-        scenarioManager.OnAllScenariosComplete -= HandleAllComplete;
-        scenarioManager.OnIntroVOComplete -= HandleIntroVOComplete;
-    }
 
-    // ?? Scenario Loaded ??????????????????????????????????????????????
+        scenarioManager.OnScenarioFirstCompleted -= HandleScenarioCompleted;
+
+        scenarioManager.OnIntroVOComplete -= HandleIntroVOComplete;
+
+        scenarioManager.OnAllScenariosComplete -= HandleTrainingFinished;
+    }
 
     private void HandleScenarioLoaded(ScenarioData scenario, int index)
     {
         StopAllCoroutines();
-        if (voAudioSource != null) voAudioSource.Stop();
+
+        completionVisible = false;
 
         HideAllPanels();
-        ClearResultIcons();
 
-        completionPanel?.SetActive(false);
-        nextButton?.gameObject.SetActive(true);
+        completionPanel.SetActive(false);
 
-        if (previousButton != null)
-            previousButton.interactable = index > 0;
+        nextButton.gameObject.SetActive(true);
+
+        previousButton.interactable = index > 0;
+
+        ClearIcons();
 
         if (!scenario.requiresAnswer)
         {
-            HandleNonInteractivePage(scenario, index);
+            ShowIntroPage(scenario);
             return;
         }
 
         ShowQuestionPage(scenario, index);
     }
 
-    private void HandleNonInteractivePage(ScenarioData scenario, int index)
+    private void ShowQuestionPage(ScenarioData scenario, int index)
     {
-        LockNav();
+        questionPanel.SetActive(true);
 
-        if (scenario.pageType == NonInteractivePageType.InfoPanel)
+        questionText.text = scenario.questionText;
+
+        optionAText.text = scenario.optionA;
+        optionBText.text = scenario.optionB;
+
+        bool completed = scenarioManager.IsCompleted(index);
+
+        optionAButton.interactable = !completed;
+        optionBButton.interactable = !completed;
+
+        nextButton.interactable = completed;
+
+        // IMPORTANT:
+        // Revisits NEVER show completion panel.
+        completionPanel.SetActive(false);
+        completionVisible = false;
+    }
+
+    private void ShowIntroPage(ScenarioData scenario)
+    {
+        LockNavigation();
+
+        switch (scenario.pageType)
         {
-            if (instructionPanel != null) instructionPanel.SetActive(true);
-            if (instructionText != null) instructionText.text = scenario.instructorIntroLine;
-            // InfoPanel unlocks immediately — no VO gating
-            if (nextButton != null) nextButton.interactable = true;
-            if (previousButton != null) previousButton.interactable = scenarioManager.CurrentIndex > 0;
-            return;
+            case NonInteractivePageType.InfoPanel:
+
+                instructionPanel.SetActive(true);
+                instructionText.text = scenario.instructorIntroLine;
+
+                UnlockNavigation();
+
+                break;
+
+            case NonInteractivePageType.SceneIntro:
+
+                GameObject panel = null;
+                TextMeshProUGUI text = null;
+
+                switch (scenario.context)
+                {
+                    case SceneContext.Ground:
+                        panel = groundIntroPanel;
+                        text = groundIntroText;
+                        break;
+
+                    case SceneContext.Flight:
+                        panel = flightIntroPanel;
+                        text = flightIntroText;
+                        break;
+
+                    case SceneContext.Advanced:
+                        panel = advancedIntroPanel;
+                        text = advancedIntroText;
+                        break;
+                }
+
+                if (panel != null)
+                    panel.SetActive(true);
+
+                if (text != null)
+                    text.text = scenario.instructorIntroLine;
+
+                break;
         }
-
-        // SceneIntro — AudioController fires OnIntroVOComplete when VO ends
-        GameObject panel = scenario.context switch
-        {
-            SceneContext.Ground => groundIntroPanel,
-            SceneContext.Flight => flightIntroPanel,
-            SceneContext.Advanced => advancedIntroPanel,
-            _ => null
-        };
-
-        TextMeshProUGUI text = scenario.context switch
-        {
-            SceneContext.Ground => groundIntroText,
-            SceneContext.Flight => flightIntroText,
-            SceneContext.Advanced => advancedIntroText,
-            _ => null
-        };
-
-        if (panel != null) panel.SetActive(true);
-        if (text != null) text.text = scenario.instructorIntroLine;
     }
 
     private void HandleIntroVOComplete()
     {
-        UnlockNav();
+        UnlockNavigation();
     }
-
-    private void ShowQuestionPage(ScenarioData scenario, int index)
-    {
-        if (questionPanel != null) questionPanel.SetActive(true);
-        if (questionText != null) questionText.text = scenario.questionText;
-        if (optionAText != null) optionAText.text = scenario.optionA;
-        if (optionBText != null) optionBText.text = scenario.optionB;
-
-        bool alreadyCompleted = scenarioManager.IsCompleted(index);
-
-        if (optionAButton != null) optionAButton.interactable = !alreadyCompleted;
-        if (optionBButton != null) optionBButton.interactable = !alreadyCompleted;
-        if (nextButton != null) nextButton.interactable = alreadyCompleted;
-        // Never show completion panel on revisit — only OnScenarioFirstCompleted does that
-    }
-
-    // ?? Answer Handling ??????????????????????????????????????????????
 
     private void HandleCorrectAnswer(ScenarioData scenario, int selectedIndex)
     {
-        ShowResultIcon(selectedIndex, true);
-        SetAnswerButtonsInteractable(false);
-        StartCoroutine(CorrectSequence(scenario));
+        ShowIcon(selectedIndex, true);
+
+        optionAButton.interactable = false;
+        optionBButton.interactable = false;
+
+        StartCoroutine(CorrectPopupRoutine(scenario));
     }
 
     private void HandleWrongAnswer(ScenarioData scenario, int selectedIndex)
     {
-        ShowResultIcon(selectedIndex, false);
-        StartCoroutine(FlashVignette());
-        StartCoroutine(WrongSequence(scenario));
+        ShowIcon(selectedIndex, false);
+
+        StartCoroutine(FlashWrongVignette());
+
+        StartCoroutine(WrongPopupRoutine(scenario));
+    }
+    // ------------------------------------------------------------------------
+    // POPUP FLOW
+    // ------------------------------------------------------------------------
+
+    private IEnumerator CorrectPopupRoutine(ScenarioData scenario)
+    {
+        LockNavigation();
+
+        feedbackPanel.SetActive(true);
+        questionPanel.SetActive(false);
+
+        yield return StartCoroutine(TypewriterReveal(
+            feedbackDescriptionText,
+            scenario.instructorCorrectLine));
+
+        yield return new WaitForSeconds(popupHoldTime);
+
+        feedbackPanel.SetActive(false);
+
+        // AnimationController is now playing the animation.
+        // We wait for OnScenarioFirstCompleted before doing anything else.
     }
 
-    // ?? Correct Sequence ?????????????????????????????????????????????
-
-    private IEnumerator CorrectSequence(ScenarioData scenario)
+    private IEnumerator WrongPopupRoutine(ScenarioData scenario)
     {
-        yield return StartCoroutine(ShowFeedbackPopup(
-            scenario.instructorCorrectLine,
-            scenario.correctVO));
+        LockNavigation();
 
-        if (questionPanel != null) questionPanel.SetActive(false);
-        LockNav();
-        // AnimationController plays anim ? NotifyCorrectAnimComplete(index)
-        // ? ScenarioManager fires OnScenarioFirstCompleted
-        // ? HandleScenarioFirstCompleted shows completion panel
+        feedbackPanel.SetActive(true);
+        questionPanel.SetActive(false);
+
+        yield return StartCoroutine(TypewriterReveal(
+            feedbackDescriptionText,
+            scenario.instructorWrongLine));
+
+        yield return new WaitForSeconds(popupHoldTime);
+
+        feedbackPanel.SetActive(false);
+
+        questionPanel.SetActive(true);
+
+        optionAButton.interactable = true;
+        optionBButton.interactable = true;
+
+        UnlockNavigation();
+
+        ClearIcons();
     }
 
-    // Fires ONLY on first correct completion — safe to show completion panel
-    private void HandleScenarioFirstCompleted(int index)
+    // ------------------------------------------------------------------------
+    // CALLED ONLY ON FIRST COMPLETION
+    // ------------------------------------------------------------------------
+
+    private void HandleScenarioCompleted(int scenarioIndex)
     {
-        UnlockNav();
+        if (scenarioIndex != scenarioManager.CurrentIndex)
+            return;
+
+        completionVisible = true;
+
         ShowCompletionPanel();
     }
 
-    // ?? Wrong Sequence ???????????????????????????????????????????????
-
-    private IEnumerator WrongSequence(ScenarioData scenario)
+    private void ShowCompletionPanel()
     {
-        yield return StartCoroutine(ShowFeedbackPopup(
-            scenario.instructorWrongLine,
-            scenario.wrongVO));
+        completionPanel.SetActive(true);
 
-        SetAnswerButtonsInteractable(true);
-        ClearResultIcons();
+        questionPanel.SetActive(false);
+
+        completionTitleText.text = "Mission Complete";
+
+        if (completionTextData != null)
+            completionBodyText.text = completionTextData.GetRandom();
+        else
+            completionBodyText.text = "";
+
+        nextButton.gameObject.SetActive(false);
+
+        previousButton.interactable = false;
     }
 
-    // ?? Feedback Popup / Typewriter ??????????????????????????????????
-
-    private IEnumerator ShowFeedbackPopup(string line, AudioClip voClip)
+    private void OnCompletionNextPressed()
     {
-        if (feedbackPanel != null) feedbackPanel.SetActive(true);
-        if (questionPanel != null) questionPanel.SetActive(false);
-        LockNav();
+        completionVisible = false;
 
-        // VO starts with typewriter — exactly like original AutoExplainSequence
-        if (voAudioSource != null && voClip != null)
-            voAudioSource.PlayOneShot(voClip);
+        completionPanel.SetActive(false);
 
-        float typeStartTime = Time.time;
-        yield return StartCoroutine(TypewriterReveal(feedbackDescriptionText, line));
-        float typingDuration = Time.time - typeStartTime;
+        nextButton.gameObject.SetActive(true);
 
-        float remainingVO = voClip != null ? Mathf.Max(0f, voClip.length - typingDuration) : 0f;
-        yield return new WaitForSeconds(Mathf.Max(popupHoldTime, remainingVO));
-
-        if (feedbackPanel != null) feedbackPanel.SetActive(false);
-        if (questionPanel != null) questionPanel.SetActive(true);
-        UnlockNav();
+        scenarioManager.GoNext();
     }
 
-    private IEnumerator TypewriterReveal(TextMeshProUGUI target, string fullText)
-    {
-        if (target == null) yield break;
-        target.text = string.Empty;
-        if (string.IsNullOrEmpty(fullText)) yield break;
+    // ------------------------------------------------------------------------
+    // TYPEWRITER
+    // ------------------------------------------------------------------------
 
-        foreach (char c in fullText)
+    private IEnumerator TypewriterReveal(
+        TextMeshProUGUI target,
+        string text)
+    {
+        target.text = "";
+
+        if (string.IsNullOrEmpty(text))
+            yield break;
+
+        foreach (char c in text)
         {
             target.text += c;
             yield return new WaitForSeconds(typewriterCharDelay);
         }
     }
 
-    // ?? Completion Panel ?????????????????????????????????????????????
+    // ------------------------------------------------------------------------
+    // WRONG FLASH
+    // ------------------------------------------------------------------------
 
-    private void ShowCompletionPanel()
+    private IEnumerator FlashWrongVignette()
     {
-        if (completionPanel != null) completionPanel.SetActive(true);
-        if (completionTitleText != null) completionTitleText.text = "Mission Complete";
-        if (completionBodyText != null)
-            completionBodyText.text = completionTextData != null
-                ? completionTextData.GetRandom()
-                : string.Empty;
-
-        if (questionPanel != null) questionPanel.SetActive(false);
-        // Hide normal Next — completion button takes over
-        if (nextButton != null) nextButton.gameObject.SetActive(false);
-    }
-
-    private void HandleAllComplete()
-    {
-        Debug.Log("ATC Training Complete");
-    }
-
-    // ?? Vignette ?????????????????????????????????????????????????????
-
-    private IEnumerator FlashVignette()
-    {
-        if (wrongVignette == null) yield break;
+        if (wrongVignette == null)
+            yield break;
 
         float t = 0f;
+
         while (t < vignetteFadeInTime)
         {
             t += Time.deltaTime;
-            wrongVignette.alpha = Mathf.Lerp(0f, 1f, t / vignetteFadeInTime);
+
+            wrongVignette.alpha =
+                Mathf.Lerp(0f, 1f, t / vignetteFadeInTime);
+
             yield return null;
         }
+
         wrongVignette.alpha = 1f;
 
         yield return new WaitForSeconds(vignetteHoldTime);
 
         t = 0f;
+
         while (t < vignetteFadeOutTime)
         {
             t += Time.deltaTime;
-            wrongVignette.alpha = Mathf.Lerp(1f, 0f, t / vignetteFadeOutTime);
+
+            wrongVignette.alpha =
+                Mathf.Lerp(1f, 0f, t / vignetteFadeOutTime);
+
             yield return null;
         }
+
         wrongVignette.alpha = 0f;
     }
 
-    // ?? Helpers ??????????????????????????????????????????????????????
+    // ------------------------------------------------------------------------
+    // HELPERS
+    // ------------------------------------------------------------------------
+
+    private void LockNavigation()
+    {
+        nextButton.interactable = false;
+        previousButton.interactable = false;
+    }
+
+    private void UnlockNavigation()
+    {
+        ScenarioData current =
+            scenarioManager.GetScenario(
+                scenarioManager.CurrentIndex);
+
+        bool allowNext =
+            !current.requiresAnswer ||
+            scenarioManager.IsCompleted(
+                scenarioManager.CurrentIndex);
+
+        nextButton.interactable = allowNext;
+
+        previousButton.interactable =
+            scenarioManager.CurrentIndex > 0;
+    }
 
     private void HideAllPanels()
     {
-        instructionPanel?.SetActive(false);
-        groundIntroPanel?.SetActive(false);
-        flightIntroPanel?.SetActive(false);
-        advancedIntroPanel?.SetActive(false);
-        questionPanel?.SetActive(false);
-        feedbackPanel?.SetActive(false);
+        instructionPanel.SetActive(false);
+
+        groundIntroPanel.SetActive(false);
+        flightIntroPanel.SetActive(false);
+        advancedIntroPanel.SetActive(false);
+
+        questionPanel.SetActive(false);
+
+        feedbackPanel.SetActive(false);
+
+        completionPanel.SetActive(false);
     }
 
-    private void ClearResultIcons()
+    private void ClearIcons()
     {
-        if (optionAResultIcon != null) optionAResultIcon.gameObject.SetActive(false);
-        if (optionBResultIcon != null) optionBResultIcon.gameObject.SetActive(false);
+        optionAResultIcon.gameObject.SetActive(false);
+        optionBResultIcon.gameObject.SetActive(false);
     }
 
-    private void ShowResultIcon(int selectedOption, bool correct)
+    private void ShowIcon(int selected, bool correct)
     {
-        Image icon = selectedOption == 0 ? optionAResultIcon : optionBResultIcon;
-        Image other = selectedOption == 0 ? optionBResultIcon : optionAResultIcon;
+        Image icon =
+            selected == 0
+            ? optionAResultIcon
+            : optionBResultIcon;
 
-        if (other != null) other.gameObject.SetActive(false);
-        if (icon != null)
-        {
-            icon.sprite = correct ? correctIconSprite : wrongIconSprite;
-            icon.gameObject.SetActive(true);
-        }
+        Image other =
+            selected == 0
+            ? optionBResultIcon
+            : optionAResultIcon;
+
+        other.gameObject.SetActive(false);
+
+        icon.sprite =
+            correct
+            ? correctIconSprite
+            : wrongIconSprite;
+
+        icon.gameObject.SetActive(true);
     }
 
-    private void SetAnswerButtonsInteractable(bool state)
+    private void HandleTrainingFinished()
     {
-        if (optionAButton != null) optionAButton.interactable = state;
-        if (optionBButton != null) optionBButton.interactable = state;
-    }
-
-    public void LockNav()
-    {
-        if (nextButton != null) nextButton.interactable = false;
-        if (previousButton != null) previousButton.interactable = false;
-    }
-
-    public void UnlockNav()
-    {
-        ScenarioData current = scenarioManager.GetScenario(scenarioManager.CurrentIndex);
-        bool nextAllowed = current.requiresAnswer
-            ? scenarioManager.IsCompleted(scenarioManager.CurrentIndex)
-            : true;
-
-        if (nextButton != null) nextButton.interactable = nextAllowed;
-        if (previousButton != null) previousButton.interactable = scenarioManager.CurrentIndex > 0;
+        Debug.Log("ATC Training Complete");
     }
 }

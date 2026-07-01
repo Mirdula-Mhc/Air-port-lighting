@@ -18,7 +18,7 @@ public class ScenarioData : ScriptableObject
     public bool requiresAnswer = true;
     public NonInteractivePageType pageType = NonInteractivePageType.InfoPanel;
 
-    [Header("Video (Optional)")]
+    [Header("Video")]
     public bool playVideo;
     public VideoClip videoClip;
     public bool pauseOnLastFrame = true;

@@ -7,58 +7,94 @@ public class AircraftController : MonoBehaviour
     [SerializeField] private ScenarioManager scenarioManager;
 
     [Header("Aircraft Root")]
-    [SerializeField] private GameObject aircraftRoot;
+    [SerializeField] private Transform aircraftRoot;
 
-    [Header("Movement Settings")]
+    [Header("Movement")]
     [SerializeField] private float moveDuration = 1f;
 
-    private Coroutine currentMoveCoroutine;
+    private Coroutine moveRoutine;
 
     private void OnEnable()
     {
         scenarioManager.OnWrongAnswer += HandleWrongAnswer;
+        scenarioManager.OnScenarioLoaded += HandleScenarioLoaded;
     }
 
     private void OnDisable()
     {
         scenarioManager.OnWrongAnswer -= HandleWrongAnswer;
+        scenarioManager.OnScenarioLoaded -= HandleScenarioLoaded;
     }
+
+    // ------------------------------------------------------------------------
+
+    private void HandleScenarioLoaded(ScenarioData scenario, int index)
+    {
+        // Cancel any movement from a previous scenario
+        if (moveRoutine != null)
+        {
+            StopCoroutine(moveRoutine);
+            moveRoutine = null;
+        }
+    }
+
+    // ------------------------------------------------------------------------
 
     private void HandleWrongAnswer(ScenarioData scenario, int selectedIndex)
     {
-        if (scenario.aircraftAnchor == null) return;
+        if (aircraftRoot == null)
+            return;
 
-        // Stop previous move before starting new one
-        if (currentMoveCoroutine != null)
-        {
-            StopCoroutine(currentMoveCoroutine);
-            currentMoveCoroutine = null;
-        }
+        if (scenario.aircraftAnchor == null)
+            return;
 
-        currentMoveCoroutine = StartCoroutine(MoveToAnchor(scenario.aircraftAnchor));
+        // Prevent stacked movement coroutines
+        if (moveRoutine != null)
+            StopCoroutine(moveRoutine);
+
+        moveRoutine = StartCoroutine(
+            MoveAircraft(
+                scenario.aircraftAnchor.position,
+                scenario.aircraftAnchor.rotation));
     }
 
-    private IEnumerator MoveToAnchor(Transform anchor)
+    // ------------------------------------------------------------------------
+
+    private IEnumerator MoveAircraft(
+        Vector3 targetPosition,
+        Quaternion targetRotation)
     {
-        if (aircraftRoot == null) yield break;
+        Vector3 startPosition = aircraftRoot.position;
+        Quaternion startRotation = aircraftRoot.rotation;
 
-        Vector3 startPos = aircraftRoot.transform.position;
-        Quaternion startRot = aircraftRoot.transform.rotation;
-        Vector3 targetPos = anchor.position;
-        Quaternion targetRot = anchor.rotation;
+        float elapsed = 0f;
 
-        float t = 0f;
-        while (t < moveDuration)
+        while (elapsed < moveDuration)
         {
-            t += Time.deltaTime;
-            float progress = Mathf.SmoothStep(0f, 1f, t / moveDuration);
-            aircraftRoot.transform.position = Vector3.Lerp(startPos, targetPos, progress);
-            aircraftRoot.transform.rotation = Quaternion.Slerp(startRot, targetRot, progress);
+            elapsed += Time.deltaTime;
+
+            float t = Mathf.Clamp01(elapsed / moveDuration);
+
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            aircraftRoot.position =
+                Vector3.Lerp(
+                    startPosition,
+                    targetPosition,
+                    t);
+
+            aircraftRoot.rotation =
+                Quaternion.Slerp(
+                    startRotation,
+                    targetRotation,
+                    t);
+
             yield return null;
         }
 
-        aircraftRoot.transform.position = targetPos;
-        aircraftRoot.transform.rotation = targetRot;
-        currentMoveCoroutine = null;
+        aircraftRoot.position = targetPosition;
+        aircraftRoot.rotation = targetRotation;
+
+        moveRoutine = null;
     }
 }

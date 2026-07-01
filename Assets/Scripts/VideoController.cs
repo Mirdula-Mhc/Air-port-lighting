@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.Video;
 using System.Collections;
 
 public class VideoController : MonoBehaviour
@@ -11,100 +11,154 @@ public class VideoController : MonoBehaviour
     [Header("Video UI")]
     [SerializeField] private GameObject videoPanel;
     [SerializeField] private VideoPlayer videoPlayer;
-    [SerializeField] private Button startButton; // launch video button
-    [SerializeField] private Button continueButton; // per-scenario continue button
+    [SerializeField] private Button continueButton;
 
-    private bool isLaunchVideo = true; // true = startup video, false = per-scenario video
+    [Header("Startup")]
+    [SerializeField] private bool playStartupVideo = true;
+    [SerializeField] private VideoClip startupVideo;
 
-    private void Start()
+    private bool startupFinished;
+
+    private Coroutine videoRoutine;
+
+    private void Awake()
     {
-        if (startButton != null) startButton.gameObject.SetActive(false);
-        if (continueButton != null) continueButton.gameObject.SetActive(false);
-        if (videoPanel != null) videoPanel.SetActive(true);
-
-        startButton?.onClick.AddListener(OnStartPressed);
-        continueButton?.onClick.AddListener(OnContinuePressed);
-
-        if (videoPlayer != null)
-        {
-            videoPlayer.loopPointReached += OnVideoEnd;
-            videoPlayer.Play();
-        }
+        continueButton.onClick.AddListener(OnContinuePressed);
     }
 
     private void OnEnable()
     {
-        if (scenarioManager != null)
-            scenarioManager.OnVideoRequired += HandleVideoRequired;
+        scenarioManager.OnVideoRequired += HandleScenarioVideo;
     }
 
     private void OnDisable()
     {
-        if (scenarioManager != null)
-            scenarioManager.OnVideoRequired -= HandleVideoRequired;
-    }
+        scenarioManager.OnVideoRequired -= HandleScenarioVideo;
 
-    private void OnDestroy()
-    {
         if (videoPlayer != null)
-            videoPlayer.loopPointReached -= OnVideoEnd;
+            videoPlayer.loopPointReached -= HandleVideoFinished;
     }
 
-    // ?? Launch Video (startup) ????????????????????????????????????????
-
-    private void OnVideoEnd(VideoPlayer vp)
+    private void Start()
     {
-        if (isLaunchVideo)
+        videoPanel.SetActive(false);
+        continueButton.gameObject.SetActive(false);
+
+        if (playStartupVideo && startupVideo != null)
         {
-            if (startButton != null) startButton.gameObject.SetActive(true);
+            startupFinished = false;
+            PlayVideo(startupVideo, true, true, false);
         }
         else
         {
-            ScenarioData scenario = scenarioManager.GetScenario(scenarioManager.CurrentIndex);
-            if (scenario.autoContinue)
-            {
-                OnContinuePressed();
-                return;
-            }
-            if (scenario.showContinueButton && continueButton != null)
-                continueButton.gameObject.SetActive(true);
+            startupFinished = true;
+            scenarioManager.ShowScenario(0);
         }
     }
 
-    private void OnStartPressed()
+    // --------------------------------------------------------------------
+
+    private void HandleScenarioVideo(ScenarioData scenario, int index)
     {
-        if (videoPanel != null) videoPanel.SetActive(false);
-        StartCoroutine(StartWithDelay());
+        if (videoRoutine != null)
+            StopCoroutine(videoRoutine);
+
+        PlayVideo(
+            scenario.videoClip,
+            scenario.pauseOnLastFrame,
+            scenario.showContinueButton,
+            scenario.autoContinue);
     }
 
-    private IEnumerator StartWithDelay()
+    // --------------------------------------------------------------------
+
+    private void PlayVideo(
+        VideoClip clip,
+        bool pauseOnLastFrame,
+        bool showButton,
+        bool autoContinue)
     {
-        yield return null; // one frame for all OnEnable subscriptions
-        scenarioManager.ShowScenario(0);
-    }
-
-    // ?? Per-Scenario Video ????????????????????????????????????????????
-
-    private void HandleVideoRequired(ScenarioData scenario, int index)
-    {
-        isLaunchVideo = false;
-
-        if (videoPanel != null) videoPanel.SetActive(true);
-        if (startButton != null) startButton.gameObject.SetActive(false);
-        if (continueButton != null) continueButton.gameObject.SetActive(false);
-
-        if (videoPlayer != null && scenario.videoClip != null)
+        if (clip == null)
         {
-            videoPlayer.clip = scenario.videoClip;
-            videoPlayer.isLooping = false;
-            videoPlayer.Play();
+            scenarioManager.NotifyVideoComplete();
+            return;
+        }
+
+        videoPanel.SetActive(true);
+
+        continueButton.gameObject.SetActive(false);
+
+        videoPlayer.Stop();
+
+        videoPlayer.loopPointReached -= HandleVideoFinished;
+
+        videoPlayer.clip = clip;
+
+        this.pauseOnLastFrame = pauseOnLastFrame;
+        this.showButton = showButton;
+        this.autoContinue = autoContinue;
+
+        videoPlayer.loopPointReached += HandleVideoFinished;
+
+        videoPlayer.Play();
+    }
+
+    // --------------------------------------------------------------------
+
+    private bool pauseOnLastFrame;
+    private bool showButton;
+    private bool autoContinue;
+
+    private void HandleVideoFinished(VideoPlayer vp)
+    {
+        videoPlayer.loopPointReached -= HandleVideoFinished;
+
+        if (pauseOnLastFrame)
+            videoPlayer.Pause();
+        else
+            videoPlayer.Stop();
+
+        if (autoContinue)
+        {
+            CloseVideo();
+
+            return;
+        }
+
+        if (showButton)
+        {
+            continueButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            CloseVideo();
         }
     }
+
+    // --------------------------------------------------------------------
 
     private void OnContinuePressed()
     {
-        if (videoPanel != null) videoPanel.SetActive(false);
-        if (continueButton != null) continueButton.gameObject.SetActive(false);
+        CloseVideo();
+    }
+
+    // --------------------------------------------------------------------
+
+    private void CloseVideo()
+    {
+        continueButton.gameObject.SetActive(false);
+
+        videoPlayer.Stop();
+
+        videoPanel.SetActive(false);
+
+        if (!startupFinished)
+        {
+            startupFinished = true;
+            scenarioManager.ShowScenario(0);
+            return;
+        }
+
         scenarioManager.NotifyVideoComplete();
     }
 }
