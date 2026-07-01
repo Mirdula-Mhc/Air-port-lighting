@@ -7,18 +7,19 @@ public class ScenarioManager : MonoBehaviour
     [Header("Scenario Data")]
     [SerializeField] private List<ScenarioData> scenarios;
 
-    // Events — all controllers listen to these
-    public event Action<ScenarioData, int> OnScenarioLoaded;   // scenario, index
-    public event Action<ScenarioData, int> OnCorrectAnswer;  // scenario, selectedIndex
-    public event Action<ScenarioData, int> OnWrongAnswer;    // scenario, selectedIndex
-    public event Action OnCorrectAnimComplete;
+    // Controllers subscribe to these
+    public event Action<ScenarioData, int> OnScenarioLoaded;
+    public event Action<ScenarioData, int> OnCorrectAnswer;
+    public event Action<ScenarioData, int> OnWrongAnswer;
+    public event Action<int> OnScenarioFirstCompleted; // fires ONLY on first completion, never on revisit
     public event Action OnAllScenariosComplete;
+    public event Action OnIntroVOComplete;
+    public event Action<ScenarioData, int> OnVideoRequired; // fires when scenario has a video
 
     private int currentIndex;
     private bool[] completedSteps;
     private bool[] audioPlayed;
 
-    // Read-only access for controllers that need to query state
     public int CurrentIndex => currentIndex;
     public bool IsCompleted(int index) => completedSteps != null && completedSteps[index];
     public bool AudioPlayed(int index) => audioPlayed != null && audioPlayed[index];
@@ -30,14 +31,30 @@ public class ScenarioManager : MonoBehaviour
     {
         completedSteps = new bool[scenarios.Count];
         audioPlayed = new bool[scenarios.Count];
-        ShowScenario(0);
+        // VideoController calls ShowScenario(0) after launch video ends
     }
 
     public void ShowScenario(int index)
     {
         if (index < 0 || index >= scenarios.Count) return;
         currentIndex = index;
-        OnScenarioLoaded?.Invoke(scenarios[index], index);
+        ScenarioData scenario = scenarios[index];
+
+        // If scenario has a video, pause here and let VideoController handle it
+        // VideoController calls NotifyVideoComplete() when done
+        if (scenario.playVideo)
+        {
+            OnVideoRequired?.Invoke(scenario, index);
+            return;
+        }
+
+        OnScenarioLoaded?.Invoke(scenario, index);
+    }
+
+    // Called by VideoController when video finishes and user continues
+    public void NotifyVideoComplete()
+    {
+        OnScenarioLoaded?.Invoke(scenarios[currentIndex], currentIndex);
     }
 
     public void SelectAnswer(int selectedAnswer)
@@ -51,15 +68,32 @@ public class ScenarioManager : MonoBehaviour
             OnWrongAnswer?.Invoke(scenario, selectedAnswer);
     }
 
-    public void NotifyCorrectAnimComplete()
+    public void NotifyIntroVOComplete()
     {
-        completedSteps[currentIndex] = true;
-        OnCorrectAnimComplete?.Invoke();
+        OnIntroVOComplete?.Invoke();
+    }
+
+    // AnimationController passes back the index it started with
+    // Stale coroutines that finish after page change are ignored
+    public void NotifyCorrectAnimComplete(int scenarioIndex)
+    {
+        if (scenarioIndex != currentIndex)
+        {
+            Debug.Log($"[ScenarioManager] Ignoring stale anim complete for index {scenarioIndex}, current is {currentIndex}");
+            return;
+        }
+
+        if (!completedSteps[scenarioIndex])
+        {
+            completedSteps[scenarioIndex] = true;
+            OnScenarioFirstCompleted?.Invoke(scenarioIndex);
+        }
     }
 
     public void GoNext()
     {
-        if (!completedSteps[currentIndex]) return;
+        ScenarioData current = scenarios[currentIndex];
+        if (current.requiresAnswer && !completedSteps[currentIndex]) return;
 
         if (currentIndex < scenarios.Count - 1)
             ShowScenario(currentIndex + 1);

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Video;
 
 public enum LightColor { Red, Green, White }
 public enum LightPattern { Steady, Flashing }
@@ -15,8 +16,15 @@ public class ScenarioData : ScriptableObject
 
     [Header("Page Type")]
     public bool requiresAnswer = true;
-    [Tooltip("Only used when Requires Answer is OFF.")]
     public NonInteractivePageType pageType = NonInteractivePageType.InfoPanel;
+
+    [Header("Video (Optional)")]
+    public bool playVideo;
+    public VideoClip videoClip;
+    public bool pauseOnLastFrame = true;
+    public bool showContinueButton = true;
+    public bool autoContinue = false;
+    public bool allowSkip = false;
 
     [Header("Signal")]
     public SignalVisualType signalVisualType = SignalVisualType.LightGun;
@@ -46,6 +54,5 @@ public class ScenarioData : ScriptableObject
     public AnimationClip wrongAnimClip;
 
     [Header("Aircraft Anchor")]
-    [Tooltip("The aircraft moves to this Transform's position and rotation on wrong answer reset.")]
     public Transform aircraftAnchor;
 }

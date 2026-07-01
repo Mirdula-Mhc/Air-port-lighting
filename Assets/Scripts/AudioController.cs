@@ -5,16 +5,16 @@ public class AudioController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private ScenarioManager scenarioManager;
-    [SerializeField] private UIController uiController;
 
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource voAudioSource;
     [SerializeField] private AudioSource feedbackAudioSource;
     [SerializeField] private AudioSource introAudioSource;
 
     [Header("Feedback Clips")]
     [SerializeField] private AudioClip correctChime;
     [SerializeField] private AudioClip wrongChime;
+
+    private Coroutine currentVOCoroutine;
 
     private void OnEnable()
     {
@@ -32,21 +32,36 @@ public class AudioController : MonoBehaviour
 
     private void HandleScenarioLoaded(ScenarioData scenario, int index)
     {
+        // Stop stale VO coroutine
+        if (currentVOCoroutine != null)
+        {
+            StopCoroutine(currentVOCoroutine);
+            currentVOCoroutine = null;
+        }
+
+        // Stop any playing intro audio
+        if (introAudioSource != null) introAudioSource.Stop();
+
         if (scenario.requiresAnswer) return;
+
+        // Revisit — notify immediately after one frame so UIController has time to lock nav
         if (scenarioManager.AudioPlayed(index))
         {
-            uiController.UnlockNav();
+            currentVOCoroutine = StartCoroutine(NotifyAfterFrame());
             return;
         }
 
-        StartCoroutine(PlayIntroVOAndUnlock(scenario, index));
+        currentVOCoroutine = StartCoroutine(PlayIntroVO(scenario, index));
     }
 
-    private IEnumerator PlayIntroVOAndUnlock(ScenarioData scenario, int index)
+    private IEnumerator NotifyAfterFrame()
     {
-        scenarioManager.MarkAudioPlayed(index);
-        uiController.LockNav();
+        yield return null; // one frame so UIController.HandleNonInteractivePage finishes locking first
+        scenarioManager.NotifyIntroVOComplete();
+    }
 
+    private IEnumerator PlayIntroVO(ScenarioData scenario, int index)
+    {
         if (introAudioSource != null && scenario.introVO != null)
         {
             introAudioSource.PlayOneShot(scenario.introVO);
@@ -57,24 +72,25 @@ public class AudioController : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
 
-        uiController.UnlockNav();
+        scenarioManager.MarkAudioPlayed(index);
+        scenarioManager.NotifyIntroVOComplete();
     }
 
     private void HandleCorrectAnswer(ScenarioData scenario, int selectedIndex)
     {
+        // Stop intro VO immediately
+        if (introAudioSource != null) introAudioSource.Stop();
+        // Only chime — VO is played by UIController inside the feedback popup
         if (feedbackAudioSource != null && correctChime != null)
             feedbackAudioSource.PlayOneShot(correctChime);
-
-        if (voAudioSource != null && scenario.correctVO != null)
-            voAudioSource.PlayOneShot(scenario.correctVO);
     }
 
     private void HandleWrongAnswer(ScenarioData scenario, int selectedIndex)
     {
+        // Stop intro VO immediately
+        if (introAudioSource != null) introAudioSource.Stop();
+        // Only chime — VO is played by UIController inside the feedback popup
         if (feedbackAudioSource != null && wrongChime != null)
             feedbackAudioSource.PlayOneShot(wrongChime);
-
-        if (voAudioSource != null && scenario.wrongVO != null)
-            voAudioSource.PlayOneShot(scenario.wrongVO);
     }
 }

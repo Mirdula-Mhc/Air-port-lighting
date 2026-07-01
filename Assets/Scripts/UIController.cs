@@ -40,6 +40,9 @@ public class UIController : MonoBehaviour
     [SerializeField] private float typewriterCharDelay = 0.03f;
     [SerializeField] private float popupHoldTime = 2f;
 
+    [Header("Voice Over")]
+    [SerializeField] private AudioSource voAudioSource;
+
     [Header("Vignette")]
     [SerializeField] private CanvasGroup wrongVignette;
     [SerializeField] private float vignetteFadeInTime = 0.15f;
@@ -71,8 +74,9 @@ public class UIController : MonoBehaviour
         scenarioManager.OnScenarioLoaded += HandleScenarioLoaded;
         scenarioManager.OnCorrectAnswer += HandleCorrectAnswer;
         scenarioManager.OnWrongAnswer += HandleWrongAnswer;
-        scenarioManager.OnCorrectAnimComplete += HandleCorrectAnimComplete;
+        scenarioManager.OnScenarioFirstCompleted += HandleScenarioFirstCompleted;
         scenarioManager.OnAllScenariosComplete += HandleAllComplete;
+        scenarioManager.OnIntroVOComplete += HandleIntroVOComplete;
     }
 
     private void OnDisable()
@@ -80,14 +84,18 @@ public class UIController : MonoBehaviour
         scenarioManager.OnScenarioLoaded -= HandleScenarioLoaded;
         scenarioManager.OnCorrectAnswer -= HandleCorrectAnswer;
         scenarioManager.OnWrongAnswer -= HandleWrongAnswer;
-        scenarioManager.OnCorrectAnimComplete -= HandleCorrectAnimComplete;
+        scenarioManager.OnScenarioFirstCompleted -= HandleScenarioFirstCompleted;
         scenarioManager.OnAllScenariosComplete -= HandleAllComplete;
+        scenarioManager.OnIntroVOComplete -= HandleIntroVOComplete;
     }
 
     // ?? Scenario Loaded ??????????????????????????????????????????????
 
     private void HandleScenarioLoaded(ScenarioData scenario, int index)
     {
+        StopAllCoroutines();
+        if (voAudioSource != null) voAudioSource.Stop();
+
         HideAllPanels();
         ClearResultIcons();
 
@@ -108,18 +116,19 @@ public class UIController : MonoBehaviour
 
     private void HandleNonInteractivePage(ScenarioData scenario, int index)
     {
-        if (nextButton != null) nextButton.interactable = false;
-        if (previousButton != null) previousButton.interactable = false;
+        LockNav();
 
         if (scenario.pageType == NonInteractivePageType.InfoPanel)
         {
             if (instructionPanel != null) instructionPanel.SetActive(true);
             if (instructionText != null) instructionText.text = scenario.instructorIntroLine;
+            // InfoPanel unlocks immediately — no VO gating
             if (nextButton != null) nextButton.interactable = true;
             if (previousButton != null) previousButton.interactable = scenarioManager.CurrentIndex > 0;
             return;
         }
 
+        // SceneIntro — AudioController fires OnIntroVOComplete when VO ends
         GameObject panel = scenario.context switch
         {
             SceneContext.Ground => groundIntroPanel,
@@ -140,6 +149,11 @@ public class UIController : MonoBehaviour
         if (text != null) text.text = scenario.instructorIntroLine;
     }
 
+    private void HandleIntroVOComplete()
+    {
+        UnlockNav();
+    }
+
     private void ShowQuestionPage(ScenarioData scenario, int index)
     {
         if (questionPanel != null) questionPanel.SetActive(true);
@@ -152,6 +166,7 @@ public class UIController : MonoBehaviour
         if (optionAButton != null) optionAButton.interactable = !alreadyCompleted;
         if (optionBButton != null) optionBButton.interactable = !alreadyCompleted;
         if (nextButton != null) nextButton.interactable = alreadyCompleted;
+        // Never show completion panel on revisit — only OnScenarioFirstCompleted does that
     }
 
     // ?? Answer Handling ??????????????????????????????????????????????
@@ -174,12 +189,19 @@ public class UIController : MonoBehaviour
 
     private IEnumerator CorrectSequence(ScenarioData scenario)
     {
-        yield return StartCoroutine(ShowFeedbackPopup(scenario.instructorCorrectLine));
+        yield return StartCoroutine(ShowFeedbackPopup(
+            scenario.instructorCorrectLine,
+            scenario.correctVO));
+
         if (questionPanel != null) questionPanel.SetActive(false);
         LockNav();
+        // AnimationController plays anim ? NotifyCorrectAnimComplete(index)
+        // ? ScenarioManager fires OnScenarioFirstCompleted
+        // ? HandleScenarioFirstCompleted shows completion panel
     }
 
-    private void HandleCorrectAnimComplete()
+    // Fires ONLY on first correct completion — safe to show completion panel
+    private void HandleScenarioFirstCompleted(int index)
     {
         UnlockNav();
         ShowCompletionPanel();
@@ -189,21 +211,32 @@ public class UIController : MonoBehaviour
 
     private IEnumerator WrongSequence(ScenarioData scenario)
     {
-        yield return StartCoroutine(ShowFeedbackPopup(scenario.instructorWrongLine));
+        yield return StartCoroutine(ShowFeedbackPopup(
+            scenario.instructorWrongLine,
+            scenario.wrongVO));
+
         SetAnswerButtonsInteractable(true);
         ClearResultIcons();
     }
 
     // ?? Feedback Popup / Typewriter ??????????????????????????????????
 
-    private IEnumerator ShowFeedbackPopup(string line)
+    private IEnumerator ShowFeedbackPopup(string line, AudioClip voClip)
     {
         if (feedbackPanel != null) feedbackPanel.SetActive(true);
         if (questionPanel != null) questionPanel.SetActive(false);
         LockNav();
 
+        // VO starts with typewriter — exactly like original AutoExplainSequence
+        if (voAudioSource != null && voClip != null)
+            voAudioSource.PlayOneShot(voClip);
+
+        float typeStartTime = Time.time;
         yield return StartCoroutine(TypewriterReveal(feedbackDescriptionText, line));
-        yield return new WaitForSeconds(popupHoldTime);
+        float typingDuration = Time.time - typeStartTime;
+
+        float remainingVO = voClip != null ? Mathf.Max(0f, voClip.length - typingDuration) : 0f;
+        yield return new WaitForSeconds(Mathf.Max(popupHoldTime, remainingVO));
 
         if (feedbackPanel != null) feedbackPanel.SetActive(false);
         if (questionPanel != null) questionPanel.SetActive(true);
@@ -235,6 +268,7 @@ public class UIController : MonoBehaviour
                 : string.Empty;
 
         if (questionPanel != null) questionPanel.SetActive(false);
+        // Hide normal Next — completion button takes over
         if (nextButton != null) nextButton.gameObject.SetActive(false);
     }
 
@@ -315,7 +349,12 @@ public class UIController : MonoBehaviour
 
     public void UnlockNav()
     {
-        if (nextButton != null) nextButton.interactable = scenarioManager.IsCompleted(scenarioManager.CurrentIndex);
+        ScenarioData current = scenarioManager.GetScenario(scenarioManager.CurrentIndex);
+        bool nextAllowed = current.requiresAnswer
+            ? scenarioManager.IsCompleted(scenarioManager.CurrentIndex)
+            : true;
+
+        if (nextButton != null) nextButton.interactable = nextAllowed;
         if (previousButton != null) previousButton.interactable = scenarioManager.CurrentIndex > 0;
     }
 }
